@@ -21,7 +21,7 @@
                     }
                 </div>
             }
-            <input id="password" type="password" formControlName="password" placeholder="Password" class="fw-bold text-color-website border my-1 form-control">
+            <input autocomplete="" id="password" type="password" formControlName="password" placeholder="Password" class="fw-bold text-color-website border my-1 form-control">
             @if(registerForm.get('password')?.errors && registerForm.get('password')?.touched){
                 <div class="text-danger">
                     @if(registerForm.get('password')?.getError('required')){
@@ -34,7 +34,7 @@
                     }
                 </div>
             }
-            <input id="confirmPassword" type="password" formControlName="confirmPassword" placeholder="confirm Password" class="fw-bold text-color-website border my-1 form-control">
+            <input autocomplete="" id="confirmPassword" type="password" formControlName="confirmPassword" placeholder="confirm Password" class="fw-bold text-color-website border my-1 form-control">
             @if(registerForm.get('confirmPassword')?.errors && registerForm.get('confirmPassword')?.touched){
                 <div class="text-danger">
                     @if(registerForm.get('confirmPassword')?.getError('required')){

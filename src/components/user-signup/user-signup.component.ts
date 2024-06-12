@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthenticationService } from '../../services/authentication.service';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-user-signup',
@@ -12,7 +12,8 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 })
 export class UserSignupComponent {
   constructor(
-    private _authService: AuthenticationService
+    private _authService: AuthenticationService,
+    private _router: Router
   ){}
 
   registerForm = new FormGroup({
@@ -27,9 +28,10 @@ export class UserSignupComponent {
 
   register(formGroup: FormGroup) {    
     if (formGroup.valid) {
-      this._authService.singup(formGroup.value).subscribe({
+      this._authService.userSingup(formGroup.value).subscribe({
         next:(response) => {
-            console.log(response);
+          this._authService.setUser(response.user,response.access_token);
+          this._router.navigateByUrl('/home');
           },
         error: (err) => {
           console.log(err);

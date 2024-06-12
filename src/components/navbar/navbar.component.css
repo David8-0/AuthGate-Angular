@@ -1,5 +1,53 @@
-.navbar  a {
-    color:white;
+.navbar ul a ,.navbar ul a:focus{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 3px;
+    font-family: "Poppins", sans-serif;
     font-size: 15px;
     font-weight: 600;
+    color: rgba(255, 255, 255, 0.7);
+    white-space: nowrap;
+    transition: 0.3s;
+    position: relative;
+
 }
+
+nav {
+    padding: 20px 0;
+}
+
+.navbar .navbar-nav li{
+    padding: 10px 0 10px 24px;
+}
+
+.navbar ul li a:before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background-color: #fff;
+    width: 0;
+    transition: all 0.3s ease-in-out 0s;
+}
+
+.navbar ul li a:hover:before{
+    width: 100%;
+}
+.navbar ul li a:hover{
+    color: #fff;
+}
+.navbar .navbar-brand{
+    font-size: 32px;
+    color: #fff;
+
+}
+.custom-active{
+    color: #fff !important;
+}
+
+ a:before.custom-active {
+    width: 100%;
+  }

@@ -5,6 +5,7 @@ import { UserSignupComponent } from '../components/user-signup/user-signup.compo
 import { PricingComponent } from '../components/pricing/pricing.component';
 import { FooterComponent } from '../components/footer/footer.component';
 
+
 @Component({
   selector: 'app-root',
   standalone: true,

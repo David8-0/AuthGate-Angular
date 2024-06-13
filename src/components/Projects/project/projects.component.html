@@ -1,0 +1,54 @@
+<div class="container">
+    <div class="card p-4 cards-container">
+        <h1 class="head">Projects</h1>
+      
+        <div class="row">
+            <div class="col-md-4">
+                <app-project-item [project]="proj"></app-project-item>
+                
+            </div>
+        </div>
+        <button class="custom-btn w-50 m-auto my-3" data-bs-toggle="modal" data-bs-target="#projectModal">Add Project</button>
+    </div>    
+    
+</div>
+
+
+  <!-- Modal -->
+  <div class="modal fade " id="projectModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Add Project</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="addProjectForm" (ngSubmit)="addProject(addProjectForm)"> 
+            <input type="text" id="clientID" formControlName="name" placeholder="Project Name" class="fw-bold  border my-1 form-control">
+            @if(addProjectForm.get('name')?.errors && addProjectForm.get('name')?.touched){
+                <div class="text-danger">
+                    @if(addProjectForm.get('name')?.getError('required')){
+                        <span class="fw-bold alert-msg"><i class="fa-solid fa-circle-exclamation"></i> project name is required</span>
+                    }
+                </div>
+            }
+            <input type="text" id="callBackUrl" formControlName="callBackUrl" placeholder="callBack Url" class="fw-bold  border my-1 form-control">
+            @if(addProjectForm.get('callBackUrl')?.errors && addProjectForm.get('callBackUrl')?.touched){
+                <div class="text-danger">
+                    @if(addProjectForm.get('callBackUrl')?.getError('required')){
+                        <span class="fw-bold alert-msg"><i class="fa-solid fa-circle-exclamation"></i> callBack Url is required</span>
+                    }
+                </div>
+            }
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="custom-btn">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+ 

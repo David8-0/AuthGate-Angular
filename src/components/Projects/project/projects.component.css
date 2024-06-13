@@ -1,0 +1,27 @@
+.cards-container{
+    background-color: #F9F8FF;
+}
+
+
+
+.head {
+    color:#444;
+    font-size: 32px;
+    font-weight: 700;
+    text-align: center;
+    position: relative;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+}
+
+.head::after{
+    content: "";
+    position: absolute;
+    display: block;
+    width: 50px;
+    height: 3px;
+    background: #5846f9;
+    bottom: 0;
+    left: calc(50% - 25px);
+}
+

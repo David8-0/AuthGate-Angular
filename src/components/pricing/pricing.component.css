@@ -1,0 +1,27 @@
+*{
+    padding: 0%;
+    margin: 0%;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+body{
+    background-color: #ebeef1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+.wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color : rgb(0, 0, 0,7)
+}
+.wrapper .card{
+    max-width: 500px;
+    background-color: white;
+    padding: 40px;
+    margin: 30px 15px;
+    border-radius: 20px;
+    box-shadow: 10px 10px 10px -1px rgb(10, 99, 169,0.16), 3px 3px 10px -1px rgb(255, 255, 255, 0.5);}
+    

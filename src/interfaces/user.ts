@@ -5,6 +5,7 @@ export interface User {
     phone: string;
     image: string;
     role: Role;
+    age:number;
 }
 
 enum Role{

@@ -1,1 +1,26 @@
-<p>profile works!</p>
+<!-- <div id="profile" *ngIf="user"></div> -->
+<h1> Profile</h1>
+        <!-- <div class="profile-details">
+          <img [src]="user.image" alt="{{ user.name }}" *ngIf="user.image">
+        </div> -->
+
+        <div class="profile-details m-auto">
+            <!-- <img [src]="user.image" alt="{{ user.name }}" *ngIf="user.image"> -->
+            <div class="form-group">
+              <label for="name">Name:</label>
+              <input id="name" type="text" [value]="user.name" [disabled]="!isEditMode">
+            </div>
+            <div class="form-group">
+              <label for="email">Email:</label>
+              <input id="email" type="text" [value]="user.email" [disabled]="!isEditMode">
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone:</label>
+              <input id="phone" type="text" [value]="user.phone" [disabled]="!isEditMode">
+            </div>
+            <div class="form-group">
+              <label for="age">Age:</label>
+              <input id="age" type="number" [value]="user.age" [disabled]="!isEditMode">
+            </div>
+            <button (click)="toggleEditMode()">{{ isEditMode ? 'Save' : 'Edit' }}</button>
+          </div>

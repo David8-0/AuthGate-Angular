@@ -1,7 +1,7 @@
-import { AuthenticationService } from './../../services/authentication.service';
 import { Component } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { User } from '../../interfaces/user';
+import { AuthenticationService } from '../../../services/authentication.service';
+import { User } from '../../../interfaces/user';
 
 @Component({
   selector: 'app-navbar',

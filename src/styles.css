@@ -17,6 +17,7 @@ body{
 .cursor-pointer{
   cursor: pointer;
 }
+
 .custom-btn{
   background: #5846f9;
   border: 0;
@@ -28,4 +29,13 @@ body{
 
 .custom-btn:hover{
   background-color:#7b27d8;
+}
+
+.form-control:focus{
+  box-shadow: none;
+}
+
+.alert-msg{
+  font-size: 13px;
+
 }

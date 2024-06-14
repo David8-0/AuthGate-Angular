@@ -12,8 +12,8 @@ export const routes: Routes = [
     {path:'',redirectTo:'home',pathMatch:'full'},
     {path:'projects',component:ProjectsComponent},
     {path:'profile',component:ProfileComponent},
-    {path:'authorize/:id',component:AuthorizeComponent},
     {path:'user-signup', component:UserSignupComponent},
     {path:'login',component:LoginComponent},
-    {path:'home',component:HomeComponent}
+    {path:'home',component:HomeComponent},
+    {path:'authorize/:projID',component:AuthorizeComponent}
 ];

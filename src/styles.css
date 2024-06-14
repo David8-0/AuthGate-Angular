@@ -39,3 +39,13 @@ body{
   font-size: 13px;
 
 }
+
+.header-h1 {
+  color: #fff;
+  font-size: 52px;
+  font-weight: 700;
+  display: block;
+  align-items: center;
+  margin-bottom: 20px;
+  text-align: center;
+}

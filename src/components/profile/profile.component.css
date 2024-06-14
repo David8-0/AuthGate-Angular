@@ -1,18 +1,5 @@
-body, html {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-}
 
-  h1 {
-    color: #fff;
-    font-size: 52px;
-    font-weight: 700;
-    display: block;
-    align-items: center;
-    margin-bottom: 20px;
-    text-align: center;
-  }
+ 
   
   h1 i {
     margin-right: 10px;

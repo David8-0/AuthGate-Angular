@@ -4,15 +4,18 @@ import { ProjectItemComponent } from '../project-item/project-item.component';
 import { Project } from '../../../interfaces/project';
 import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
-
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
 @Component({
   selector: 'app-projects',
   standalone: true,
-  imports: [ReactiveFormsModule, ProjectItemComponent,DialogModule,ButtonModule],
+  imports: [ReactiveFormsModule, ProjectItemComponent,DialogModule,ButtonModule,ToastModule],
   templateUrl: './projects.component.html',
-  styleUrl: './projects.component.css'
+  styleUrl: './projects.component.css',
+  providers:[MessageService]
 })
 export class ProjectsComponent {
+  constructor(private _messageService: MessageService){}
 proj:Project = {
   clientID:"asdasdasd",
     clientSECRET:"secreeet4dasd",
@@ -30,8 +33,10 @@ proj:Project = {
   });
 
 
-  addProject(formGroup: FormGroup) {    
+  addProject(formGroup: FormGroup) {   
+    this._messageService.add({ severity: 'success', summary: 'Success', detail: 'Message Content' }); 
     if (formGroup.valid) {
+      
       // this._authService.logIn(formGroup.value).subscribe({
       //   next:(response) => {
       //     this._authService.setUser(response.user,response.access_token);

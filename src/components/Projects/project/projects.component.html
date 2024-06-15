@@ -3,11 +3,12 @@
     <div class="card p-4 cards-container">
         
       
-        <div class="row">
+        <div class="row g-3">
+          @for(item of projectsArr; track item){
             <div class="col-md-4">
-                <app-project-item [project]="proj"></app-project-item>
-                
+                <app-project-item [project]="item"></app-project-item>  
             </div>
+          } 
         </div>
         <button class="custom-btn w-50 m-auto my-3" data-bs-toggle="modal" data-bs-target="#projectModal">Add Project</button>
     </div>    
@@ -16,11 +17,11 @@
 
 
   <!-- Modal -->
-  <div class="modal fade " id="projectModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+  <div class="modal fade " id="projectModal" tabindex="-1" aria-labelledby="exampleModalLabel1" aria-hidden="true" >
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Add Project</h1>
+          <h1 class="modal-title fs-5" id="exampleModalLabel1">Add Project</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">

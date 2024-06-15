@@ -31,9 +31,8 @@ export class LoginComponent {
     if (formGroup.valid) {
       this._authService.logIn(formGroup.value).subscribe({
         next:(response) => {
-          this._authService.setUser(response.user,response.access_token);
+          this._authService.setUser(response.data.user,response.data.access_token);
           if(this._projectService.projectID){
-            console.log(this._projectService.projectID);
             this._router.navigateByUrl(`/authorize/${this._projectService.projectID}`);
           }else{
             this._router.navigateByUrl('/home');

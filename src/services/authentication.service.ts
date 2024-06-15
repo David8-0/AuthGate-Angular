@@ -12,6 +12,7 @@ import { SignIn } from '../interfaces/sign-in';
 export class AuthenticationService {
   baseUrl:string = `http://localhost:3000/auth/`;
   user:BehaviorSubject<User> = new BehaviorSubject<User>({} as User);
+  
   constructor(private _http: HttpClient) {
       if(localStorage.getItem('user')){
         const user = JSON.parse(`${localStorage.getItem('user')}`);

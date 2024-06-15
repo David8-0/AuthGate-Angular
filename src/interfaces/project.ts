@@ -4,4 +4,6 @@ export interface Project {
     clientSECRET?: string;
     name: string;
     callBackUrl: string;
+    createdAt?:Date;
+    updatedAt?:Date;
 }

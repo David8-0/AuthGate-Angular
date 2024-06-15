@@ -12,72 +12,110 @@
     <div class="control-item">
       <i
         class="fa-solid fa-trash-can text-danger"
-        data-bs-toggle="modal" data-bs-target="#confirmDelete"
+        (click)="showDeleteDialog()"
       ></i>
     </div>
     <div class="control-item">
-      <i class="fa-solid fa-pen-to-square text-success"
-      data-bs-toggle="modal" data-bs-target="#updateProj"
+      <i
+        class="fa-solid fa-pen-to-square text-success"
+        (click)="showupdateDialog()"
       ></i>
     </div>
   </div>
 </div>
 
-
-
-<div #confirmDelete class="modal fade" id="confirmDelete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">
-            <i class="fa-solid fa-circle-exclamation text-danger"></i>
-            Confirm Delete</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-            <h5>are you sure you want to delete this project ?</h5>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-danger" (click)="deleteProject(project.clientID)" data-bs-dismiss="modal">Delete</button>
-        </div>
-      </div>
+<div class="flex justify-content-center">
+  <p-dialog
+    header="Confirm Delete"
+    [(visible)]="DeleteDialogvisible"
+    [modal]="true"
+    [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }"
+    [style]="{ width: '400px' }"
+    [draggable]="false"
+    [resizable]="false"
+  >
+    <div class="buttons w-100 d-flex justify-content-around">
+      are you sure you want to delete this project ?
+      <button
+        class="btn btn-info w-25 me-1"
+        (click)="this.DeleteDialogvisible = false"
+      >
+        No
+      </button>
+      <button class="btn btn-danger w-25" (click)="deleteProject(project._id)">
+        Yes
+      </button>
     </div>
-  </div>
+  </p-dialog>
+</div>
 
-
-<div class="modal fade" id="updateProj" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Update Project</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+<div class="flex justify-content-center">
+  <p-dialog
+    header="Confirm Update"
+    [(visible)]="UpdateDialogVisible"
+    [modal]="true"
+    [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }"
+    [style]="{ width: '400px' }"
+    [draggable]="false"
+    [resizable]="false"
+  >
+    <div class="buttons w-100 d-flex flex-column justify-content-around">
+      <form
+        [formGroup]="updateProjectForm"
+        (ngSubmit)="updateProject(project._id, updateProjectForm)"
+      >
+        <label for="clientID"> Client ID </label>
+        <input
+          type="text"
+          id="clientID"
+          formControlName="name"
+          placeholder="Project Name"
+          class="fw-bold border my-1 form-control"
+        />
+        @if(updateProjectForm.get('name')?.errors &&
+        updateProjectForm.get('name')?.touched){
+        <div class="text-danger">
+          @if(updateProjectForm.get('name')?.getError('required')){
+          <span class="fw-bold alert-msg"
+            ><i class="fa-solid fa-circle-exclamation"></i> project name is
+            required</span
+          >
+          }
         </div>
-        <div class="modal-body">
-          <form [formGroup]="updateProjectForm" (ngSubmit)="updateProject(updateProjectForm)"> 
-            <input type="text" id="clientID" formControlName="name" placeholder="Project Name" class="fw-bold  border my-1 form-control">
-            @if(updateProjectForm.get('name')?.errors && updateProjectForm.get('name')?.touched){
-                <div class="text-danger">
-                    @if(updateProjectForm.get('name')?.getError('required')){
-                        <span class="fw-bold alert-msg"><i class="fa-solid fa-circle-exclamation"></i> project name is required</span>
-                    }
-                </div>
-            }
-            <input type="text" id="callBackUrl" formControlName="callBackUrl" placeholder="callBack Url" class="fw-bold  border my-1 form-control">
-            @if(updateProjectForm.get('callBackUrl')?.errors && updateProjectForm.get('callBackUrl')?.touched){
-                <div class="text-danger">
-                    @if(updateProjectForm.get('callBackUrl')?.getError('required')){
-                        <span class="fw-bold alert-msg"><i class="fa-solid fa-circle-exclamation"></i> callBack Url is required</span>
-                    }
-                </div>
-            }
-          </form>
+        }
+        <label for="callBackUrl"> Callback URL</label>
+        <input
+          type="text"
+          id="callBackUrl"
+          formControlName="callBackUrl"
+          placeholder="callBack Url"
+          class="fw-bold border my-1 form-control"
+        />
+        @if(updateProjectForm.get('callBackUrl')?.errors &&
+        updateProjectForm.get('callBackUrl')?.touched){
+        <div class="text-danger">
+          @if(updateProjectForm.get('callBackUrl')?.getError('required')){
+          <span class="fw-bold alert-msg"
+            ><i class="fa-solid fa-circle-exclamation"></i> callBack Url is
+            required</span
+          >
+          }
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-success" (click)="updateProject(updateProjectForm)" data-bs-dismiss="modal">confirm Updates</button>
-        </div>
-      </div>
+        }
+      </form>
+      <button
+        class="btn btn-info w-100 my-2"
+        (click)="this.UpdateDialogVisible = false"
+      >
+        No
+      </button>
+      <button
+        class="btn btn-success w-100 my-2"
+        (click)="updateProject(project._id, updateProjectForm)"
+      >
+        Yes
+      </button>
     </div>
-  </div>
-
+  </p-dialog>
+</div>
+<p-toast />

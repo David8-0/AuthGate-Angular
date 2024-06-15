@@ -1,26 +1,190 @@
-<!-- <div id="profile" *ngIf="user"></div> -->
-<h1 class="header-h1"> Profile</h1>
-        <!-- <div class="profile-details">
-          <img [src]="user.image" alt="{{ user.name }}" *ngIf="user.image">
-        </div> -->
+<div class="container">
+  <h1 class="header-h1">Profile</h1>
 
-        <div class="profile-details m-auto">
-            <!-- <img [src]="user.image" alt="{{ user.name }}" *ngIf="user.image"> -->
-            <div class="form-group">
-              <label for="name">Name:</label>
-              <input id="name" type="text" [value]="user.name" [disabled]="!isEditMode">
-            </div>
-            <div class="form-group">
-              <label for="email">Email:</label>
-              <input id="email" type="text" [value]="user.email" [disabled]="!isEditMode">
-            </div>
-            <div class="form-group">
-              <label for="phone">Phone:</label>
-              <input id="phone" type="text" [value]="user.phone" [disabled]="!isEditMode">
-            </div>
-            <div class="form-group">
-              <label for="age">Age:</label>
-              <input id="age" type="number" [value]="user.age" [disabled]="!isEditMode">
-            </div>
-            <button (click)="toggleEditMode()">{{ isEditMode ? 'Save' : 'Edit' }}</button>
-          </div>
+<div class="row">
+  <div class="col-md-6">
+    <div class="profile-details m-auto">
+      <form [formGroup]="updateInfoForm" (ngSubmit)="updateInfo(updateInfoForm)">
+        <div class="form-group">
+          <label for="name">Name:</label>
+          <input
+            id="name"
+            type="text"
+            formControlName="name"
+            [disabled]="!isEditMode"
+          />
+        </div>
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input
+            id="email"
+            type="text"
+            formControlName="email"
+            [disabled]="!isEditMode"
+          />
+        </div>
+        <div class="form-group">
+          <label for="email">Role:</label>
+          <input
+            id="email"
+            type="text"
+            formControlName="role"
+            [disabled]="true"
+          />
+        </div>
+        <div class="form-group">
+          <label for="phone">Phone:</label>
+          <input
+            id="phone"
+            type="text"
+            formControlName="phone"
+            [disabled]="!isEditMode"
+          />
+        </div>
+  
+        @if (user.role !='tenant') {
+        <div class="form-group">
+          <label for="age">Age:</label>
+          <input
+            id="age"
+            type="number"
+            formControlName="age"
+          />
+        </div>
+        } @if(user.role =='tenant') {
+        <div class="form-group">
+          <label for="address">address:</label>
+          <input
+            id="address"
+            type="text"
+            formArrayName="address"
+            [disabled]="!isEditMode"
+          />
+        </div>
+        <div class="form-group">
+          <label for="website">website:</label>
+          <input
+            id="website"
+            type="text"
+            formArrayName="website"
+            [disabled]="!isEditMode"
+          />
+        </div>
+        }
+  
+
+      </form>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="img-holder ">
+      <div class="images-upload my-4 cursor-pointer position-relative rounded overflow-hidden">
+        <div class="user-img">
+          <img src="assets/default.png" class="w-100" alt="user-img" />
+          <label for="file-upload" class="custom-file-upload">
+            <i class="fa-solid fa-image text-white"></i>
+          </label>
+        </div>
+        <input
+          class="upload-img d-none"
+          id="file-upload"
+          (change)="uploadPhoto($event)"
+          type="file"
+        />
+      </div>
+      <div class="controls">
+        <button (click)="toggleEditMode()" class="me-3 custom-btn">Edit</button>
+        <button class="custom-btn me-3" *ngIf="isEditMode" (click)="updateInfo(updateInfoForm)">Save</button>
+        <button class="custom-btn me-3" *ngIf="isEditMode" (click)="this.showChangePasswordDialog=true">Change Password</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+
+<div class="flex justify-content-center">
+  <p-dialog
+    header="Change Password"
+    [(visible)]="showChangePasswordDialog"
+    [modal]="true"
+    [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }"
+    [style]="{ width: '400px' }"
+    [draggable]="false"
+    [resizable]="false"
+  >
+    <div class="buttons w-100 d-flex flex-column justify-content-around">
+      <form
+        [formGroup]="updatePasswordForm"
+        (ngSubmit)="updatePassword(updatePasswordForm)"
+      >
+        
+        <input
+          type="password"
+          id="oldPassword"
+          formControlName="oldPassword"
+          placeholder="old password"
+          class="fw-bold border my-1 form-control"
+        />
+        @if(updatePasswordForm.get('oldPassword')?.errors &&
+        updatePasswordForm.get('oldPassword')?.touched){
+        <div class="text-danger">
+          @if(updatePasswordForm.get('oldPassword')?.getError('required')){
+          <span class="fw-bold alert-msg"><i class="fa-solid fa-circle-exclamation"></i> old password is required </span>
+          }
+        </div>
+        }
+        
+        <input
+          type="password"
+          id="password"
+          formControlName="password"
+          placeholder="new password"
+          class="fw-bold border my-1 form-control"
+        />
+        @if(updatePasswordForm.get('password')?.errors &&
+        updatePasswordForm.get('password')?.touched){
+        <div class="text-danger">
+          @if(updatePasswordForm.get('password')?.getError('required')){
+          <span class="fw-bold alert-msg"><i class="fa-solid fa-circle-exclamation"></i> new password required</span>
+          }
+        </div>
+        }
+
+        
+        <input
+          type="password"
+          id="confirmPassword"
+          formControlName="confirmPassword"
+          placeholder="confirm new password"
+          class="fw-bold border my-1 form-control"
+        />
+        @if(updatePasswordForm.get('confirmPassword')?.errors &&
+        updatePasswordForm.get('confirmPassword')?.touched){
+        <div class="text-danger">
+          @if(updatePasswordForm.get('confirmPassword')?.getError('required')){
+          <span class="fw-bold alert-msg"><i class="fa-solid fa-circle-exclamation"></i> confirm new password required</span>
+          }
+        </div>
+        }
+      </form>
+
+
+
+      <button
+        class="btn btn-info w-100 my-2"
+        (click)="this.showChangePasswordDialog = false"
+      >
+        cancel
+      </button>
+      <button
+        class="btn btn-success w-100 my-2"
+        (click)="updatePassword(updatePasswordForm)"
+      >
+        save
+      </button>
+    </div>
+  </p-dialog>
+</div>
+<p-toast />

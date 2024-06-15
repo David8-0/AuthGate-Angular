@@ -36,7 +36,10 @@ export class AuthorizeComponent implements OnInit{
       if(this.projectID){
         this._projectService.getByID(this.projectID).subscribe({
           next:(res)=>{
-            this.project=res;
+            this.project=res.data;
+          },
+          error:(err)=>{
+            this._router.navigateByUrl('/error');
           }
         })
       }

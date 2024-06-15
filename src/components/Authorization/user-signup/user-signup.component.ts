@@ -43,7 +43,7 @@ export class UserSignupComponent {
     if (formGroup.valid) {
       this._authService.userSingup(formGroup.value).subscribe({
         next:(response) => {
-          this._authService.setUser(response.user,response.access_token);
+          this._authService.setUser(response.data.user,response.data.access_token);
           this._router.navigateByUrl('/home');
           },
         error: (err) => {
@@ -57,7 +57,7 @@ export class UserSignupComponent {
     if (formGroup.valid) {
       this._authService.tenantSingup (formGroup.value).subscribe({
         next:(response) => {
-          this._authService.setUser(response.user,response.access_token);
+          this._authService.setUser(response.data.user,response.data.access_token);
           this._router.navigateByUrl('/home');
           },
         error: (err) => {

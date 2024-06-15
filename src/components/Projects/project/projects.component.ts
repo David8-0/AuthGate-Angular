@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ProjectItemComponent } from '../project-item/project-item.component';
 import { Project } from '../../../interfaces/project';
@@ -6,6 +6,7 @@ import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
+import { ProjectService } from '../../../services/project.service';
 @Component({
   selector: 'app-projects',
   standalone: true,
@@ -14,16 +15,25 @@ import { MessageService } from 'primeng/api';
   styleUrl: './projects.component.css',
   providers:[MessageService]
 })
-export class ProjectsComponent {
-  constructor(private _messageService: MessageService){}
-proj:Project = {
-  clientID:"asdasdasd",
-    clientSECRET:"secreeet4dasd",
-    name:"Talabat",
-    callBackUrl: "TalabatURL"
+export class ProjectsComponent implements OnInit{
+  projectsArr:Project[] = [];
+  constructor(
+    private _messageService: MessageService,
+    private _projectService: ProjectService
+  ){}
+  
+
+
+ngOnInit(): void {
+    this._projectService.getAll().subscribe({
+      next:(res)=>{
+        this.projectsArr=res.data;
+      }
+    })
+    this._projectService.projectsArr.subscribe(newArr=>{
+      this.projectsArr=newArr;
+    });
 }
-
-
 
     
 
@@ -34,18 +44,16 @@ proj:Project = {
 
 
   addProject(formGroup: FormGroup) {   
-    this._messageService.add({ severity: 'success', summary: 'Success', detail: 'Message Content' }); 
     if (formGroup.valid) {
-      
-      // this._authService.logIn(formGroup.value).subscribe({
-      //   next:(response) => {
-      //     this._authService.setUser(response.user,response.access_token);
-      //     this._router.navigateByUrl('/home');
-      //     },
-      //   error: (err) => {
-      //     console.log(err);
-      //   }
-      // })
+        this._projectService.addProject(formGroup.value).subscribe({
+          next:(res)=>{
+            this._messageService.add({ severity: 'success', summary: 'Success', detail: 'project added successfully' }); 
+            this._projectService.projectsArr.next(res.data);
+          },
+          error:(err)=>{
+            this._messageService.add({ severity: 'error', summary: 'Error', detail: 'there was an error adding your project' }); 
+          }
+        });
     }
   }
 

@@ -10,14 +10,10 @@ import { AuthenticationService } from '../../services/authentication.service';
   styleUrl: './pricing.component.css'
 })
 export class PricingComponent {
-user : User = {} as User;
+
 constructor(
   private _authService:AuthenticationService
 ){
-  _authService.user.subscribe((newUser) =>{
-    this.user = newUser;
-    console.log(this.user);
-    
-  });
+  
 }
 }

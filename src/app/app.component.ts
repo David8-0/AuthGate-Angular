@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { NavbarComponent } from '../components/navbar/navbar.component';
-import { UserSignupComponent } from '../components/user-signup/user-signup.component';
 import { PricingComponent } from '../components/pricing/pricing.component';
-import { FooterComponent } from '../components/footer/footer.component';
+import { FooterComponent } from '../components/Core/footer/footer.component';
+import { NavbarComponent } from '../components/Core/navbar/navbar.component';
+import { UserSignupComponent } from '../components/Authorization/user-signup/user-signup.component';
 
 
 @Component({

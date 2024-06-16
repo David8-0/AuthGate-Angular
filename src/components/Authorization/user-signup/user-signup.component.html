@@ -1,10 +1,13 @@
-<div class="d-flex flex-wrap min-vh-100 rounded" id="imgDiv">
+<div class="d-flex flex-wrap wrapper rounded" id="imgDiv">
   <div
     class="d-flex flex-column justify-content-center align-items-center rounded m-auto p-4 shadow-lg bg-dark w-50"
   >
 
     @if(isUser){
         <h3 class="fw-bold text-light">Register as a User</h3>
+        @if(this._projectService.projectID){
+          <h2 class="text-white">you need to sing up first to continue...</h2> 
+      }
     <form
       [formGroup]="registerUserForm"
       (ngSubmit)="registerUser(registerUserForm)"
@@ -238,3 +241,4 @@
     >
   </div>
 </div>
+<p-toast />

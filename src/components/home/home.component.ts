@@ -1,16 +1,20 @@
 import { Component } from '@angular/core';
-import { trigger, state, style, animate, transition } from '@angular/animations';
+import { trigger, state, style, animate, transition, keyframes } from '@angular/animations';
+import { PricingComponent } from '../pricing/pricing.component';
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [],
+  imports: [PricingComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
   animations: [
     trigger('upDownAnimation', [
       transition('* => *', [
-        animate('1s', style({ transform: 'translateY(-50px)' })),
-        animate('1s', style({ transform: 'translateY(50px)' }))
+        animate('2s infinite', keyframes([
+          style({ transform: 'translateY(0)', offset: 0 }),
+          style({ transform: 'translateY(-50px)', offset: 0.5 }),
+          style({ transform: 'translateY(0)', offset: 1 })
+        ]))
       ])
     ])
   ]

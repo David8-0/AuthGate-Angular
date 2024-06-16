@@ -16,18 +16,20 @@
                 <i class="fa-solid fa-user me-2"></i>
                 profile</a>
             </li>
-            <li class="nav-item">             
-              <a class="nav-link" routerLink="projects" routerLinkActive="custom-active" >
-                <i class="fa-solid fa-shield me-2"></i>
-                Projects</a>
-            </li>
+            @if(user.role == 'tenant'){
+              <li class="nav-item">             
+                <a class="nav-link" routerLink="projects" routerLinkActive="custom-active" >
+                  <i class="fa-solid fa-shield me-2"></i>
+                  Projects</a>
+              </li>
+            }
             <li class="nav-item">
               <a class="nav-link cursor-pointer" (click)="logOut()" >log out</a>
             </li>
           }
           @if(!isLoggedIn){
             <li class="nav-item">
-              <a class="nav-link" routerLink="user-signup" routerLinkActive="custom-active" >sing up</a>
+              <a class="nav-link" routerLink="user-signup" routerLinkActive="custom-active" >sign up</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" routerLink="login" routerLinkActive="custom-active" >login</a>

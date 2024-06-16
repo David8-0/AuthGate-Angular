@@ -13,7 +13,7 @@ export class TenantService {
   updateTenantImage(teantID:string,photo:any):Observable<any>{
     return this._http.post(this.baseUrl+`image/${teantID}`,photo)
   }
-  updateTenant(user:User){
+  updateTenant(user:User):Observable<any>{
     return this._http.patch(this.baseUrl,user)
   }
 

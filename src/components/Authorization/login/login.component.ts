@@ -3,20 +3,23 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { AuthenticationService } from '../../../services/authentication.service';
 import { ProjectService } from '../../../services/project.service';
-
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ReactiveFormsModule,RouterLink,RouterLinkActive],
+  imports: [ReactiveFormsModule,RouterLink,RouterLinkActive,ToastModule],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+  styleUrl: './login.component.css',
+  providers:[MessageService]
 })
 export class LoginComponent {
 
 
   constructor(
+    private _messageService: MessageService,
     private _authService: AuthenticationService,
-    private _projectService:ProjectService,
+    public _projectService:ProjectService,
     private _router: Router
   ){}
 
@@ -39,7 +42,7 @@ export class LoginComponent {
           }
           },
         error: (err) => {
-          console.log(err);
+          this._messageService.add({ severity: 'error', summary: 'Error', detail: 'your email or password is invalid' });
         }
       })
     }

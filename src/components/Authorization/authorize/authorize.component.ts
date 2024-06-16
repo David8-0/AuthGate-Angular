@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AuthenticationService } from '../../../services/authentication.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProjectService } from '../../../services/project.service';
 import { Project } from '../../../interfaces/project';
 import { User } from '../../../interfaces/user';
+import { UserService } from '../../../services/user.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-authorize',
@@ -12,11 +14,13 @@ import { User } from '../../../interfaces/user';
   templateUrl: './authorize.component.html',
   styleUrl: './authorize.component.css'
 })
-export class AuthorizeComponent implements OnInit{
+export class AuthorizeComponent implements OnInit,OnDestroy{
   projectID:string|null=null;
   project:Project = {} as Project;
   user:User = {} as User;
+  subscriptions:Subscription[]=[];
   constructor(
+    private _userService:UserService,
     private _authenticationService:AuthenticationService,
     private _projectService:ProjectService,
     private _activatedRoute:ActivatedRoute,
@@ -24,9 +28,10 @@ export class AuthorizeComponent implements OnInit{
   ){}
 
   ngOnInit(): void {
-    this._activatedRoute.paramMap.subscribe(params => { 
+    const sub =this._activatedRoute.paramMap.subscribe(params => { 
       this.projectID = params.get('projID');
     });
+    this.subscriptions.push(sub);
 
     if(!this._authenticationService.user.value.id){
       this._projectService.projectID = this.projectID;
@@ -49,7 +54,23 @@ export class AuthorizeComponent implements OnInit{
     }
   }
 
-  confirm(){}
+  ngOnDestroy(): void {
+      this.subscriptions.forEach(sub=>sub.unsubscribe());
+  }
+
+  confirm(){
+    if(this.projectID){
+      this._userService.addUserToProject(this.projectID).subscribe({
+        next:(res)=>{
+          console.log(res);
+          window.location.href=`https://${this.project.callBackUrl}/${res.data.result.authorizationCode}`
+        },
+        error:(err)=>{
+          console.log(err);
+        }
+      });
+    }
+  }
   cancel(){
     this._router.navigateByUrl('/home');
   }

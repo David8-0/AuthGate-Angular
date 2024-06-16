@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { User } from '../../interfaces/user';
 import { AuthenticationService } from '../../services/authentication.service';
 import { CommonModule } from '@angular/common';
@@ -8,6 +8,7 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { DialogModule } from 'primeng/dialog';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-profile',
@@ -17,23 +18,26 @@ import { DialogModule } from 'primeng/dialog';
   styleUrl: './profile.component.css',
   providers:[MessageService]
 })
-export class ProfileComponent implements OnInit{
+export class ProfileComponent implements OnInit,OnDestroy{
   user:User = {} as User;
   isEditMode: boolean = false;
   photoUrl:string="";
   showChangePasswordDialog: boolean = false;
+  subscriptions:Subscription[]=[];
   constructor(
     private _messageService: MessageService,
     private _authService:AuthenticationService,
     private _tenantService:TenantService,
     private _userService:UserService
   ){
-    _authService.user.subscribe((newUser) =>{
-      this.user = newUser;
-    });
+    
   }
 
   ngOnInit(): void {
+    const sub =this._authService.user.subscribe((newUser) =>{
+      this.user = newUser;
+    });
+    this.subscriptions.push(sub);
     this.updateInfoForm.get('name')?.setValue(this.user.name??"")
     this.updateInfoForm.get('email')?.setValue(this.user.email??"")
     this.updateInfoForm.get('phone')?.setValue(this.user.phone??"")
@@ -42,6 +46,7 @@ export class ProfileComponent implements OnInit{
     this.updateInfoForm.get('address')?.setValue(this.user.address??"")
     this.updateInfoForm.get('website')?.setValue(this.user.website??"")
     this.updateInfoForm.disable();
+    
   }
 
   toggleEditMode() {
@@ -51,6 +56,7 @@ export class ProfileComponent implements OnInit{
     }else{
       this.updateInfoForm.enable();
       this.isEditMode=true;
+      this.updateInfoForm.get('role')?.disable();
     }
   }
 
@@ -71,7 +77,6 @@ export class ProfileComponent implements OnInit{
   });
 
   uploadPhoto(event:any){
-    console.log(event);
     const file: File = event.target.files[0];
       if (file){
         let formData = new FormData();
@@ -80,20 +85,20 @@ export class ProfileComponent implements OnInit{
           this._tenantService.updateTenantImage(this.user.id,formData).subscribe({
             next:(res)=>{console.log(res)
               this.photoUrl = res.data.image;
-              console.log(res);
+              this._messageService.add({ severity: 'success', summary: 'Success', detail: 'your photo is updated successfully' }); 
             },
             error:(err)=>{
-              console.log(err);
+              this._messageService.add({ severity: 'error', summary: 'Error', detail: 'there was a problem updating your photo' });
             }
           })
         }else if(this.user.role == 'user' && this.user.id){
           this._userService.updateUserImage(this.user.id,formData).subscribe({
             next:(res)=>{console.log(res)
               this.photoUrl = res.data.image;
-              console.log(res);
+              this._messageService.add({ severity: 'success', summary: 'Success', detail: 'your photo is updated successfully' }); 
             },
             error:(err)=>{
-              console.log(err);
+              this._messageService.add({ severity: 'error', summary: 'Error', detail: 'there was a problem updating your photo' });
             }
           })
         }
@@ -113,6 +118,10 @@ export class ProfileComponent implements OnInit{
       console.log(form.value);
       
     }
+  }
+
+  ngOnDestroy(): void {
+      this.subscriptions.forEach(sub=>sub.unsubscribe());
   }
   
 

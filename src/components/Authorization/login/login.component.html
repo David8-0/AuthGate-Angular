@@ -1,6 +1,12 @@
-<div class="d-flex flex-wrap  min-vh-100 rounded" id="imgDiv">
-    <div class="d-flex flex-column justify-content-center align-items-center rounded m-auto p-4 shadow-lg  bg-dark w-50">
-        <h3 class="fw-bold text-light">Log in</h3>
+<div class="container">
+    
+
+<div class="d-flex flex-wrap  wrapper rounded" id="imgDiv">
+    <div class="d-flex flex-column justify-content-center align-items-center rounded m-auto p-4 shadow-lg  bg-dark w-75">
+        <h1 class="fw-bold text-light">Log in</h1>
+        @if(this._projectService.projectID){
+            <h2 class="text-white">you need to log in first to continue...</h2> 
+        }
         <form [formGroup]="loginForm" (ngSubmit)="register(loginForm)" class="d-flex flex-column justify-content-center px-5 py-3 w-75 w-100">
             
             <input id="email" type="text" formControlName="email" placeholder="Email" class="fw-bold  form-control my-1">
@@ -33,3 +39,5 @@
     </div>
 </div>
 
+<p-toast />
+</div>

@@ -14,9 +14,13 @@ export class UserService {
     return this._http.post(this.baseUrl+`image/${teantID}`,photo)
   }
 
-  updateUser(user:User){
+  updateUser(user:User):Observable<any>{
     return this._http.patch(this.baseUrl,user)
   }
 
-  
+  addUserToProject(projectId:string):Observable<any>{
+    return this._http.post(this.baseUrl,{
+      projectId
+    });
+  }
 }

@@ -3,10 +3,21 @@
   <span>{{ project.name }}</span>
   <p class="card-data">Callback URL</p>
   <span>{{ project.callBackUrl }}</span>
-  <p class="card-data">client ID</p>
+  <div class="d-flex justify-content-start">
+    <p class="card-data">client ID </p>
+    <span class="copy-span"> <i class="fa-solid fa-copy" (click)="copyClientID()"></i></span>
+  </div>
   <span>{{ project.clientID }}</span>
-  <p class="card-data">Client Secret</p>
-  <span>{{ project.clientSECRET }}</span>
+  <div class="d-flex justify-content-start">
+    <p class="card-data">Client Secret</p>
+    <span class="copy-span" (click)="copyClientSecret()"> <i class="fa-solid fa-copy" ></i> </span>
+    <span class="copy-span" (click)="toggleShowClientSecret()"><i class="fa-solid" [class.fa-eye-slash]="this.showClientSecret" [class.fa-eye]="!this.showClientSecret"></i></span>
+  </div>
+  @if(this.showClientSecret){
+    <span>{{ project.clientSECRET }}</span>
+  }
+  
+  <!-- <span>***************************************</span> -->
 
   <div class="controls">
     <div class="control-item">
@@ -59,6 +70,8 @@
     [draggable]="false"
     [resizable]="false"
   >
+  
+
     <div class="buttons w-100 d-flex flex-column justify-content-around">
       <form
         [formGroup]="updateProjectForm"
@@ -118,4 +131,5 @@
     </div>
   </p-dialog>
 </div>
+
 <p-toast />

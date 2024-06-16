@@ -12,7 +12,7 @@ import { MessageService } from 'primeng/api';
   imports: [ReactiveFormsModule,DialogModule,ButtonModule,ToastModule],
   templateUrl: './project-item.component.html',
   styleUrl: './project-item.component.css',
-  providers:[MessageService]
+  providers:[]
 })
 export class ProjectItemComponent implements OnChanges{
   
@@ -21,16 +21,20 @@ export class ProjectItemComponent implements OnChanges{
   constructor(
     private _messageService: MessageService,
     private _projectService:ProjectService
-  ){}
-
+  ){
+    
+  }
+  showClientSecret:boolean = false;
   DeleteDialogvisible: boolean = false;
   UpdateDialogVisible:boolean = false;
 
   showDeleteDialog() {
         this.DeleteDialogvisible = true;
+        
     }
   showupdateDialog() {
       this.UpdateDialogVisible = true;
+      
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -51,8 +55,9 @@ export class ProjectItemComponent implements OnChanges{
       if(formGroup.valid && projectID){
         this._projectService.updateProject(projectID,formGroup.value).subscribe({
           next:(res)=>{
-            this._projectService.projectsArr.next(res.data);
             this._messageService.add({ severity: 'success', summary: 'Success', detail: 'project updated successfully' }); 
+            this._projectService.projectsArr.next(res.data);
+            
           },error:(err)=>{
             this._messageService.add({ severity: 'error', summary: 'Error', detail: 'there was an error updating your project' });
           },complete:()=>{
@@ -76,4 +81,21 @@ export class ProjectItemComponent implements OnChanges{
     }
 
   }
+
+  copyClientSecret(){
+    if(this.project.clientSECRET){
+      navigator.clipboard.writeText(this.project.clientSECRET).then(()=>{console.log("copied")}).catch(err=>{console.log(err)});
+    }
+  }
+
+  copyClientID(){
+    if(this.project.clientID){
+      navigator.clipboard.writeText(this.project.clientID).then(()=>{console.log("copied")}).catch(err=>{console.log(err)});
+    }
+  }
+
+  toggleShowClientSecret(){
+    this.showClientSecret = !this.showClientSecret;
+  }
 }
+

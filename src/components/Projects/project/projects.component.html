@@ -1,8 +1,9 @@
-<div class="container">
+<div class="container wrapper">
   <h1 class="header-h1">Projects</h1>
     <div class="card p-4 cards-container">
-        
-      
+      @if(projectsArr.length ==0){
+        <h2 class="text-center my-5">you currently have no projects want to add one ?</h2>
+      }
         <div class="row g-3">
           @for(item of projectsArr; track item){
             <div class="col-md-4">

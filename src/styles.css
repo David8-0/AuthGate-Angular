@@ -49,3 +49,8 @@ body{
   margin-bottom: 20px;
   text-align: center;
 }
+
+.wrapper{
+  min-height: calc(100vh - 306px);
+  margin-bottom: 30px;
+}

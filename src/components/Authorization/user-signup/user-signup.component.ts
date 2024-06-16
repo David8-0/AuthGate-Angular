@@ -2,18 +2,23 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { AuthenticationService } from '../../../services/authentication.service';
-
+import { ProjectService } from '../../../services/project.service';
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-user-signup',
   standalone: true,
-  imports: [ReactiveFormsModule,RouterLink,RouterLinkActive],
+  imports: [ReactiveFormsModule,RouterLink,RouterLinkActive,ToastModule],
   templateUrl: './user-signup.component.html',
-  styleUrl: './user-signup.component.css'
+  styleUrl: './user-signup.component.css',
+  providers:[MessageService]
 })
 export class UserSignupComponent {
   isUser: boolean = true;
   constructor(
+    private _messageService: MessageService,
+    public _projectService:ProjectService,
     private _authService: AuthenticationService,
     private _router: Router
   ){}
@@ -44,10 +49,14 @@ export class UserSignupComponent {
       this._authService.userSingup(formGroup.value).subscribe({
         next:(response) => {
           this._authService.setUser(response.data.user,response.data.access_token);
-          this._router.navigateByUrl('/home');
+          if(this._projectService.projectID){
+            this._router.navigateByUrl(`/authorize/${this._projectService.projectID}`);
+          }else{
+            this._router.navigateByUrl('/home');
+          }
           },
         error: (err) => {
-          console.log(err);
+          this._messageService.add({ severity: 'error', summary: 'Error', detail: 'something went wrong signing you up' });
         }
       })
     }
@@ -61,7 +70,7 @@ export class UserSignupComponent {
           this._router.navigateByUrl('/home');
           },
         error: (err) => {
-          console.log(err);
+          this._messageService.add({ severity: 'error', summary: 'Error', detail: 'something went wrong signing you up' });
         }
       })
     }

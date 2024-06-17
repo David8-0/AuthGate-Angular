@@ -1,6 +1,6 @@
 
 footer {
-   color:#fff;
+   
    font-size: 14px;
    background: linear-gradient(45deg, rgba(86, 58, 250, 0.9) 0%, rgba(116, 15, 214, 0.9) 100%),
      url('../../../assets/hero-bg.jpg') center center no-repeat;
@@ -9,6 +9,7 @@ footer {
 .footer-top{
     padding-top:60px ;
     padding-bottom:30px ;
+    
 }
 
 .footer-container {
@@ -72,6 +73,7 @@ footer .social-links a {
 
 footer .social-links a i {
     font-size: 18px;
+    color: #fff;
 }
 
 footer .social-links a:hover{
@@ -80,3 +82,6 @@ footer .social-links a:hover{
     text-decoration: none;
     cursor: pointer;
 }
+ footer h4,p,i{
+    color: #fff;
+ }

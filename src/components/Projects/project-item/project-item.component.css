@@ -59,5 +59,12 @@
 .copy-span:hover{
     cursor: pointer;
     background-color: #2c4964;
+}
+
+.copy-span i {
+    transition: 0.3s all;
+}
+
+.copy-span:hover > i{
     color: #fff;
 }

@@ -16,6 +16,10 @@ import { MessageService } from 'primeng/api';
 })
 export class UserSignupComponent {
   isUser: boolean = true;
+  isShowPassword:boolean = false;
+  isShowConfirmPassword:boolean = false;
+  showUserErrors:boolean = false;
+  showTenantErrors:boolean = false;
   constructor(
     private _messageService: MessageService,
     public _projectService:ProjectService,
@@ -59,6 +63,8 @@ export class UserSignupComponent {
           this._messageService.add({ severity: 'error', summary: 'Error', detail: 'something went wrong signing you up' });
         }
       })
+    }else{
+      this.showUserErrors=true;
     }
   }
 
@@ -73,7 +79,14 @@ export class UserSignupComponent {
           this._messageService.add({ severity: 'error', summary: 'Error', detail: 'something went wrong signing you up' });
         }
       })
+    }else{
+      this.showTenantErrors=true;
     }
   }
-
+  toggleShowPassword(){
+    this.isShowPassword=!this.isShowPassword;
+  }
+  toggleShowConfirmPassword(){
+    this.isShowConfirmPassword=!this.isShowConfirmPassword;
+  }
 }

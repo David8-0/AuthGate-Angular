@@ -14,8 +14,8 @@ import { MessageService } from 'primeng/api';
   providers:[MessageService]
 })
 export class LoginComponent {
-
-
+  isShowPassword:boolean = false;
+  showErrors:boolean = false;
   constructor(
     private _messageService: MessageService,
     private _authService: AuthenticationService,
@@ -45,6 +45,12 @@ export class LoginComponent {
           this._messageService.add({ severity: 'error', summary: 'Error', detail: 'your email or password is invalid' });
         }
       })
+    }else{
+      this.showErrors=true;
     }
+  }
+
+  toggleShowPassword(){
+    this.isShowPassword=!this.isShowPassword;
   }
 }

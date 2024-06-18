@@ -1,0 +1,11 @@
+<div class="my-4">
+    <h2 class="text-center">Tenants</h2>
+</div>
+<div class="row g-3">
+    @for(item of tenants;track item){
+    <div class="col-md-6">
+            <app-user-item [user]="item"></app-user-item>
+    </div>
+    }
+</div>
+<p-toast />

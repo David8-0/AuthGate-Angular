@@ -1,12 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { User } from '../interfaces/user';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
+  usersList:BehaviorSubject<User[]> = new BehaviorSubject<User[]>([]);
   baseUrl:string = `http://localhost:3000/users/`;
   constructor(private _http: HttpClient) { }
 
@@ -22,5 +23,14 @@ export class UserService {
     return this._http.post(this.baseUrl,{
       projectId
     });
+  }
+
+  getAll():Observable<any>{
+    return this._http.get(this.baseUrl);
+  }
+
+
+  delete(userID:string):Observable<any>{
+    return this._http.delete(this.baseUrl+userID);
   }
 }

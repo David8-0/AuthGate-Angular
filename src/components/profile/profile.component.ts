@@ -81,8 +81,8 @@ export class ProfileComponent implements OnInit,OnDestroy{
       if (file){
         let formData = new FormData();
         formData.append('image',file);
-        if(this.user.role == 'tenant' && this.user.id){
-          this._tenantService.updateTenantImage(this.user.id,formData).subscribe({
+        if(this.user.role == 'tenant' && this.user._id){
+          this._tenantService.updateTenantImage(this.user._id,formData).subscribe({
             next:(res)=>{console.log(res)
               this.photoUrl = res.data.image;
               this._messageService.add({ severity: 'success', summary: 'Success', detail: 'your photo is updated successfully' }); 
@@ -91,8 +91,8 @@ export class ProfileComponent implements OnInit,OnDestroy{
               this._messageService.add({ severity: 'error', summary: 'Error', detail: 'there was a problem updating your photo' });
             }
           })
-        }else if(this.user.role == 'user' && this.user.id){
-          this._userService.updateUserImage(this.user.id,formData).subscribe({
+        }else if(this.user.role == 'user' && this.user._id){
+          this._userService.updateUserImage(this.user._id,formData).subscribe({
             next:(res)=>{console.log(res)
               this.photoUrl = res.data.image;
               this._messageService.add({ severity: 'success', summary: 'Success', detail: 'your photo is updated successfully' }); 
@@ -107,7 +107,7 @@ export class ProfileComponent implements OnInit,OnDestroy{
   }
 
   updateInfo(form:FormGroup){
-    if(form.valid && this.user.id){
+    if(form.valid && this.user._id){
       console.log(form.value);
       
     }

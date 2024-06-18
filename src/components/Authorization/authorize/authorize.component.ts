@@ -33,7 +33,7 @@ export class AuthorizeComponent implements OnInit,OnDestroy{
     });
     this.subscriptions.push(sub);
 
-    if(!this._authenticationService.user.value.id){
+    if(!this._authenticationService.user.value._id){
       this._projectService.projectID = this.projectID;
       this._router.navigateByUrl('/login');
     }else{

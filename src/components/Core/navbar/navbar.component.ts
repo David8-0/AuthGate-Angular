@@ -22,7 +22,7 @@ export class NavbarComponent implements OnInit,OnDestroy{
 
   ngOnInit(): void {
     const sub =this._authService.user.subscribe(res=>{
-      if(res?.id){
+      if(res?._id){
         this.isLoggedIn = true;
         this.user = res;
       }else{

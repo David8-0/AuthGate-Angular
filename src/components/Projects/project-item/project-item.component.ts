@@ -1,11 +1,14 @@
 import { Project } from './../../../interfaces/project';
-import { Component, ElementRef, Input, OnChanges, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ProjectService } from '../../../services/project.service';
 import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
+import { User } from '../../../interfaces/user';
+import { Subscription } from 'rxjs';
+import { AuthenticationService } from '../../../services/authentication.service';
 @Component({
   selector: 'app-project-item',
   standalone: true,
@@ -14,11 +17,13 @@ import { MessageService } from 'primeng/api';
   styleUrl: './project-item.component.css',
   providers:[]
 })
-export class ProjectItemComponent implements OnChanges{
+export class ProjectItemComponent implements OnChanges,OnInit,OnDestroy{
   
 @Input() project: Project = {} as Project;
-
+sub:Subscription={} as Subscription;
+user:User = {};
   constructor(
+    private _authenticationService: AuthenticationService,
     private _messageService: MessageService,
     private _projectService:ProjectService
   ){
@@ -36,14 +41,20 @@ export class ProjectItemComponent implements OnChanges{
       this.UpdateDialogVisible = true;
       
   }
+  ngOnInit(): void {
+    this.sub = this._authenticationService.user.subscribe(
+      (newUser)=>{
+        this.user=newUser;
+      }
+    );
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
-    // console.log(`constructor ${this.project._id}`);
     this.updateProjectForm.get('name')?.setValue(this.project.name);
     this.updateProjectForm.get('callBackUrl')?.setValue(this.project.callBackUrl);
-    
-    // console.log(this.project);
-    
   }
 
   updateProjectForm = new FormGroup({

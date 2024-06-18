@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { User } from '../interfaces/user';
 
 @Injectable({
@@ -8,6 +8,8 @@ import { User } from '../interfaces/user';
 })
 export class TenantService {
   baseUrl:string = `http://localhost:3000/tenants/`;
+  tenantsList:BehaviorSubject<User[]> = new BehaviorSubject<User[]>([]);
+
   constructor(private _http: HttpClient) { }
 
   updateTenantImage(teantID:string,photo:any):Observable<any>{
@@ -17,5 +19,12 @@ export class TenantService {
     return this._http.patch(this.baseUrl,user)
   }
 
-  
+  delete(userID:string):Observable<any>{
+    return this._http.delete(this.baseUrl+userID);
+  }
+
+  getAll():Observable<any>{
+    return this._http.get(this.baseUrl);
+  }
+
 }

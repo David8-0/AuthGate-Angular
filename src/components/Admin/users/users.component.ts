@@ -5,17 +5,20 @@ import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { UserItemComponent } from '../user-item/user-item.component';
 import { Subscription } from 'rxjs';
+import { SearchUsersPipe } from '../../../pipes/search-users.pipe';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-users',
   standalone: true,
-  imports: [ToastModule,UserItemComponent],
+  imports: [ToastModule,UserItemComponent,SearchUsersPipe,FormsModule],
   templateUrl: './users.component.html',
   styleUrl: './users.component.css',
   providers:[MessageService]
 })
 export class UsersComponent implements OnInit,OnDestroy{
   users:User[] = [];
+  searchKey:string="";
   sub:Subscription={} as Subscription;
   constructor(
     private _userService:UserService,

@@ -1,8 +1,9 @@
 <div class="my-4">
     <h2 class="text-center">Users</h2>
 </div>
+<input type="text" placeholder="Search by name" class="form-control w-50 m-auto my-3" [(ngModel)]="searchKey">
 <div class="row g-3">
-    @for(item of users;track item){
+    @for(item of users | searchUsers:searchKey;track item){
     <div class="col-md-6">
             <app-user-item [user]="item"></app-user-item>
     </div>

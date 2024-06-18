@@ -6,17 +6,21 @@ import { MessageService } from 'primeng/api';
 import { UserItemComponent } from '../user-item/user-item.component';
 import { Subscription } from 'rxjs';
 import { TenantService } from '../../../services/tenant.service';
+import { SearchUsersPipe } from '../../../pipes/search-users.pipe';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-tenants',
   standalone: true,
-  imports: [ToastModule,UserItemComponent],
+  imports: [ToastModule,UserItemComponent,SearchUsersPipe,FormsModule],
   templateUrl: './tenants.component.html',
   styleUrl: './tenants.component.css',
   providers:[MessageService]
 })
 export class TenantsComponent {
   tenants:User[] = [];
+  searchKey:string="";
   sub:Subscription={} as Subscription;
   constructor(
     private _tenantService:TenantService,

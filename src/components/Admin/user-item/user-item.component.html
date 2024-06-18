@@ -63,6 +63,12 @@
           <app-project-item [project]="item" ></app-project-item>
         </div>
         }
+    }@if(user.role == 'user'){
+      @for(item of user.projects;track item){
+        <div class="col-md-6">
+          <h5>Project:{{item.name}} </h5>
+        </div>
+      }
     }
   </div>
 </p-dialog>

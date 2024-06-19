@@ -1,5 +1,5 @@
 import { ProjectItemComponent } from './../../Projects/project-item/project-item.component';
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { User } from '../../../interfaces/user';
 import { UserService } from '../../../services/user.service';
 import { ToastModule } from 'primeng/toast';
@@ -14,15 +14,23 @@ import { DialogModule } from 'primeng/dialog';
   styleUrl: './user-item.component.css',
   providers:[]
 })
-export class UserItemComponent {
+export class UserItemComponent implements OnChanges{
   @Input() user:User={};
+  photoUrl:string="assets/default.png";
   visible: boolean = false;
   constructor(
     private _messageService: MessageService,
     private _tenantService:TenantService,
     private _userService:UserService
-  ){}
+  ){
+   
+  }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    if(this.user.image?.length){
+      this.photoUrl = this.user.image;
+    }
+  }
   deleteUser(userId:string|undefined){
     if(userId && this.user.role == 'user'){
       this._userService.delete(userId).subscribe({

@@ -26,7 +26,7 @@ export class LoginComponent {
  
 
   loginForm = new FormGroup({
-    password: new FormControl('',[Validators.required,Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)]),
+    password: new FormControl(''),
     email: new FormControl('',[Validators.required,Validators.email]),
   });
 
@@ -52,5 +52,14 @@ export class LoginComponent {
 
   toggleShowPassword(){
     this.isShowPassword=!this.isShowPassword;
+  }
+
+  signInWithGoogle(){
+    window.location.href="http://localhost:3000/auth/google";
+  }
+
+
+  signInWithGitHub(){
+    window.location.href="http://localhost:3000/auth/github";
   }
 }

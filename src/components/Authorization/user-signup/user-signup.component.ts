@@ -1,3 +1,4 @@
+import { ValidationService } from './../../../services/validation.service';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
@@ -20,33 +21,36 @@ export class UserSignupComponent {
   isShowConfirmPassword:boolean = false;
   showUserErrors:boolean = false;
   showTenantErrors:boolean = false;
+
   constructor(
     private _messageService: MessageService,
     public _projectService:ProjectService,
     private _authService: AuthenticationService,
-    private _router: Router
+    private _router: Router,
+    private _validationService:ValidationService
   ){}
 
   registerUserForm = new FormGroup({
     name: new FormControl('',Validators.required),
     password: new FormControl('',[Validators.required,Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)]),
     email: new FormControl('',[Validators.required,Validators.email]),
-    phone: new FormControl(),
+    phone: new FormControl('',Validators.pattern(/^(?:\+20|0)?1[0125]\d{8}$/)),
     image: new FormControl(),
-    age: new FormControl(),
-    confirmPassword: new FormControl('',[Validators.required,Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)]),
-  });
+    age: new FormControl('',[Validators.min(13),Validators.max(100)]),
+    confirmPassword: new FormControl('',[Validators.required,Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)])
+    
+  },{validators: this._validationService.passwordMatchValidator('password','confirmPassword')});
 
   registerTenantForm = new FormGroup({
     name: new FormControl('',Validators.required),
     password: new FormControl('',[Validators.required,Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)]),
     email: new FormControl('',[Validators.required,Validators.email]),
-    phone: new FormControl(),
+    phone: new FormControl('',Validators.pattern(/^(?:\+20|0)?1[0125]\d{8}$/)),
     image: new FormControl(),
     address: new FormControl(),
-    website: new FormControl(),
+    website: new FormControl('',Validators.pattern(/^www\.[a-zA-Z0-9-]+(\.[a-zA-Z]+)+$/)),
     confirmPassword: new FormControl('',[Validators.required,Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)]),
-  });
+  },{validators: this._validationService.passwordMatchValidator('password','confirmPassword')});
 
   registerUser(formGroup: FormGroup) {    
     if (formGroup.valid) {

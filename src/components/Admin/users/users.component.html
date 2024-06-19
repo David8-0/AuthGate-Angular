@@ -1,12 +1,38 @@
 <div class="my-4">
     <h2 class="text-center">Users</h2>
 </div>
-<input type="text" placeholder="Search by name" class="form-control w-50 m-auto my-3" [(ngModel)]="searchKey">
+<div class="filters d-flex mb-3">
+    <div class="deleted-controls">
+        <div class="">
+            <input type="radio" name="deleted" class="me-2 cursor-pointer"  (click)="setDeleteFilter('all')" id="all" checked>
+            <label for="all" class="cursor-pointer">All</label>
+        </div>
+        <div class="">
+            <input type="radio" name="deleted" class="me-2 cursor-pointer" (click)="setDeleteFilter('deleted')"  id="deleted">
+            <label for="deleted" class="cursor-pointer">Deleted</label>
+        </div>
+        <div class="">
+            <input type="radio" name="deleted" class="me-2 cursor-pointer" (click)="setDeleteFilter('not-deleted')" id="not-deleted">
+            <label for="not-deleted" class="cursor-pointer">Not Deleted</label>
+        </div>
+
+    </div>
+    <input type="text" placeholder="Search by name" class="form-control w-50 m-auto my-3" [(ngModel)]="searchKey">
+</div>
+
 <div class="row g-3">
-    @for(item of users | searchUsers:searchKey;track item){
+    @for(item of users | searchUsers:searchKey |deleteFilter:deleteValue | pagination:pageSize:cureentPage;track item){
     <div class="col-md-6">
             <app-user-item [user]="item"></app-user-item>
     </div>
     }
+    <div class="pagination d-flex  justify-content-center">
+        @for(i of numberOfPages |times;track i){
+            <div class="page-item "[class.active-page]="cureentPage==i"  (click)="jumpToPage(i)">
+                {{i}}
+            </div>
+        }
+        
+    </div>
 </div>
 <p-toast />

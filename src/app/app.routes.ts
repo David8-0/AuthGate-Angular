@@ -10,6 +10,8 @@ import { LoginComponent } from '../components/Authorization/login/login.componen
 import { isTenantGuard } from '../guards/is-tenant.guard';
 import { NotFoundComponent } from '../components/Core/not-found/not-found.component';
 import { ErrorComponent } from '../components/Core/error/error.component';
+import { GoogleCallbackComponent } from '../components/Authorization/google-callback/google-callback.component';
+import { GithubCallbackComponent } from '../components/Authorization/github-callback/github-callback.component';
 
 export const routes: Routes = [
     {path:'',redirectTo:'home',pathMatch:'full'},
@@ -21,7 +23,8 @@ export const routes: Routes = [
     {path:'authorize/:projID',component:AuthorizeComponent},
     {path:'error',component:ErrorComponent},
     {path:'dashboard', loadChildren: ()=>import('../components/Admin/dashboard/admin.routes').then(m=>m.routes)},
-
+    {path:'auth/google/callback',component:GoogleCallbackComponent},
+    {path:'auth/github/callback',component:GithubCallbackComponent},
     {path:'**',component:NotFoundComponent}
 
 ];

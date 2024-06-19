@@ -116,6 +116,9 @@
               <li>minimum length is 8.</li>
             </ul>
             }
+            @if(registerUserForm.get('confirmPassword')?.getError('passwordMismatch')){
+              <span class="alert-text">confirm password doesn't match password</span>
+            }
           </div>
           }
           <input
@@ -125,6 +128,14 @@
             placeholder="phone"
             class="fw-bold text-color-website border my-1 form-control"
           />
+          @if(registerUserForm.get('phone')?.errors &&
+          (registerUserForm.get('phone')?.touched )){
+          <div class="text-danger">
+            @if(registerUserForm.get('phone')?.getError('pattern')){
+            <span class="alert-text">Invalid Phone number</span>
+            }
+          </div>
+          }
           <input
             id="age"
             type="number"
@@ -132,7 +143,14 @@
             placeholder="age"
             class="fw-bold text-color-website border my-1 form-control"
           />
-
+          @if(registerUserForm.get('age')?.errors &&
+          (registerUserForm.get('age')?.touched)){
+          <div class="text-danger">
+            @if(registerUserForm.get('age')?.getError('min') || registerUserForm.get('age')?.getError('max')){
+            <span class="alert-text">Age must be between 13 ad 100 </span>
+            } 
+          </div>
+          }
           <input
             type="submit"
             class="custom-btn w-50 m-auto mt-4"
@@ -246,6 +264,9 @@
               <li>minimum length is 8.</li>
             </ul>
             }
+            @if(registerTenantForm.get('confirmPassword')?.getError('passwordMismatch')){
+              <span class="alert-text">confirm password doesn't match password</span>
+            }
           </div>
           }
           <input
@@ -255,6 +276,14 @@
             placeholder="phone"
             class="fw-bold text-color-website border my-1 form-control"
           />
+          @if(registerTenantForm.get('phone')?.errors &&
+          (registerTenantForm.get('phone')?.touched )){
+          <div class="text-danger">
+            @if(registerTenantForm.get('phone')?.getError('pattern')){
+            <span class="alert-text">Invalid Phone number</span>
+            }
+          </div>
+          }
           <input
             id="address"
             type="text"
@@ -269,7 +298,14 @@
             placeholder="website"
             class="fw-bold text-color-website border my-1 form-control"
           />
-
+          @if(registerTenantForm.get('website')?.errors &&
+          (registerTenantForm.get('website')?.touched )){
+          <div class="text-danger">
+            @if(registerTenantForm.get('website')?.getError('pattern')){
+            <span class="alert-text">Invalid URL</span>
+            }
+          </div>
+          }
 
           <input
             type="submit"

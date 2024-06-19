@@ -34,17 +34,7 @@
                             @if(loginForm.get('password')?.getError('required')){
                                 <span class="alert-text text-danger">Password is required</span>
                             }
-                            @if(loginForm.get('password')?.getError('pattern')){
-                                <span class="alert-text text-danger">Password pattern is invalid and must contain at least  </span>
-                                <ul>
-                                    <li>one uppercase letter.</li>
-                                    <li>one digit.</li>
-                                    <li>special character.</li>
-                                    <li>minimum length is 8.</li>
-                                </ul>
-                                    
-                                
-                            }
+                            
                         </div>
                     }
                     <input type="submit"  class="custom-btn w-50 m-auto mt-4" value="Login" />
@@ -62,10 +52,10 @@
                     <div class="icon-wrapper">
                         <i class="fa-brands fa-facebook"></i>
                     </div>
-                    <div class="icon-wrapper">
+                    <div class="icon-wrapper" (click)="signInWithGoogle()">
                         <i class="fa-brands fa-google"></i>
                     </div>
-                    <div class="icon-wrapper">
+                    <div class="icon-wrapper" (click)="signInWithGitHub()">
                         <i class="fa-brands fa-github"></i>
                     </div>
                 </div>

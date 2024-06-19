@@ -7,11 +7,14 @@ import { UserItemComponent } from '../user-item/user-item.component';
 import { Subscription } from 'rxjs';
 import { SearchUsersPipe } from '../../../pipes/search-users.pipe';
 import { FormsModule } from '@angular/forms';
+import { PaginationPipe } from '../../../pipes/pagination.pipe';
+import { TimesPipe } from '../../../pipes/times.pipe';
+import { DeleteFilterPipe } from '../../../pipes/delete-filter.pipe';
 
 @Component({
   selector: 'app-users',
   standalone: true,
-  imports: [ToastModule,UserItemComponent,SearchUsersPipe,FormsModule],
+  imports: [ToastModule,UserItemComponent,SearchUsersPipe,FormsModule,PaginationPipe,TimesPipe,DeleteFilterPipe],
   templateUrl: './users.component.html',
   styleUrl: './users.component.css',
   providers:[MessageService]
@@ -20,6 +23,12 @@ export class UsersComponent implements OnInit,OnDestroy{
   users:User[] = [];
   searchKey:string="";
   sub:Subscription={} as Subscription;
+  numberOfPages:number=0;
+  pageSize:number=4;
+  cureentPage:number=1;
+
+  deleteValue:string="all";
+
   constructor(
     private _userService:UserService,
     private _messageService: MessageService
@@ -30,6 +39,7 @@ export class UsersComponent implements OnInit,OnDestroy{
         next:(res)=>{
           this._userService.usersList.next(res.data);
           this.users = res.data;
+          this.numberOfPages=Math.ceil(this.users.length /this.pageSize);
         },
         error:(err)=>{
           this._messageService.add({ severity: 'error', summary: 'Error', detail: 'There was an Error getting users' });
@@ -42,5 +52,13 @@ export class UsersComponent implements OnInit,OnDestroy{
 
 ngOnDestroy(): void {
     this.sub.unsubscribe();
+}
+
+setDeleteFilter(value:string){
+  this.deleteValue = value;
+}
+
+jumpToPage(page: number) {
+  this.cureentPage = page; 
 }
 }

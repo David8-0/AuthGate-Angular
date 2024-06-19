@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { User } from '../interfaces/user';
+import { UpdatePassword } from '../interfaces/update-password';
 
 @Injectable({
   providedIn: 'root'
@@ -25,6 +26,10 @@ export class UserService {
     });
   }
 
+  getByID(userID:string):Observable<any>{
+    return this._http.get(this.baseUrl+userID);
+  }
+
   getAll():Observable<any>{
     return this._http.get(this.baseUrl);
   }
@@ -32,5 +37,9 @@ export class UserService {
 
   delete(userID:string):Observable<any>{
     return this._http.delete(this.baseUrl+userID);
+  }
+
+  updatePassword(updateForm:UpdatePassword):Observable<any>{
+    return this._http.patch(this.baseUrl+"updateWithPassword",updateForm);
   }
 }

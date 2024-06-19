@@ -39,10 +39,7 @@ body{
   box-shadow: none;
 }
 
-.alert-msg{
-  font-size: 13px;
 
-}
 
 .header-h1 {
   color: #fff;
@@ -61,7 +58,7 @@ body{
 
 .alert-text{
   font-weight: 500;
-  font-size: 18px;
+  font-size: 15px;
   color: red;
 }
 

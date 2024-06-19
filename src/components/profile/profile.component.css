@@ -64,3 +64,11 @@
 .custom-file-upload:hover{
   opacity: 1;
 }
+
+.images-upload{
+  max-width:  500px;
+}
+
+#passwordChangeForm span i {
+  color: red;
+}

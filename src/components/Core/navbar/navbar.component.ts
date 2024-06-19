@@ -22,7 +22,7 @@ export class NavbarComponent implements OnInit,OnDestroy{
 
   ngOnInit(): void {
     const sub =this._authService.user.subscribe(res=>{
-      if(res?.id){
+      if(res?._id){
         this.isLoggedIn = true;
         this.user = res;
       }else{
@@ -36,9 +36,7 @@ export class NavbarComponent implements OnInit,OnDestroy{
     this.subscriptions.forEach(sub=>sub.unsubscribe());
   }
   logOut(){
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
-    this._authService.user.next({} as User);
+    this._authService.logOut();
     this._router.navigateByUrl('/home');
   }
 }

@@ -12,6 +12,9 @@
     position: relative;
 
 }
+.navbar ul i{
+    color: rgba(255, 255, 255, 0.7);
+}
 
 nav {
     padding: 20px 0;
@@ -36,7 +39,7 @@ nav {
 .navbar ul li a:hover:before{
     width: 100%;
 }
-.navbar ul li a:hover{
+.navbar ul li a:hover,.navbar ul li a:hover > i{
     color: #fff;
 }
 .navbar .navbar-brand{
@@ -45,10 +48,11 @@ nav {
     font-weight: 600;
 
 }
-.custom-active{
+.custom-active,.custom-active > i{
     color: #fff !important;
 }
 
  a:before.custom-active {
     width: 100%;
   }
+  

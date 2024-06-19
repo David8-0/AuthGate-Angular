@@ -14,8 +14,8 @@ import { MessageService } from 'primeng/api';
   providers:[MessageService]
 })
 export class LoginComponent {
-
-
+  isShowPassword:boolean = false;
+  showErrors:boolean = false;
   constructor(
     private _messageService: MessageService,
     private _authService: AuthenticationService,
@@ -26,7 +26,7 @@ export class LoginComponent {
  
 
   loginForm = new FormGroup({
-    password: new FormControl('',[Validators.required,Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)]),
+    password: new FormControl(''),
     email: new FormControl('',[Validators.required,Validators.email]),
   });
 
@@ -45,6 +45,21 @@ export class LoginComponent {
           this._messageService.add({ severity: 'error', summary: 'Error', detail: 'your email or password is invalid' });
         }
       })
+    }else{
+      this.showErrors=true;
     }
+  }
+
+  toggleShowPassword(){
+    this.isShowPassword=!this.isShowPassword;
+  }
+
+  signInWithGoogle(){
+    window.location.href="http://localhost:3000/auth/google";
+  }
+
+
+  signInWithGitHub(){
+    window.location.href="http://localhost:3000/auth/github";
   }
 }

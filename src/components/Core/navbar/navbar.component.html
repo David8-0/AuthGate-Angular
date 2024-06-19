@@ -16,6 +16,10 @@
                 <i class="fa-solid fa-user me-2"></i>
                 profile</a>
             </li>
+            <li class="nav-item">             
+              <a class="nav-link" routerLink="dashboard" routerLinkActive="custom-active" >
+                Dashboard</a>
+            </li>
             @if(user.role == 'tenant'){
               <li class="nav-item">             
                 <a class="nav-link" routerLink="projects" routerLinkActive="custom-active" >

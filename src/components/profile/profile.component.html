@@ -1,194 +1,248 @@
 <div class="container">
-
   <div class="profile wrapper">
-  
     <h1 class="header-h1">Profile</h1>
-  
-  <div class="row">
-    <div class="col-md-6">
-      <div class="profile-details m-auto">
-        <form [formGroup]="updateInfoForm" (ngSubmit)="updateInfo(updateInfoForm)">
-          <div class="form-group">
-            <label for="name">Name:</label>
-            <input
-              id="name"
-              type="text"
-              formControlName="name"
-            />
-          </div>
-          <div class="form-group">
-            <label for="email">Email:</label>
-            <input
-              id="email"
-              type="text"
-              formControlName="email"
-            />
-          </div>
-          <div class="form-group">
-            <label for="role">Role:</label>
-            <input
-              id="role"
-              type="text"
-              formControlName="role"
-            />
-          </div>
-          <div class="form-group">
-            <label for="phone">Phone:</label>
-            <input
-              id="phone"
-              type="text"
-              formControlName="phone"
-            />
-          </div>
-    
-          @if (user.role !='tenant') {
-          <div class="form-group">
-            <label for="age">Age:</label>
-            <input
-              id="age"
-              type="number"
-              formControlName="age"
-            />
-          </div>
-          } @if(user.role =='tenant') {
-          <div class="form-group">
-            <label for="address">address:</label>
-            <input
-              id="address"
-              type="text"
-              formControlName="address"
-            />
-          </div>
-          <div class="form-group">
-            <label for="website">website:</label>
-            <input
-              id="website"
-              type="text"
-              formControlName="website"
-            />
+
+    <div class="row">
+      <div class="col-md-6">
+        <div class="profile-details m-auto">
+          <form
+            [formGroup]="updateInfoForm"
+            (ngSubmit)="updateInfo(updateInfoForm)"
+          >
+            <div class="form-group">
+              <label for="name">Name:</label>
+              <input id="name" type="text" formControlName="name" />
+
+              @if(updateInfoForm.get('name')?.errors &&
+              updateInfoForm.get('name')?.touched){
+              <div class="text-danger">
+                @if(updateInfoForm.get('name')?.getError('required')){
+                <span class="alert-text">name is required</span>
+                }
+              </div>
+              }
+            </div>
+
+            <div class="form-group">
+              <label for="email">Email:</label>
+              <input id="email" type="text" formControlName="email" />
+              @if(updateInfoForm.get('email')?.errors &&
+              updateInfoForm.get('email')?.touched ){
+              <div class="text-danger">
+                @if(updateInfoForm.get('email')?.getError('required')){
+                <span class="alert-text">email is required</span>
+                } @if(updateInfoForm.get('email')?.getError('email')){
+                <span class="alert-text">email pattern is invalid</span>
+                }
+              </div>
+              }
+            </div>
+
+            <div class="form-group">
+              <label for="role">Role:</label>
+              <input id="role" type="text" formControlName="role" />
+            </div>
+
+            <div class="form-group">
+              <label for="phone">Phone:</label>
+              <input id="phone" type="text" formControlName="phone" />
+
+              @if(updateInfoForm.get('phone')?.errors &&
+              (updateInfoForm.get('phone')?.touched )){
+              <div class="text-danger">
+                @if(updateInfoForm.get('phone')?.getError('pattern')){
+                <span class="alert-text">Invalid Phone number</span>
+                }
+              </div>
+              }
+            </div>
+
+            @if (user.role !='tenant') {
+            <div class="form-group">
+              <label for="age">Age:</label>
+              <input id="age" type="number" formControlName="age" />
+              @if(updateInfoForm.get('age')?.errors &&
+          (updateInfoForm.get('age')?.touched)){
+          <div class="text-danger">
+            @if(updateInfoForm.get('age')?.getError('min') || updateInfoForm.get('age')?.getError('max')){
+            <span class="alert-text">Age must be between 13 ad 100 </span>
+            } 
           </div>
           }
-    
-  
-        </form>
-      </div>
-    </div>
-    <div class="col-md-6">
-      <div class="img-holder ">
-        <div class="images-upload my-4 cursor-pointer position-relative rounded overflow-hidden">
-          <div class="user-img">
-            <img src="assets/default.png" class="w-100" alt="user-img" />
-            <label for="file-upload" class="custom-file-upload">
-              <i class="fa-solid fa-image text-white"></i>
-            </label>
-          </div>
-          <input
-            class="upload-img d-none"
-            id="file-upload"
-            (change)="uploadPhoto($event)"
-            type="file"
-          />
-        </div>
-        <div class="controls">
-          <button (click)="toggleEditMode()" class="me-3 custom-btn">Edit</button>
-          <button class="custom-btn me-3" *ngIf="isEditMode" (click)="updateInfo(updateInfoForm)">Save</button>
-          <button class="custom-btn me-3" *ngIf="isEditMode" (click)="this.showChangePasswordDialog=true">Change Password</button>
+            </div>
+            } @if(user.role =='tenant') {
+            <div class="form-group">
+              <label for="address">address:</label>
+              <input id="address" type="text" formControlName="address" />
+            </div>
+            <div class="form-group">
+              <label for="website">website:</label>
+              <input id="website" type="text" formControlName="website" />
+              @if(updateInfoForm.get('website')?.errors &&
+              (updateInfoForm.get('website')?.touched )){
+              <div class="text-danger">
+                @if(updateInfoForm.get('website')?.getError('pattern')){
+                <span class="alert-text">Invalid URL</span>
+                }
+              </div>
+              }
+            </div>
+            }
+          </form>
         </div>
       </div>
-    </div>
-  </div>
-  
-  <div class="flex justify-content-center">
-    <p-dialog
-      header="Change Password"
-      [(visible)]="showChangePasswordDialog"
-      [modal]="true"
-      [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }"
-      [style]="{ width: '400px' }"
-      [draggable]="false"
-      [resizable]="false"
-    >
-      <div class="buttons w-100 d-flex flex-column justify-content-around">
-        <form
-          [formGroup]="updatePasswordForm"
-          (ngSubmit)="updatePassword(updatePasswordForm)"
-        >
-          
-          <input
-            type="password"
-            id="oldPassword"
-            formControlName="oldPassword"
-            placeholder="old password"
-            class="fw-bold border my-1 form-control"
-            autocomplete=""
-          />
-          @if(updatePasswordForm.get('oldPassword')?.errors &&
-          updatePasswordForm.get('oldPassword')?.touched){
-          <div class="text-danger">
-            @if(updatePasswordForm.get('oldPassword')?.getError('required')){
-            <span class="fw-bold alert-msg"><i class="fa-solid fa-circle-exclamation"></i> old password is required </span>
-            }
+      <div class="col-md-6 mt-3 mt-md-0">
+        <div class="img-holder">
+          <div
+            class="images-upload m-auto mb-3 cursor-pointer position-relative rounded overflow-hidden"
+          >
+            <div class="user-img">
+              <img [src]="photoUrl" class="w-100" alt="user-img" />
+              <label for="file-upload" class="custom-file-upload">
+                <i class="fa-solid fa-image text-white"></i>
+              </label>
+            </div>
+            <input
+              class="upload-img d-none"
+              id="file-upload"
+              (change)="uploadPhoto($event)"
+              type="file"
+            />
           </div>
-          }
-          
-          <input
-          autocomplete=""
-            type="password"
-            id="password"
-            formControlName="password"
-            placeholder="new password"
-            class="fw-bold border my-1 form-control"
-          />
-          @if(updatePasswordForm.get('password')?.errors &&
-          updatePasswordForm.get('password')?.touched){
-          <div class="text-danger">
-            @if(updatePasswordForm.get('password')?.getError('required')){
-            <span class="fw-bold alert-msg"><i class="fa-solid fa-circle-exclamation"></i> new password required</span>
-            }
+          <div class="controls d-flex justify-content-center">
+            <button (click)="toggleEditMode()" class="me-3 custom-btn">
+              Edit
+            </button>
+            <button
+              class="custom-btn me-3"
+              *ngIf="isEditMode"
+              (click)="updateInfo(updateInfoForm)"
+            >
+              Save
+            </button>
+            <button
+              class="custom-btn me-3"
+              *ngIf="isEditMode"
+              (click)="this.showChangePasswordDialog = true"
+            >
+              Change Password
+            </button>
           </div>
-          }
-  
-          
-          <input
-          autocomplete=""
-            type="password"
-            id="confirmPassword"
-            formControlName="confirmPassword"
-            placeholder="confirm new password"
-            class="fw-bold border my-1 form-control"
-          />
-          @if(updatePasswordForm.get('confirmPassword')?.errors &&
-          updatePasswordForm.get('confirmPassword')?.touched){
-          <div class="text-danger">
-            @if(updatePasswordForm.get('confirmPassword')?.getError('required')){
-            <span class="fw-bold alert-msg"><i class="fa-solid fa-circle-exclamation"></i> confirm new password required</span>
-            }
-          </div>
-          }
-        </form>
-  
-  
-  
-        <button
-          class="btn btn-info w-100 my-2"
-          (click)="this.showChangePasswordDialog = false"
-        >
-          cancel
-        </button>
-        <button
-          class="btn btn-success w-100 my-2"
-          (click)="updatePassword(updatePasswordForm)"
-        >
-          save
-        </button>
+        </div>
       </div>
-    </p-dialog>
-  </div>
-  <p-toast />
+    </div>
+
+    <div class="flex justify-content-center">
+      <p-dialog
+        header="Change Password"
+        [(visible)]="showChangePasswordDialog"
+        [modal]="true"
+        [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }"
+        [style]="{ width: '400px' }"
+        [draggable]="false"
+        [resizable]="false"
+      >
+        <div class="buttons w-100 d-flex flex-column justify-content-around">
+          <form
+            [formGroup]="updatePasswordForm"
+            (ngSubmit)="updatePassword(updatePasswordForm)"
+            id="passwordChangeForm"
+          >
+            <input
+              type="password"
+              id="oldPassword"
+              formControlName="oldPassword"
+              placeholder="old password"
+              class="fw-bold border my-1 form-control"
+              autocomplete=""
+            />
+            @if(updatePasswordForm.get('oldPassword')?.errors &&(
+            updatePasswordForm.get('oldPassword')?.touched ||
+            showChangePasswordErrors)){
+            <div class="text-danger">
+              @if(updatePasswordForm.get('oldPassword')?.getError('required')){
+              <span class="fw-bold alert-text"
+                ><i class="fa-solid fa-circle-exclamation"></i> old password is
+                required
+              </span>
+              }
+            </div>
+            }
+
+            <input
+              autocomplete=""
+              type="password"
+              id="newPassword"
+              formControlName="newPassword"
+              placeholder="new password"
+              class="fw-bold border my-1 form-control"
+            />
+            @if(updatePasswordForm.get('newPassword')?.errors &&(
+            updatePasswordForm.get('newPassword')?.touched ||
+            showChangePasswordErrors)){
+            <div class="">
+              @if(updatePasswordForm.get('newPassword')?.getError('required')){
+              <span class="fw-bold alert-text"
+                ><i class="fa-solid fa-circle-exclamation"></i> new password
+                required</span
+              >
+              } @if(updatePasswordForm.get('newPassword')?.getError('pattern')){
+              <span class="fw-bold alert-text"
+                >confirm Password pattern is invalid and must contain at least
+              </span>
+              <ul>
+                <li>one uppercase letter.</li>
+                <li>one digit.</li>
+                <li>special character.</li>
+                <li>minimum length is 8.</li>
+              </ul>
+              }
+            </div>
+            }
+
+            <input
+              autocomplete=""
+              type="password"
+              id="confirmNewPassword"
+              formControlName="confirmNewPassword"
+              placeholder="confirm new password"
+              class="fw-bold border my-1 form-control"
+            />
+            @if(updatePasswordForm.get('confirmNewPassword')?.errors
+            &&(updatePasswordForm.get('confirmNewPassword')?.touched ||
+            showChangePasswordErrors)){
+            <div class="text-danger">
+              @if(updatePasswordForm.get('confirmNewPassword')?.getError('required')){
+              <span class="fw-bold alert-text"
+                ><i class="fa-solid fa-circle-exclamation"></i> confirm new
+                password required</span
+              >
+              }
+              @if(updatePasswordForm.get('confirmNewPassword')?.getError('passwordMismatch')){
+              <span class="fw-bold alert-text"
+                ><i class="fa-solid fa-circle-exclamation"></i> confirm password
+                doesn't match password</span
+              >
+              }
+            </div>
+            }
+          </form>
+
+          <button
+            class="btn btn-info w-100 my-2"
+            (click)="this.showChangePasswordDialog = false"
+          >
+            cancel
+          </button>
+          <button
+            class="custom-btn w-100 my-2"
+            (click)="updatePassword(updatePasswordForm)"
+          >
+            save
+          </button>
+        </div>
+      </p-dialog>
+    </div>
+    <p-toast />
   </div>
 </div>
-
-
-
-
-

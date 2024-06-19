@@ -17,7 +17,7 @@
     <span>{{ project.clientSECRET }}</span>
   }
   
-  <!-- <span>***************************************</span> -->
+  
 
   <div class="controls">
     <div class="control-item">
@@ -26,12 +26,14 @@
         (click)="showDeleteDialog()"
       ></i>
     </div>
-    <div class="control-item">
-      <i
-        class="fa-solid fa-pen-to-square text-success"
-        (click)="showupdateDialog()"
-      ></i>
-    </div>
+    @if(user.role == 'tenant'){
+      <div class="control-item">
+        <i
+          class="fa-solid fa-pen-to-square text-success"
+          (click)="showupdateDialog()"
+        ></i>
+      </div>
+    } 
   </div>
 </div>
 

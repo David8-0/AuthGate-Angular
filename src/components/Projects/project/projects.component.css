@@ -4,16 +4,6 @@
 
 
 
-.head {
-    color:#444;
-    font-size: 32px;
-    font-weight: 700;
-    text-align: center;
-    position: relative;
-    padding-bottom: 20px;
-    margin-bottom: 20px;
-}
-
 .head::after{
     content: "";
     position: absolute;

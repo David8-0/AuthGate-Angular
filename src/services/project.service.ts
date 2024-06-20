@@ -17,13 +17,13 @@ export class ProjectService {
   }
 
 
-  getAll():Observable<any>{
+  getAllPerTenant():Observable<any>{
     return this._http.get(this.baseUrl);
   }
 
-  assingUserToProject(projID:string){
+  // assingUserToProject(projID:string){
 
-  }
+  // }
 
   addProject(project:Project):Observable<any>{
     return this._http.post(this.baseUrl,project);

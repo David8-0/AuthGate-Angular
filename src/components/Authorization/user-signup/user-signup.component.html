@@ -29,6 +29,7 @@
           (registerUserForm.get('name')?.touched || showUserErrors)){
           <div class="">
             @if(registerUserForm.get('name')?.getError('required')){
+              <i class="fa-solid fa-circle-exclamation alert-icon"></i>
             <span class="alert-text">name is required</span>
             }
           </div>
@@ -43,9 +44,11 @@
           @if(registerUserForm.get('email')?.errors &&
           (registerUserForm.get('email')?.touched ||showUserErrors)){
           <div class="text-danger">
+            <i class="fa-solid fa-circle-exclamation alert-icon"></i>
             @if(registerUserForm.get('email')?.getError('required')){
             <span class="alert-text">email is required</span>
             } @if(registerUserForm.get('email')?.getError('email')){
+              <i class="fa-solid fa-circle-exclamation alert-icon"></i>
             <span class="alert-text">email pattern is invalid</span>
             }
           </div>
@@ -69,9 +72,12 @@
           @if(registerUserForm.get('password')?.errors &&
           (registerUserForm.get('password')?.touched || showUserErrors)){
           <div class="text-danger">
+            
             @if(registerUserForm.get('password')?.getError('required')){
+              <i class="fa-solid fa-circle-exclamation alert-icon"></i>
             <span class="alert-text">password is required</span>
             } @if(registerUserForm.get('password')?.getError('pattern')){
+              <i class="fa-solid fa-circle-exclamation alert-icon"></i>
             <span class="alert-text text-danger"
               >Password pattern is invalid and must contain at least
             </span>
@@ -104,8 +110,10 @@
           (registerUserForm.get('confirmPassword')?.touched ||showUserErrors)){
           <div class="text-danger">
             @if(registerUserForm.get('confirmPassword')?.getError('required')){
+              <i class="fa-solid fa-circle-exclamation alert-icon"></i>
             <span class="alert-text">confirm password is required</span>
             } @if(registerUserForm.get('confirmPassword')?.getError('pattern')){
+              <i class="fa-solid fa-circle-exclamation alert-icon"></i>
             <span class="alert-text text-danger"
               >confirm Password pattern is invalid and must contain at least
             </span>
@@ -117,6 +125,7 @@
             </ul>
             }
             @if(registerUserForm.get('confirmPassword')?.getError('passwordMismatch')){
+              <i class="fa-solid fa-circle-exclamation alert-icon"></i>
               <span class="alert-text">confirm password doesn't match password</span>
             }
           </div>
@@ -132,6 +141,7 @@
           (registerUserForm.get('phone')?.touched )){
           <div class="text-danger">
             @if(registerUserForm.get('phone')?.getError('pattern')){
+              <i class="fa-solid fa-circle-exclamation alert-icon"></i>
             <span class="alert-text">Invalid Phone number</span>
             }
           </div>
@@ -147,6 +157,7 @@
           (registerUserForm.get('age')?.touched)){
           <div class="text-danger">
             @if(registerUserForm.get('age')?.getError('min') || registerUserForm.get('age')?.getError('max')){
+              <i class="fa-solid fa-circle-exclamation alert-icon"></i>
             <span class="alert-text">Age must be between 13 ad 100 </span>
             } 
           </div>
@@ -177,6 +188,7 @@
           (registerTenantForm.get('name')?.touched || showTenantErrors)){
           <div class="text-danger">
             @if(registerTenantForm.get('name')?.getError('required')){
+              <i class="fa-solid fa-circle-exclamation alert-icon"></i>
             <span class="alert-text">name is required</span>
             }
           </div>
@@ -192,8 +204,10 @@
           (registerTenantForm.get('email')?.touched || showTenantErrors)){
           <div class="text-danger">
             @if(registerTenantForm.get('email')?.getError('required')){
+              <i class="fa-solid fa-circle-exclamation alert-icon"></i>
             <span class="alert-text">email is required</span>
             } @if(registerTenantForm.get('email')?.getError('email')){
+              <i class="fa-solid fa-circle-exclamation alert-icon"></i>
             <span class="alert-text">email pattern is invalid</span>
             }
           </div>
@@ -217,8 +231,10 @@
           (registerTenantForm.get('password')?.touched || showTenantErrors)){
           <div class="text-danger">
             @if(registerTenantForm.get('password')?.getError('required')){
+              <i class="fa-solid fa-circle-exclamation alert-icon"></i>
             <span class="alert-text">password is required</span>
             } @if(registerTenantForm.get('password')?.getError('pattern')){
+              <i class="fa-solid fa-circle-exclamation alert-icon"></i>
             <span class="alert-text text-danger"
               >Password pattern is invalid and must contain at least
             </span>
@@ -251,9 +267,11 @@
           showTenantErrors)){
           <div class="text-danger">
             @if(registerTenantForm.get('confirmPassword')?.getError('required')){
+              <i class="fa-solid fa-circle-exclamation alert-icon"></i>
             <span class="alert-text">confirm password is required</span>
             }
             @if(registerTenantForm.get('confirmPassword')?.getError('pattern')){
+              <i class="fa-solid fa-circle-exclamation alert-icon"></i>
             <span class="alert-text text-danger"
               >confirm Password pattern is invalid and must contain at least
             </span>
@@ -265,6 +283,7 @@
             </ul>
             }
             @if(registerTenantForm.get('confirmPassword')?.getError('passwordMismatch')){
+              <i class="fa-solid fa-circle-exclamation alert-icon"></i>
               <span class="alert-text">confirm password doesn't match password</span>
             }
           </div>
@@ -280,6 +299,7 @@
           (registerTenantForm.get('phone')?.touched )){
           <div class="text-danger">
             @if(registerTenantForm.get('phone')?.getError('pattern')){
+              <i class="fa-solid fa-circle-exclamation alert-icon"></i>
             <span class="alert-text">Invalid Phone number</span>
             }
           </div>
@@ -302,6 +322,7 @@
           (registerTenantForm.get('website')?.touched )){
           <div class="text-danger">
             @if(registerTenantForm.get('website')?.getError('pattern')){
+              <i class="fa-solid fa-circle-exclamation alert-icon"></i>
             <span class="alert-text">Invalid URL</span>
             }
           </div>
@@ -335,10 +356,10 @@
               <div class="icon-wrapper">
                   <i class="fa-brands fa-facebook"></i>
               </div>
-              <div class="icon-wrapper">
-                  <i class="fa-brands fa-google"></i>
+              <div class="icon-wrapper" (click)="signInWithGoogle()" >
+                  <i class="fa-brands fa-google" ></i>
               </div>
-              <div class="icon-wrapper">
+              <div class="icon-wrapper" (click)="signInWithGitHub()">
                   <i class="fa-brands fa-github"></i>
               </div>
           </div>

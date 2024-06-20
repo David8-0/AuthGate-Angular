@@ -18,9 +18,11 @@
                     @if(loginForm.get('email')?.errors && (loginForm.get('email')?.touched)|| showErrors){
                         <div>
                             @if(loginForm.get('email')?.getError('required')){
+                                <i class="fa-solid fa-circle-exclamation alert-icon"></i>
                                 <span class="alert-text text-danger">Email is required</span>
                             }
                             @if(loginForm.get('email')?.getError('email')){
+                                <i class="fa-solid fa-circle-exclamation alert-icon"></i>
                                 <span class="alert-text text-danger">Email pattern is invalid</span>
                             }
                         </div>
@@ -29,9 +31,10 @@
                         <i class="fa-solid" [class.fa-eye]="!isShowPassword" [class.fa-eye-slash]="isShowPassword" (click)="toggleShowPassword() "></i>
                         <input id="password" [type]="isShowPassword?'text':'password'" formControlName="password" placeholder="Password" class="fw-bold  border my-1 form-control">
                     </div>
-                    @if((loginForm.get('password')?.errors && loginForm.get('password')?.touched)|| showErrors){
+                    @if((loginForm.get('password')?.errors && (loginForm.get('password')?.touched)|| showErrors)){
                         <div class="text-danger">
                             @if(loginForm.get('password')?.getError('required')){
+                                <i class="fa-solid fa-circle-exclamation alert-icon"></i>
                                 <span class="alert-text text-danger">Password is required</span>
                             }
                             
@@ -59,7 +62,7 @@
                         <i class="fa-brands fa-github"></i>
                     </div>
                 </div>
-
+                <a class="text-decoration-none" routerLink="/user-signup">Don't have an account ? Sign Up</a>
             </div>
         </div>
     </div>

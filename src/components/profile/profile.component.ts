@@ -34,8 +34,9 @@ export class ProfileComponent implements OnInit,OnDestroy{
     private _validationService:ValidationService
   ){
     this.user = this._authService.user.value;
-    console.log(this.user);
-    
+    //console.log(this.user);
+    // console.log(this._authService.user.value._id);
+
   }
 
   ngOnInit(): void {

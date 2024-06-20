@@ -93,4 +93,12 @@ export class UserSignupComponent {
   toggleShowConfirmPassword(){
     this.isShowConfirmPassword=!this.isShowConfirmPassword;
   }
+  signInWithGoogle(){
+    window.location.href="http://localhost:3000/auth/google";
+  }
+
+
+  signInWithGitHub(){
+    window.location.href="http://localhost:3000/auth/github";
+  }
 }

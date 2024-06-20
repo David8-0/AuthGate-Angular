@@ -79,7 +79,7 @@ export class AuthenticationService {
 
   logOut(){
     localStorage.removeItem('token');
-    localStorage.removeItem('user');
+    localStorage.removeItem('userID');
     localStorage.removeItem('role');
     this.user.next({} as User);
   }

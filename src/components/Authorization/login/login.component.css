@@ -1,0 +1,42 @@
+
+
+.password-wrapper{
+    position: relative;
+}
+
+.password-wrapper i {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+.divider{
+    height: 1px;
+    background-color: #e5dee7;
+    width: 40%;
+}
+
+.icon-wrapper{
+    font-size: 26px;
+    display: flex;
+    /* background: rgba(198, 155, 238, 0.171); */
+    color: var(--main-text-color);
+    line-height: 1;
+    /* padding: 8px 0; */
+    margin-right: 4px;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    transition: 0.3s;
+    justify-content: center;
+    align-items: center;
+}
+
+.icon-wrapper:hover{
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
+

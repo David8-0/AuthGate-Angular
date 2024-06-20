@@ -1,0 +1,72 @@
+<div class="container wrapper">
+    
+    <div class="card-body p-5  rounded bg-white">
+        <div class="row">
+            <div class="col-md-5">
+                <div class="">
+                    <img src="assets/login.png" class="w-100" alt="login photo">
+                </div>
+            </div>
+            <div class="col-md-7">
+                <h1 class="text-center">Sign in</h1>
+                @if(this._projectService.projectID){
+                    <h4 class="">you need to log in first to continue...</h4> 
+                }
+                <form [formGroup]="loginForm" (ngSubmit)="register(loginForm)" class="d-flex flex-column justify-content-center px-5 py-3 w-75 w-100">
+                    
+                    <input id="email" type="text" formControlName="email" placeholder="Email" class="fw-bold  form-control my-1">
+                    @if(loginForm.get('email')?.errors && (loginForm.get('email')?.touched)|| showErrors){
+                        <div>
+                            @if(loginForm.get('email')?.getError('required')){
+                                <i class="fa-solid fa-circle-exclamation alert-icon"></i>
+                                <span class="alert-text text-danger">Email is required</span>
+                            }
+                            @if(loginForm.get('email')?.getError('email')){
+                                <i class="fa-solid fa-circle-exclamation alert-icon"></i>
+                                <span class="alert-text text-danger">Email pattern is invalid</span>
+                            }
+                        </div>
+                    }
+                    <div class="password-wrapper">
+                        <i class="fa-solid" [class.fa-eye]="!isShowPassword" [class.fa-eye-slash]="isShowPassword" (click)="toggleShowPassword() "></i>
+                        <input id="password" [type]="isShowPassword?'text':'password'" formControlName="password" placeholder="Password" class="fw-bold  border my-1 form-control">
+                    </div>
+                    @if((loginForm.get('password')?.errors && (loginForm.get('password')?.touched)|| showErrors)){
+                        <div class="text-danger">
+                            @if(loginForm.get('password')?.getError('required')){
+                                <i class="fa-solid fa-circle-exclamation alert-icon"></i>
+                                <span class="alert-text text-danger">Password is required</span>
+                            }
+                            
+                        </div>
+                    }
+                    <input type="submit"  class="custom-btn w-50 m-auto mt-4" value="Login" />
+
+                    
+                        
+                    
+                </form>
+                <div class="d-flex  justify-content-center align-items-center">
+                    <div class="divider"></div>
+                    <span class="mx-2 fw-bold">OR</span>
+                    <div class="divider"></div>
+                </div>
+                <div class="providers mt-2 d-flex  justify-content-center">
+                    <div class="icon-wrapper">
+                        <i class="fa-brands fa-facebook"></i>
+                    </div>
+                    <div class="icon-wrapper" (click)="signInWithGoogle()">
+                        <i class="fa-brands fa-google"></i>
+                    </div>
+                    <div class="icon-wrapper" (click)="signInWithGitHub()">
+                        <i class="fa-brands fa-github"></i>
+                    </div>
+                </div>
+                <a class="text-decoration-none" routerLink="/user-signup">Don't have an account ? Sign Up</a>
+            </div>
+        </div>
+    </div>
+
+
+<p-toast />
+</div>

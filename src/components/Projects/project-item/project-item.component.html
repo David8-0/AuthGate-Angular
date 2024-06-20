@@ -1,0 +1,137 @@
+<div class="card-item">
+  <p class="card-data">name</p>
+  <span>{{ project.name }}</span>
+  <p class="card-data">Callback URL</p>
+  <span>{{ project.callBackUrl }}</span>
+  <div class="d-flex justify-content-start">
+    <p class="card-data">client ID </p>
+    <span class="copy-span"> <i class="fa-solid fa-copy" (click)="copyClientID()"></i></span>
+  </div>
+  <span>{{ project.clientID }}</span>
+  <div class="d-flex justify-content-start">
+    <p class="card-data">Client Secret</p>
+    <span class="copy-span" (click)="copyClientSecret()"> <i class="fa-solid fa-copy" ></i> </span>
+    <span class="copy-span" (click)="toggleShowClientSecret()"><i class="fa-solid" [class.fa-eye-slash]="this.showClientSecret" [class.fa-eye]="!this.showClientSecret"></i></span>
+  </div>
+  @if(this.showClientSecret){
+    <span>{{ project.clientSECRET }}</span>
+  }
+  
+  
+
+  <div class="controls">
+    <div class="control-item">
+      <i
+        class="fa-solid fa-trash-can text-danger"
+        (click)="showDeleteDialog()"
+      ></i>
+    </div>
+    @if(user.role == 'tenant'){
+      <div class="control-item">
+        <i
+          class="fa-solid fa-pen-to-square text-success"
+          (click)="showupdateDialog()"
+        ></i>
+      </div>
+    } 
+  </div>
+</div>
+
+<div class="flex justify-content-center">
+  <p-dialog
+    header="Confirm Delete"
+    [(visible)]="DeleteDialogvisible"
+    [modal]="true"
+    [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }"
+    [style]="{ width: '400px' }"
+    [draggable]="false"
+    [resizable]="false"
+  >
+    <div class="buttons w-100 d-flex justify-content-around">
+      are you sure you want to delete this project ?
+      <button
+        class="btn btn-info w-25 me-1"
+        (click)="this.DeleteDialogvisible = false"
+      >
+        No
+      </button>
+      <button class="btn btn-danger w-25" (click)="deleteProject(project._id)">
+        Yes
+      </button>
+    </div>
+  </p-dialog>
+</div>
+
+<div class="flex justify-content-center">
+  <p-dialog
+    header="Confirm Update"
+    [(visible)]="UpdateDialogVisible"
+    [modal]="true"
+    [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }"
+    [style]="{ width: '400px' }"
+    [draggable]="false"
+    [resizable]="false"
+  >
+  
+
+    <div class="buttons w-100 d-flex flex-column justify-content-around">
+      <form
+        [formGroup]="updateProjectForm"
+        (ngSubmit)="updateProject(project._id, updateProjectForm)"
+      >
+        <label for="clientID"> Client ID </label>
+        <input
+          type="text"
+          id="clientID"
+          formControlName="name"
+          placeholder="Project Name"
+          class="fw-bold border my-1 form-control"
+        />
+        @if(updateProjectForm.get('name')?.errors &&
+        updateProjectForm.get('name')?.touched){
+        <div class="text-danger">
+          @if(updateProjectForm.get('name')?.getError('required')){
+          <span class="fw-bold alert-msg"
+            ><i class="fa-solid fa-circle-exclamation"></i> project name is
+            required</span
+          >
+          }
+        </div>
+        }
+        <label for="callBackUrl"> Callback URL</label>
+        <input
+          type="text"
+          id="callBackUrl"
+          formControlName="callBackUrl"
+          placeholder="callBack Url"
+          class="fw-bold border my-1 form-control"
+        />
+        @if(updateProjectForm.get('callBackUrl')?.errors &&
+        updateProjectForm.get('callBackUrl')?.touched){
+        <div class="text-danger">
+          @if(updateProjectForm.get('callBackUrl')?.getError('required')){
+          <span class="fw-bold alert-msg"
+            ><i class="fa-solid fa-circle-exclamation"></i> callBack Url is
+            required</span
+          >
+          }
+        </div>
+        }
+      </form>
+      <button
+        class="btn btn-info w-100 my-2"
+        (click)="this.UpdateDialogVisible = false"
+      >
+        No
+      </button>
+      <button
+        class="btn btn-success w-100 my-2"
+        (click)="updateProject(project._id, updateProjectForm)"
+      >
+        Yes
+      </button>
+    </div>
+  </p-dialog>
+</div>
+
+<p-toast />

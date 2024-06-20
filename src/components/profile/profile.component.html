@@ -17,6 +17,7 @@
               updateInfoForm.get('name')?.touched){
               <div class="text-danger">
                 @if(updateInfoForm.get('name')?.getError('required')){
+                  <i class="fa-solid fa-circle-exclamation"></i>
                 <span class="alert-text">name is required</span>
                 }
               </div>
@@ -30,8 +31,10 @@
               updateInfoForm.get('email')?.touched ){
               <div class="text-danger">
                 @if(updateInfoForm.get('email')?.getError('required')){
+                  <i class="fa-solid fa-circle-exclamation"></i>
                 <span class="alert-text">email is required</span>
                 } @if(updateInfoForm.get('email')?.getError('email')){
+                  <i class="fa-solid fa-circle-exclamation"></i>
                 <span class="alert-text">email pattern is invalid</span>
                 }
               </div>
@@ -51,6 +54,7 @@
               (updateInfoForm.get('phone')?.touched )){
               <div class="text-danger">
                 @if(updateInfoForm.get('phone')?.getError('pattern')){
+                  <i class="fa-solid fa-circle-exclamation"></i>
                 <span class="alert-text">Invalid Phone number</span>
                 }
               </div>
@@ -65,6 +69,7 @@
           (updateInfoForm.get('age')?.touched)){
           <div class="text-danger">
             @if(updateInfoForm.get('age')?.getError('min') || updateInfoForm.get('age')?.getError('max')){
+              <i class="fa-solid fa-circle-exclamation"></i>
             <span class="alert-text">Age must be between 13 ad 100 </span>
             } 
           </div>
@@ -82,6 +87,7 @@
               (updateInfoForm.get('website')?.touched )){
               <div class="text-danger">
                 @if(updateInfoForm.get('website')?.getError('pattern')){
+                  <i class="fa-solid fa-circle-exclamation"></i>
                 <span class="alert-text">Invalid URL</span>
                 }
               </div>

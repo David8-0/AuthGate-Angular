@@ -12,6 +12,7 @@ import { NotFoundComponent } from '../components/Core/not-found/not-found.compon
 import { ErrorComponent } from '../components/Core/error/error.component';
 import { GoogleCallbackComponent } from '../components/Authorization/google-callback/google-callback.component';
 import { GithubCallbackComponent } from '../components/Authorization/github-callback/github-callback.component';
+import { DeveloperComponent } from '../components/Information/developer/developer.component';
 
 export const routes: Routes = [
     {path:'',redirectTo:'home',pathMatch:'full'},
@@ -25,6 +26,7 @@ export const routes: Routes = [
     {path:'dashboard', loadChildren: ()=>import('../components/Admin/dashboard/admin.routes').then(m=>m.routes)},
     {path:'auth/google/callback',component:GoogleCallbackComponent},
     {path:'auth/github/callback',component:GithubCallbackComponent},
+    {path:'developer',component:DeveloperComponent},
     {path:'**',component:NotFoundComponent}
 
 ];

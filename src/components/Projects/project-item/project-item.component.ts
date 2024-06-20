@@ -1,7 +1,6 @@
 import { Project } from './../../../interfaces/project';
 import { Component, ElementRef, Input, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ProjectService } from '../../../services/project.service';
 import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
 import { ToastModule } from 'primeng/toast';
@@ -9,6 +8,7 @@ import { MessageService } from 'primeng/api';
 import { User } from '../../../interfaces/user';
 import { Subscription } from 'rxjs';
 import { AuthenticationService } from '../../../services/authentication.service';
+import { ProjectService } from '../../../services/project.service';
 @Component({
   selector: 'app-project-item',
   standalone: true,

@@ -69,6 +69,7 @@
   max-width:  500px;
 }
 
-#passwordChangeForm span i {
+ i {
   color: red;
+  margin-right: 5px;
 }

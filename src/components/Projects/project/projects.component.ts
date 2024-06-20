@@ -27,9 +27,13 @@ export class ProjectsComponent implements OnInit,OnDestroy{
 
 
 ngOnInit(): void {
-    this._projectService.getAll().subscribe({
+    this._projectService.getAllPerTenant().subscribe({
       next:(res)=>{
         this.projectsArr=res.data;
+        console.log(res);
+      },
+      error:(err)=>{
+        console.log(err);
       }
     })
     const sub =this._projectService.projectsArr.subscribe(newArr=>{

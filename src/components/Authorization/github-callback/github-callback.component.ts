@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from '../../../services/authentication.service';
 import { Subscription } from 'rxjs';
+import { ProjectService } from '../../../services/project.service';
 
 @Component({
   selector: 'app-github-callback',
@@ -15,6 +16,7 @@ export class GithubCallbackComponent implements OnInit,OnDestroy{
   user:any = {};
   sub:Subscription={} as Subscription;
   constructor(
+    public _projectService:ProjectService,
     private _activatedRoute:ActivatedRoute,
     private _autehnticationService:AuthenticationService,
     private _router:Router
@@ -28,7 +30,11 @@ export class GithubCallbackComponent implements OnInit,OnDestroy{
       this.user = params['user'];
       this.user = JSON.parse(decodeURIComponent(this.user))
       this._autehnticationService.setUser(this.user,this.token??"");
-      this._router.navigateByUrl('/home');
+      if(this._projectService.projectID){
+        this._router.navigateByUrl(`/authorize/${this._projectService.projectID}`);
+      }else{
+        this._router.navigateByUrl('/home');
+      }
     }); 
   }
 

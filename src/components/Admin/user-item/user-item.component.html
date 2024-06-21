@@ -1,0 +1,74 @@
+<div class="user-item d-flex">
+  <div class="row">
+    <div class="col-md-4">
+      <div class="user-img position-relative">
+        <img [src]="photoUrl" class="w-100 shadow" alt="user-img" />
+        <div class="img-layer">
+          <div class="controls">
+            @if(!user.deleted){
+              <div class="control my-2 cursor-pointer" (click)="deleteUser(user._id)">
+                <i class="fa-solid fa-trash-can text-danger"></i>
+                <span class="ms-2">Delete</span>
+              </div>
+            }
+            <div class="control my-2 cursor-pointer">
+              <i class="fa-regular fa-map text-white"></i>
+              <span class="ms-2" (click)="showDialog()">view Projects</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-8">
+      <div class="user-info p-2 bg-white w-100 position-relative">
+        <p class="mb-0"><span class="fw-bold">Name:</span> {{ user.name }}</p>
+        <p class="mb-0"><span class="fw-bold">Email:</span> {{ user.email }}</p>
+        <p class="mb-0"><span class="fw-bold">Phone:</span> {{ user.phone }}</p>
+        <p class="mb-0"><span class="fw-bold">Role:</span> {{ user.role }}</p>
+        <p class="mb-0">
+          <span class="fw-bold">number of projects:</span>
+          {{ user.projects.length }}
+        </p>
+        @if(user.role == 'tenant'){
+          <p class="mb-0">
+            <span class="fw-bold">address:</span> {{ user.address }}
+          </p>
+          <p class="mb-0">
+            <span class="fw-bold">website:</span> {{ user.website }}
+          </p>
+        } @if(user.role == 'user'){
+           <p class="mb-0"><span class="fw-bold">Age:</span> {{ user.age }}</p>
+        } @if(user.deleted){
+            <div class="deleted-badge">Deleted</div>
+        }
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<p-dialog
+  header="Projects"
+  [modal]="true"
+  [(visible)]="visible"
+  [style]="{ width: '50rem'}"
+  [breakpoints]="{ '1199px': '750px', '575px': '90vw' }"
+>
+  <div class="row">
+    @if(user.role == 'tenant'){
+      @for(item of user.projects;track item){
+        <div class="col-md-6">
+          <app-project-item [project]="item" ></app-project-item>
+        </div>
+        }
+    }@if(user.role == 'user'){
+      @for(item of user.projects;track item){
+        <div class="col-md-6">
+          <h5>Project: {{item.name}} </h5>
+        </div>
+      }
+    }
+  </div>
+</p-dialog>

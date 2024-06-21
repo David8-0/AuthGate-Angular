@@ -1,0 +1,26 @@
+
+<div class="container wrapper">
+    <h1 class="header-h1">Dashboard</h1>
+    <div class="card-body p-5  rounded cards">
+        <div class="row">
+            
+            <div class="col-md-6">
+                <a routerLink="users" routerLinkActive="active-card">
+                    <div class="card-item">
+                        <i class="fa-solid fa-users"></i>
+                        <h2>Users</h2>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-6">
+                <a routerLink="tenants" routerLinkActive="active-card">
+                <div class="card-item">
+                    <i class="fa-solid fa-user-tie"></i>
+                    <h2>Tenants</h2>
+                </div>
+            </a>
+            </div>
+        </div>
+        <router-outlet></router-outlet>
+    </div>
+</div>

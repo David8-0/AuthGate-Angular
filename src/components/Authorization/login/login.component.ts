@@ -3,19 +3,22 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { AuthenticationService } from '../../../services/authentication.service';
 import { ProjectService } from '../../../services/project.service';
-import { ToastModule } from 'primeng/toast';
+import { DialogModule } from 'primeng/dialog';
+
 import { MessageService } from 'primeng/api';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ReactiveFormsModule,RouterLink,RouterLinkActive,ToastModule],
+  imports: [DialogModule,ReactiveFormsModule,RouterLink,RouterLinkActive],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
-  providers:[MessageService]
+  providers:[]
 })
 export class LoginComponent {
   isShowPassword:boolean = false;
   showErrors:boolean = false;
+  showResetPasswordDialog: boolean = false;
+  showResetPasswordErrors:boolean = false;
   constructor(
     private _messageService: MessageService,
     private _authService: AuthenticationService,
@@ -29,6 +32,12 @@ export class LoginComponent {
     password: new FormControl('',Validators.required),
     email: new FormControl('',[Validators.required,Validators.email]),
   });
+
+  resetPasswordForm = new FormGroup({
+    email: new FormControl('',[Validators.required,Validators.email]),
+  });
+
+  
 
   register(formGroup: FormGroup) {    
     if (formGroup.valid) {
@@ -61,5 +70,23 @@ export class LoginComponent {
 
   signInWithGitHub(){
     window.location.href="http://localhost:3000/auth/github";
+  }
+
+  resetPassword(formGroup: FormGroup){
+    if(formGroup.valid){
+      this._authService.resetPassword(formGroup.value).subscribe({
+        next:(res)=>{
+          this._messageService.add({ severity: 'success', summary: 'Success', detail: 'an email has been sent to you ' });
+          this.showResetPasswordDialog=false;
+          console.log(res);
+        },
+        error:(err)=>{
+          this._messageService.add({ severity: 'error', summary: 'Error', detail: 'there is a problem with your email' });
+          console.log(err);
+        }
+      });
+    }else{
+      this.showResetPasswordErrors=true;
+    }
   }
 }

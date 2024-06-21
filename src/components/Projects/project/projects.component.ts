@@ -11,10 +11,10 @@ import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-projects',
   standalone: true,
-  imports: [ReactiveFormsModule, ProjectItemComponent,DialogModule,ButtonModule,ToastModule],
+  imports: [ReactiveFormsModule, ProjectItemComponent,DialogModule,ButtonModule],
   templateUrl: './projects.component.html',
   styleUrl: './projects.component.css',
-  providers:[MessageService]
+  providers:[]
 })
 export class ProjectsComponent implements OnInit,OnDestroy{
   projectsArr:Project[] = [];

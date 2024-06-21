@@ -1,7 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { User } from '../../../interfaces/user';
 import { UserService } from '../../../services/user.service';
-import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { UserItemComponent } from '../user-item/user-item.component';
 import { Subscription } from 'rxjs';
@@ -14,17 +13,17 @@ import { DeleteFilterPipe } from '../../../pipes/delete-filter.pipe';
 @Component({
   selector: 'app-users',
   standalone: true,
-  imports: [ToastModule,UserItemComponent,SearchUsersPipe,FormsModule,PaginationPipe,TimesPipe,DeleteFilterPipe],
+  imports: [UserItemComponent,SearchUsersPipe,FormsModule,PaginationPipe,TimesPipe,DeleteFilterPipe],
   templateUrl: './users.component.html',
   styleUrl: './users.component.css',
-  providers:[MessageService]
+  providers:[]
 })
 export class UsersComponent implements OnInit,OnDestroy{
   users:User[] = [];
   searchKey:string="";
   sub:Subscription={} as Subscription;
   numberOfPages:number=0;
-  pageSize:number=4;
+  pageSize:number=8;
   cureentPage:number=1;
 
   deleteValue:string="all";

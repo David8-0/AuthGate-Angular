@@ -3,7 +3,6 @@ import { Component, ElementRef, Input, OnChanges, OnDestroy, OnInit, SimpleChang
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
-import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { User } from '../../../interfaces/user';
 import { Subscription } from 'rxjs';
@@ -12,7 +11,7 @@ import { ProjectService } from '../../../services/project.service';
 @Component({
   selector: 'app-project-item',
   standalone: true,
-  imports: [ReactiveFormsModule,DialogModule,ButtonModule,ToastModule],
+  imports: [ReactiveFormsModule,DialogModule,ButtonModule],
   templateUrl: './project-item.component.html',
   styleUrl: './project-item.component.css',
   providers:[]

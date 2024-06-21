@@ -4,16 +4,15 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { AuthenticationService } from '../../../services/authentication.service';
 import { ProjectService } from '../../../services/project.service';
-import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-user-signup',
   standalone: true,
-  imports: [ReactiveFormsModule,RouterLink,RouterLinkActive,ToastModule],
+  imports: [ReactiveFormsModule,RouterLink,RouterLinkActive],
   templateUrl: './user-signup.component.html',
   styleUrl: './user-signup.component.css',
-  providers:[MessageService]
+  providers:[]
 })
 export class UserSignupComponent {
   isUser: boolean = true;

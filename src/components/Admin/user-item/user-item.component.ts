@@ -2,14 +2,13 @@ import { ProjectItemComponent } from './../../Projects/project-item/project-item
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { User } from '../../../interfaces/user';
 import { UserService } from '../../../services/user.service';
-import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { TenantService } from '../../../services/tenant.service';
 import { DialogModule } from 'primeng/dialog';
 @Component({
   selector: 'app-user-item',
   standalone: true,
-  imports: [ToastModule,DialogModule,ProjectItemComponent],
+  imports: [DialogModule,ProjectItemComponent],
   templateUrl: './user-item.component.html',
   styleUrl: './user-item.component.css',
   providers:[]

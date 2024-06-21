@@ -1,13 +1,10 @@
 import { Component } from '@angular/core';
 import { User } from '../../../interfaces/user';
-import { UserService } from '../../../services/user.service';
-import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { UserItemComponent } from '../user-item/user-item.component';
 import { Subscription } from 'rxjs';
 import { TenantService } from '../../../services/tenant.service';
 import { SearchUsersPipe } from '../../../pipes/search-users.pipe';
-import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { PaginationPipe } from '../../../pipes/pagination.pipe';
 import { TimesPipe } from '../../../pipes/times.pipe';
@@ -15,17 +12,17 @@ import { DeleteFilterPipe } from '../../../pipes/delete-filter.pipe';
 @Component({
   selector: 'app-tenants',
   standalone: true,
-  imports: [ToastModule,UserItemComponent,SearchUsersPipe,FormsModule,PaginationPipe,TimesPipe,DeleteFilterPipe],
+  imports: [UserItemComponent,SearchUsersPipe,FormsModule,PaginationPipe,TimesPipe,DeleteFilterPipe],
   templateUrl: './tenants.component.html',
   styleUrl: './tenants.component.css',
-  providers:[MessageService]
+  providers:[]
 })
 export class TenantsComponent {
   tenants:User[] = [];
   searchKey:string="";
   sub:Subscription={} as Subscription;
   numberOfPages:number=0;
-  pageSize:number=4;
+  pageSize:number=8;
   cureentPage:number=1;
   deleteValue:string="all";
   constructor(

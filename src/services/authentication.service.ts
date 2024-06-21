@@ -8,6 +8,7 @@ import { SignIn } from '../interfaces/sign-in';
 import { UserService } from './user.service';
 import { TenantService } from './tenant.service';
 import { Router } from '@angular/router';
+import { UpdatePassword } from '../interfaces/update-password';
 
 @Injectable({
   providedIn: 'root'
@@ -58,8 +59,6 @@ export class AuthenticationService {
     return this._http.post(this.baseUrl+"registeruser",user);
   }
 
-  
-
   tenantSingup(tenant:TenantSignup):Observable<any>{
     return this._http.post(this.baseUrl+"registertenant",tenant);
   }
@@ -84,9 +83,16 @@ export class AuthenticationService {
     this.user.next({} as User);
   }
   
-  // SignInWithGoogle():Observable<any>{
-  //   return this._http.get(this.baseUrl+"google")
-  // }
+  resetPasswordRequest(email:string):Observable<any>{
+    return this._http.post(this.baseUrl+"reset-password/request",{
+      email
+    })
+  }
+
+  resetPassword(form:UpdatePassword):Observable<any>{
+    return this._http.post(this.baseUrl+"reset-password",form)
+  }
+  
 }
 
 

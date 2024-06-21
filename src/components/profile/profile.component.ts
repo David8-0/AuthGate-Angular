@@ -14,10 +14,10 @@ import { ValidationService } from '../../services/validation.service';
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [CommonModule,ReactiveFormsModule,DialogModule,ToastModule],
+  imports: [CommonModule,ReactiveFormsModule,DialogModule],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.css',
-  providers:[MessageService]
+  providers:[]
 })
 export class ProfileComponent implements OnInit,OnDestroy{
   user:User = {} as User;

@@ -30,3 +30,15 @@ h1{
       transform: translatey(-30px);
     }
   }
+/* * Services * */
+  #services{
+    background-color: #F9F8FF;
+  }
+
+  #services h2 {
+    font-size: 40px;
+  }
+
+  #services p {
+    font-size: 20px;
+  }

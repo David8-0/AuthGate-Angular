@@ -42,4 +42,8 @@ export class UserService {
   updatePassword(updateForm:UpdatePassword):Observable<any>{
     return this._http.patch(this.baseUrl+"updateWithPassword",updateForm);
   }
+
+  unDelete(userID:string):Observable<any>{
+    return this._http.patch(this.baseUrl+userID+"/undelete",{});
+  }
 }

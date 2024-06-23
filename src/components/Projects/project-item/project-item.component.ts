@@ -83,6 +83,7 @@ user:User = {};
         next:(res)=>{
           this._messageService.add({ severity: 'info', summary: 'Info', detail: 'successfully deleted your project' });
           this._projectService.projectsArr.next(res.data);
+          this.project=res.data.find( (p:any) => p._id === projectID);
         },
         error:(err)=>{
           this._messageService.add({ severity: 'error', summary: 'Error', detail: 'there was an error deleting your project' });
@@ -106,6 +107,22 @@ user:User = {};
 
   toggleShowClientSecret(){
     this.showClientSecret = !this.showClientSecret;
+  }
+
+
+  undeleteProject(projectID:string | undefined){
+    if(projectID){
+      this._projectService.undeleteProject(projectID).subscribe({
+        next:(res)=>{
+          this._messageService.add({ severity: 'info', summary: 'Info', detail: 'project is undeleted successfully   ' });  
+          this.project= res.data;
+        },
+        error:(err)=>{
+          this._messageService.add({ severity: 'error', summary: 'Error', detail: 'there was an error undeleting the project' });
+        },
+        complete:()=>{}
+      });
+    }
   }
 }
 

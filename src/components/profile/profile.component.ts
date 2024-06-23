@@ -182,6 +182,7 @@ export class ProfileComponent implements OnInit,OnDestroy{
     }else{
       this.showChangePasswordErrors=true;
     }
+    this.updatePasswordForm.reset();
   }
 
   ngOnDestroy(): void {

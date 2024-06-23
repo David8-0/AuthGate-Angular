@@ -7,7 +7,7 @@ import { Project } from '../interfaces/project';
   providedIn: 'root'
 })
 export class ProjectService {
-  projectID:string|null = null;
+  //projectID:string|null = null;
   baseUrl:string = `http://localhost:3000/projects/`;
   projectsArr:BehaviorSubject<Project[]> = new BehaviorSubject<Project[]>([] as Project[]);
   constructor(private _http: HttpClient) { }
@@ -18,7 +18,7 @@ export class ProjectService {
 
 
   getAllPerTenant():Observable<any>{
-    return this._http.get(this.baseUrl);
+    return this._http.get(this.baseUrl+"targetTenant");
   }
 
   // assingUserToProject(projID:string){
@@ -30,10 +30,14 @@ export class ProjectService {
   }
 
   updateProject(projectID:string,project:Project):Observable<any>{
-    return this._http.put(this.baseUrl+projectID,project);
+    return this._http.patch(this.baseUrl+projectID,project);
   }
 
   deleteProject(projectID:string):Observable<any>{
     return this._http.delete(this.baseUrl+projectID);
+  }
+
+  undeleteProject(projectID:string):Observable<any>{
+    return this._http.patch(this.baseUrl+projectID+"/undelete",{});
   }
 }

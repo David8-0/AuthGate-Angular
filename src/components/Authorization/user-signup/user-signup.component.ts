@@ -20,6 +20,7 @@ export class UserSignupComponent {
   isShowConfirmPassword:boolean = false;
   showUserErrors:boolean = false;
   showTenantErrors:boolean = false;
+  isProjectID:boolean = false;
 
   constructor(
     private _messageService: MessageService,
@@ -27,7 +28,10 @@ export class UserSignupComponent {
     private _authService: AuthenticationService,
     private _router: Router,
     private _validationService:ValidationService
-  ){}
+  ){
+    if(localStorage.getItem('projectID'))
+      this.isProjectID=true;
+  }
 
   registerUserForm = new FormGroup({
     name: new FormControl('',Validators.required),
@@ -56,8 +60,8 @@ export class UserSignupComponent {
       this._authService.userSingup(formGroup.value).subscribe({
         next:(response) => {
           this._authService.setUser(response.data.user,response.data.access_token);
-          if(this._projectService.projectID){
-            this._router.navigateByUrl(`/authorize/${this._projectService.projectID}`);
+          if(localStorage.getItem('projectID')){
+            this._router.navigateByUrl(`/authorize/${localStorage.getItem('projectID')}`);
           }else{
             this._router.navigateByUrl('/home');
           }

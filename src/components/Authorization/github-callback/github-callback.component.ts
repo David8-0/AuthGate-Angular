@@ -28,10 +28,12 @@ export class GithubCallbackComponent implements OnInit,OnDestroy{
     this.sub =this._activatedRoute.queryParams.subscribe(params => { 
       this.token = params['token'];
       this.user = params['user'];
-      this.user = JSON.parse(decodeURIComponent(this.user))
+      this.user = JSON.parse(decodeURIComponent(this.user));
+      console.log(this.user);
+      
       this._autehnticationService.setUser(this.user,this.token??"");
-      if(this._projectService.projectID){
-        this._router.navigateByUrl(`/authorize/${this._projectService.projectID}`);
+      if(localStorage.getItem('projectID')){
+        this._router.navigateByUrl(`/authorize/${localStorage.getItem('projectID')}`);
       }else{
         this._router.navigateByUrl('/home');
       }

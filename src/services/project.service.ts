@@ -7,7 +7,7 @@ import { Project } from '../interfaces/project';
   providedIn: 'root'
 })
 export class ProjectService {
-  projectID:string|null = null;
+  //projectID:string|null = null;
   baseUrl:string = `http://localhost:3000/projects/`;
   projectsArr:BehaviorSubject<Project[]> = new BehaviorSubject<Project[]>([] as Project[]);
   constructor(private _http: HttpClient) { }

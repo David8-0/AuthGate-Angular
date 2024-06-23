@@ -19,6 +19,7 @@ export class AuthorizeComponent implements OnInit,OnDestroy{
   project:Project = {} as Project;
   user:User = {} as User;
   subscriptions:Subscription[]=[];
+  
   constructor(
     private _userService:UserService,
     private _authenticationService:AuthenticationService,
@@ -26,8 +27,6 @@ export class AuthorizeComponent implements OnInit,OnDestroy{
     private _activatedRoute:ActivatedRoute,
     private _router:Router
   ){
-    //console.log(this._authenticationService.user.value);
-
   }
 
   ngOnInit(): void {
@@ -35,13 +34,12 @@ export class AuthorizeComponent implements OnInit,OnDestroy{
       this.projectID = params.get('projID');
     });
     this.subscriptions.push(sub);
-    //console.log(this._authenticationService.user.value);
     
     if(!localStorage.getItem('token')){
-      this._projectService.projectID = this.projectID;
+      localStorage.setItem('projectID',`${this.projectID}`)
       this._router.navigateByUrl('/login');
     }else{
-      this._projectService.projectID=null;
+      localStorage.removeItem('projectID');
       if(this.projectID){
         this._projectService.getByID(this.projectID).subscribe({
           next:(res)=>{
@@ -49,8 +47,6 @@ export class AuthorizeComponent implements OnInit,OnDestroy{
           },
           error:(err)=>{
             console.log(err);
-            
-            //this._router.navigateByUrl('/error');
           }
         })
       }

@@ -84,9 +84,7 @@ export class AuthenticationService {
   }
   
   resetPasswordRequest(email:string):Observable<any>{
-    return this._http.post(this.baseUrl+"reset-password/request",{
-      email
-    })
+    return this._http.post(this.baseUrl+"reset-password/request",email)
   }
 
   resetPassword(form:UpdatePassword):Observable<any>{

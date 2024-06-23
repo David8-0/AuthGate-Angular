@@ -57,7 +57,31 @@ export class UserItemComponent implements OnChanges{
     }
   }
 
-  
+    undelete(userId:string | undefined){
+      if(userId && this.user.role == 'tenant'){
+        this._tenantService.unDelete(userId).subscribe({
+          next:(res)=>{
+            this._messageService.add({ severity: 'info', summary: 'undeleted', detail: 'user undeleted successfully' });
+            this._tenantService.tenantsList.next(res.data);
+          },
+          error:(err)=>{
+            this._messageService.add({ severity: 'error', summary: 'Error', detail: 'there was a problem undeleting the user' });
+            console.log(err);
+          }
+        });
+      }else if(userId && this.user.role == 'user'){
+        this._userService.unDelete(userId).subscribe({
+          next:(res)=>{
+            this._messageService.add({ severity: 'info', summary: 'undeleted', detail: 'user undeleted successfully' });
+            this._userService.usersList.next(res.data);
+          },
+          error:(err)=>{
+            this._messageService.add({ severity: 'error', summary: 'Error', detail: 'there was a problem undeleting the user' });
+            console.log(err);
+          }
+        });
+      }
+    }
 
     showDialog() {
         this.visible = true;

@@ -30,6 +30,7 @@ export const routes: Routes = [
     {path:'auth/github/callback',component:GithubCallbackComponent},
     {path:'developer',component:DeveloperComponent},
     {path:'reset-password/:token',component:ResetPasswordComponent},
+    {path:'services',component:HomeComponent},
     {path:'**',component:NotFoundComponent}
 
 ];

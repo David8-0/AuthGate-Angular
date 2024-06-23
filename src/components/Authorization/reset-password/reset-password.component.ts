@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ValidationService } from '../../../services/validation.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
+import { AuthenticationService } from '../../../services/authentication.service';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-reset-password',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule,RouterLink],
   templateUrl: './reset-password.component.html',
   styleUrl: './reset-password.component.css'
 })
@@ -15,10 +17,12 @@ export class ResetPasswordComponent implements OnInit{
   isShowConfirmPassword:boolean = false;
   showErrors:boolean = false;
   token:string | null=null;
-
+  reseted:boolean = true;
   constructor(
     private _validationService:ValidationService,
     private _activateRoute: ActivatedRoute,
+    private _authenticationService:AuthenticationService,
+    private _messageService: MessageService
   ){}
 
 
@@ -38,7 +42,14 @@ export class ResetPasswordComponent implements OnInit{
   register(form:FormGroup){
     if(form.valid){
       form.get('token')?.setValue(this.token);
-      console.log(form.value);
+      this._authenticationService.resetPassword(form.value).subscribe({
+        next:(res)=>{
+          this.reseted=true;
+        },
+        error:(err)=>{
+          this._messageService.add({ severity: 'error', summary: 'Error', detail: 'there is a problem updating your password' });
+        }
+      })
     }else{
       this.showErrors = true;
     }

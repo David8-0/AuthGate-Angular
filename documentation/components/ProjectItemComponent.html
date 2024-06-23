@@ -1,0 +1,1442 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>auth-gate documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">auth-gate documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  ProjectItemComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/components/Projects/project-item/project-item.component.ts</code>
+</p>
+
+
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                <code>OnChanges</code>
+                <code>OnInit</code>
+                <code>OnDestroy</code>
+    </p>
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-project-item</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                            <code>ReactiveFormsModule</code>
+                            <code>DialogModule</code>
+                            <code>ButtonModule</code>
+                </td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./project-item.component.html</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">styleUrl</td>
+                <td class="col-md-9"><code>./project-item.component.css</code></td>
+            </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#DeleteDialogvisible" >DeleteDialogvisible</a>
+                            </li>
+                            <li>
+                                <a href="#showClientSecret" >showClientSecret</a>
+                            </li>
+                            <li>
+                                <a href="#sub" >sub</a>
+                            </li>
+                            <li>
+                                <a href="#UpdateDialogVisible" >UpdateDialogVisible</a>
+                            </li>
+                            <li>
+                                <a href="#updateProjectForm" >updateProjectForm</a>
+                            </li>
+                            <li>
+                                <a href="#user" >user</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#copyClientID" >copyClientID</a>
+                            </li>
+                            <li>
+                                <a href="#copyClientSecret" >copyClientSecret</a>
+                            </li>
+                            <li>
+                                <a href="#deleteProject" >deleteProject</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnChanges" >ngOnChanges</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnDestroy" >ngOnDestroy</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#showDeleteDialog" >showDeleteDialog</a>
+                            </li>
+                            <li>
+                                <a href="#showupdateDialog" >showupdateDialog</a>
+                            </li>
+                            <li>
+                                <a href="#toggleShowClientSecret" >toggleShowClientSecret</a>
+                            </li>
+                            <li>
+                                <a href="#updateProject" >updateProject</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Inputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#project" >project</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(_authenticationService: <a href="../injectables/AuthenticationService.html" target="_self">AuthenticationService</a>, _messageService: MessageService, _projectService: <a href="../injectables/ProjectService.html" target="_self">ProjectService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/components/Projects/project-item/project-item.component.ts:23</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>_authenticationService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/AuthenticationService.html" target="_self" >AuthenticationService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>_messageService</td>
+                                                  
+                                                        <td>
+                                                                    <code>MessageService</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>_projectService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/ProjectService.html" target="_self" >ProjectService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+    <section data-compodoc="block-inputs">
+    <h3 id="inputs">Inputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="project"></a>
+                        <b>project</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/Project.html" target="_self" >Project</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{} as Project</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="21" class="link-to-prism">src/components/Projects/project-item/project-item.component.ts:21</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="copyClientID"></a>
+                    <span class="name">
+                        <span ><b>copyClientID</b></span>
+                        <a href="#copyClientID"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>copyClientID()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="101"
+                                    class="link-to-prism">src/components/Projects/project-item/project-item.component.ts:101</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="copyClientSecret"></a>
+                    <span class="name">
+                        <span ><b>copyClientSecret</b></span>
+                        <a href="#copyClientSecret"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>copyClientSecret()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="95"
+                                    class="link-to-prism">src/components/Projects/project-item/project-item.component.ts:95</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="deleteProject"></a>
+                    <span class="name">
+                        <span ><b>deleteProject</b></span>
+                        <a href="#deleteProject"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>deleteProject(projectID: string | undefined)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="80"
+                                    class="link-to-prism">src/components/Projects/project-item/project-item.component.ts:80</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>projectID</td>
+                                            <td>
+                                                        <code>string | undefined</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnChanges"></a>
+                    <span class="name">
+                        <span ><b>ngOnChanges</b></span>
+                        <a href="#ngOnChanges"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnChanges(changes: SimpleChanges)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="54"
+                                    class="link-to-prism">src/components/Projects/project-item/project-item.component.ts:54</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>changes</td>
+                                            <td>
+                                                        <code>SimpleChanges</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnDestroy"></a>
+                    <span class="name">
+                        <span ><b>ngOnDestroy</b></span>
+                        <a href="#ngOnDestroy"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnDestroy()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="50"
+                                    class="link-to-prism">src/components/Projects/project-item/project-item.component.ts:50</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="43"
+                                    class="link-to-prism">src/components/Projects/project-item/project-item.component.ts:43</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="showDeleteDialog"></a>
+                    <span class="name">
+                        <span ><b>showDeleteDialog</b></span>
+                        <a href="#showDeleteDialog"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>showDeleteDialog()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="35"
+                                    class="link-to-prism">src/components/Projects/project-item/project-item.component.ts:35</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="showupdateDialog"></a>
+                    <span class="name">
+                        <span ><b>showupdateDialog</b></span>
+                        <a href="#showupdateDialog"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>showupdateDialog()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="39"
+                                    class="link-to-prism">src/components/Projects/project-item/project-item.component.ts:39</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="toggleShowClientSecret"></a>
+                    <span class="name">
+                        <span ><b>toggleShowClientSecret</b></span>
+                        <a href="#toggleShowClientSecret"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>toggleShowClientSecret()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="107"
+                                    class="link-to-prism">src/components/Projects/project-item/project-item.component.ts:107</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="updateProject"></a>
+                    <span class="name">
+                        <span ><b>updateProject</b></span>
+                        <a href="#updateProject"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>updateProject(projectID: string | undefined, formGroup: FormGroup)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="64"
+                                    class="link-to-prism">src/components/Projects/project-item/project-item.component.ts:64</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>projectID</td>
+                                            <td>
+                                                        <code>string | undefined</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>formGroup</td>
+                                            <td>
+                                                        <code>FormGroup</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="DeleteDialogvisible"></a>
+                    <span class="name">
+                        <span ><b>DeleteDialogvisible</b></span>
+                        <a href="#DeleteDialogvisible"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/components/Projects/project-item/project-item.component.ts:32</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="showClientSecret"></a>
+                    <span class="name">
+                        <span ><b>showClientSecret</b></span>
+                        <a href="#showClientSecret"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/components/Projects/project-item/project-item.component.ts:31</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="sub"></a>
+                    <span class="name">
+                        <span ><b>sub</b></span>
+                        <a href="#sub"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Subscription</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{} as Subscription</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/components/Projects/project-item/project-item.component.ts:22</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="UpdateDialogVisible"></a>
+                    <span class="name">
+                        <span ><b>UpdateDialogVisible</b></span>
+                        <a href="#UpdateDialogVisible"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/components/Projects/project-item/project-item.component.ts:33</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="updateProjectForm"></a>
+                    <span class="name">
+                        <span ><b>updateProjectForm</b></span>
+                        <a href="#updateProjectForm"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new FormGroup({
+    name: new FormControl(&#x27;&#x27;,[Validators.required]),
+    callBackUrl: new FormControl(&#x27;&#x27;,[Validators.required]),
+  })</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="59" class="link-to-prism">src/components/Projects/project-item/project-item.component.ts:59</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="user"></a>
+                    <span class="name">
+                        <span ><b>user</b></span>
+                        <a href="#user"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/User.html" target="_self" >User</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{}</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/components/Projects/project-item/project-item.component.ts:23</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Project } from &#x27;./../../../interfaces/project&#x27;;
+import { Component, ElementRef, Input, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewChild } from &#x27;@angular/core&#x27;;
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from &#x27;@angular/forms&#x27;;
+import { DialogModule } from &#x27;primeng/dialog&#x27;;
+import { ButtonModule } from &#x27;primeng/button&#x27;;
+import { MessageService } from &#x27;primeng/api&#x27;;
+import { User } from &#x27;../../../interfaces/user&#x27;;
+import { Subscription } from &#x27;rxjs&#x27;;
+import { AuthenticationService } from &#x27;../../../services/authentication.service&#x27;;
+import { ProjectService } from &#x27;../../../services/project.service&#x27;;
+@Component({
+  selector: &#x27;app-project-item&#x27;,
+  standalone: true,
+  imports: [ReactiveFormsModule,DialogModule,ButtonModule],
+  templateUrl: &#x27;./project-item.component.html&#x27;,
+  styleUrl: &#x27;./project-item.component.css&#x27;,
+  providers:[]
+})
+export class ProjectItemComponent implements OnChanges,OnInit,OnDestroy{
+  
+@Input() project: Project &#x3D; {} as Project;
+sub:Subscription&#x3D;{} as Subscription;
+user:User &#x3D; {};
+  constructor(
+    private _authenticationService: AuthenticationService,
+    private _messageService: MessageService,
+    private _projectService:ProjectService
+  ){
+    
+  }
+  showClientSecret:boolean &#x3D; false;
+  DeleteDialogvisible: boolean &#x3D; false;
+  UpdateDialogVisible:boolean &#x3D; false;
+
+  showDeleteDialog() {
+        this.DeleteDialogvisible &#x3D; true;
+        
+    }
+  showupdateDialog() {
+      this.UpdateDialogVisible &#x3D; true;
+      
+  }
+  ngOnInit(): void {
+    this.sub &#x3D; this._authenticationService.user.subscribe(
+      (newUser)&#x3D;&gt;{
+        this.user&#x3D;newUser;
+      }
+    );
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.updateProjectForm.get(&#x27;name&#x27;)?.setValue(this.project.name);
+    this.updateProjectForm.get(&#x27;callBackUrl&#x27;)?.setValue(this.project.callBackUrl);
+  }
+
+  updateProjectForm &#x3D; new FormGroup({
+    name: new FormControl(&#x27;&#x27;,[Validators.required]),
+    callBackUrl: new FormControl(&#x27;&#x27;,[Validators.required]),
+  });
+
+  updateProject(projectID:string|undefined,formGroup: FormGroup){
+      if(formGroup.valid &amp;&amp; projectID){
+        this._projectService.updateProject(projectID,formGroup.value).subscribe({
+          next:(res)&#x3D;&gt;{
+            this._messageService.add({ severity: &#x27;success&#x27;, summary: &#x27;Success&#x27;, detail: &#x27;project updated successfully&#x27; }); 
+            this._projectService.projectsArr.next(res.data);
+            
+          },error:(err)&#x3D;&gt;{
+            this._messageService.add({ severity: &#x27;error&#x27;, summary: &#x27;Error&#x27;, detail: &#x27;there was an error updating your project&#x27; });
+          },complete:()&#x3D;&gt;{
+            this.UpdateDialogVisible&#x3D;false;
+          }
+        });
+      }
+  }
+
+  deleteProject(projectID:string | undefined){
+    if(projectID){
+      this._projectService.deleteProject(projectID).subscribe({
+        next:(res)&#x3D;&gt;{
+          this._messageService.add({ severity: &#x27;info&#x27;, summary: &#x27;Info&#x27;, detail: &#x27;successfully deleted your project&#x27; });
+          this._projectService.projectsArr.next(res.data);
+        },
+        error:(err)&#x3D;&gt;{
+          this._messageService.add({ severity: &#x27;error&#x27;, summary: &#x27;Error&#x27;, detail: &#x27;there was an error deleting your project&#x27; });
+        },complete:()&#x3D;&gt;{this.DeleteDialogvisible&#x3D;false;}
+      });
+    }
+
+  }
+
+  copyClientSecret(){
+    if(this.project.clientSECRET){
+      navigator.clipboard.writeText(this.project.clientSECRET).then(()&#x3D;&gt;{console.log(&quot;copied&quot;)}).catch(err&#x3D;&gt;{console.log(err)});
+    }
+  }
+
+  copyClientID(){
+    if(this.project.clientID){
+      navigator.clipboard.writeText(this.project.clientID).then(()&#x3D;&gt;{console.log(&quot;copied&quot;)}).catch(err&#x3D;&gt;{console.log(err)});
+    }
+  }
+
+  toggleShowClientSecret(){
+    this.showClientSecret &#x3D; !this.showClientSecret;
+  }
+}
+
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;card-item&quot;&gt;
+  &lt;p class&#x3D;&quot;card-data&quot;&gt;name&lt;/p&gt;
+  &lt;span&gt;{{ project.name }}&lt;/span&gt;
+  &lt;p class&#x3D;&quot;card-data&quot;&gt;Callback URL&lt;/p&gt;
+  &lt;span&gt;{{ project.callBackUrl }}&lt;/span&gt;
+  &lt;div class&#x3D;&quot;d-flex justify-content-start&quot;&gt;
+    &lt;p class&#x3D;&quot;card-data&quot;&gt;client ID &lt;/p&gt;
+    &lt;span class&#x3D;&quot;copy-span&quot;&gt; &lt;i class&#x3D;&quot;fa-solid fa-copy&quot; (click)&#x3D;&quot;copyClientID()&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+  &lt;/div&gt;
+  &lt;span&gt;{{ project.clientID }}&lt;/span&gt;
+  &lt;div class&#x3D;&quot;d-flex justify-content-start&quot;&gt;
+    &lt;p class&#x3D;&quot;card-data&quot;&gt;Client Secret&lt;/p&gt;
+    &lt;span class&#x3D;&quot;copy-span&quot; (click)&#x3D;&quot;copyClientSecret()&quot;&gt; &lt;i class&#x3D;&quot;fa-solid fa-copy&quot; &gt;&lt;/i&gt; &lt;/span&gt;
+    &lt;span class&#x3D;&quot;copy-span&quot; (click)&#x3D;&quot;toggleShowClientSecret()&quot;&gt;&lt;i class&#x3D;&quot;fa-solid&quot; [class.fa-eye-slash]&#x3D;&quot;this.showClientSecret&quot; [class.fa-eye]&#x3D;&quot;!this.showClientSecret&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+  &lt;/div&gt;
+  @if(this.showClientSecret){
+    &lt;span&gt;{{ project.clientSECRET }}&lt;/span&gt;
+  }
+  
+  
+
+  &lt;div class&#x3D;&quot;controls&quot;&gt;
+    &lt;div class&#x3D;&quot;control-item&quot;&gt;
+      &lt;i
+        class&#x3D;&quot;fa-solid fa-trash-can text-danger&quot;
+        (click)&#x3D;&quot;showDeleteDialog()&quot;
+      &gt;&lt;/i&gt;
+    &lt;/div&gt;
+    @if(user.role &#x3D;&#x3D; &#x27;tenant&#x27;){
+      &lt;div class&#x3D;&quot;control-item&quot;&gt;
+        &lt;i
+          class&#x3D;&quot;fa-solid fa-pen-to-square text-success&quot;
+          (click)&#x3D;&quot;showupdateDialog()&quot;
+        &gt;&lt;/i&gt;
+      &lt;/div&gt;
+    } 
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class&#x3D;&quot;flex justify-content-center&quot;&gt;
+  &lt;p-dialog
+    header&#x3D;&quot;Confirm Delete&quot;
+    [(visible)]&#x3D;&quot;DeleteDialogvisible&quot;
+    [modal]&#x3D;&quot;true&quot;
+    [breakpoints]&#x3D;&quot;{ &#x27;1199px&#x27;: &#x27;75vw&#x27;, &#x27;575px&#x27;: &#x27;90vw&#x27; }&quot;
+    [style]&#x3D;&quot;{ width: &#x27;400px&#x27; }&quot;
+    [draggable]&#x3D;&quot;false&quot;
+    [resizable]&#x3D;&quot;false&quot;
+  &gt;
+    &lt;div class&#x3D;&quot;buttons w-100 d-flex justify-content-around&quot;&gt;
+      are you sure you want to delete this project ?
+      &lt;button
+        class&#x3D;&quot;btn btn-info w-25 me-1&quot;
+        (click)&#x3D;&quot;this.DeleteDialogvisible &#x3D; false&quot;
+      &gt;
+        No
+      &lt;/button&gt;
+      &lt;button class&#x3D;&quot;btn btn-danger w-25&quot; (click)&#x3D;&quot;deleteProject(project._id)&quot;&gt;
+        Yes
+      &lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/p-dialog&gt;
+&lt;/div&gt;
+
+&lt;div class&#x3D;&quot;flex justify-content-center&quot;&gt;
+  &lt;p-dialog
+    header&#x3D;&quot;Confirm Update&quot;
+    [(visible)]&#x3D;&quot;UpdateDialogVisible&quot;
+    [modal]&#x3D;&quot;true&quot;
+    [breakpoints]&#x3D;&quot;{ &#x27;1199px&#x27;: &#x27;75vw&#x27;, &#x27;575px&#x27;: &#x27;90vw&#x27; }&quot;
+    [style]&#x3D;&quot;{ width: &#x27;400px&#x27; }&quot;
+    [draggable]&#x3D;&quot;false&quot;
+    [resizable]&#x3D;&quot;false&quot;
+  &gt;
+  
+
+    &lt;div class&#x3D;&quot;buttons w-100 d-flex flex-column justify-content-around&quot;&gt;
+      &lt;form
+        [formGroup]&#x3D;&quot;updateProjectForm&quot;
+        (ngSubmit)&#x3D;&quot;updateProject(project._id, updateProjectForm)&quot;
+      &gt;
+        &lt;label for&#x3D;&quot;clientID&quot;&gt; Client ID &lt;/label&gt;
+        &lt;input
+          type&#x3D;&quot;text&quot;
+          id&#x3D;&quot;clientID&quot;
+          formControlName&#x3D;&quot;name&quot;
+          placeholder&#x3D;&quot;Project Name&quot;
+          class&#x3D;&quot;fw-bold border my-1 form-control&quot;
+        /&gt;
+        @if(updateProjectForm.get(&#x27;name&#x27;)?.errors &amp;&amp;
+        updateProjectForm.get(&#x27;name&#x27;)?.touched){
+        &lt;div class&#x3D;&quot;text-danger&quot;&gt;
+          @if(updateProjectForm.get(&#x27;name&#x27;)?.getError(&#x27;required&#x27;)){
+          &lt;span class&#x3D;&quot;fw-bold alert-msg&quot;
+            &gt;&lt;i class&#x3D;&quot;fa-solid fa-circle-exclamation&quot;&gt;&lt;/i&gt; project name is
+            required&lt;/span
+          &gt;
+          }
+        &lt;/div&gt;
+        }
+        &lt;label for&#x3D;&quot;callBackUrl&quot;&gt; Callback URL&lt;/label&gt;
+        &lt;input
+          type&#x3D;&quot;text&quot;
+          id&#x3D;&quot;callBackUrl&quot;
+          formControlName&#x3D;&quot;callBackUrl&quot;
+          placeholder&#x3D;&quot;callBack Url&quot;
+          class&#x3D;&quot;fw-bold border my-1 form-control&quot;
+        /&gt;
+        @if(updateProjectForm.get(&#x27;callBackUrl&#x27;)?.errors &amp;&amp;
+        updateProjectForm.get(&#x27;callBackUrl&#x27;)?.touched){
+        &lt;div class&#x3D;&quot;text-danger&quot;&gt;
+          @if(updateProjectForm.get(&#x27;callBackUrl&#x27;)?.getError(&#x27;required&#x27;)){
+          &lt;span class&#x3D;&quot;fw-bold alert-msg&quot;
+            &gt;&lt;i class&#x3D;&quot;fa-solid fa-circle-exclamation&quot;&gt;&lt;/i&gt; callBack Url is
+            required&lt;/span
+          &gt;
+          }
+        &lt;/div&gt;
+        }
+      &lt;/form&gt;
+      &lt;button
+        class&#x3D;&quot;btn btn-info w-100 my-2&quot;
+        (click)&#x3D;&quot;this.UpdateDialogVisible &#x3D; false&quot;
+      &gt;
+        No
+      &lt;/button&gt;
+      &lt;button
+        class&#x3D;&quot;btn btn-success w-100 my-2&quot;
+        (click)&#x3D;&quot;updateProject(project._id, updateProjectForm)&quot;
+      &gt;
+        Yes
+      &lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/p-dialog&gt;
+&lt;/div&gt;
+
+</code></pre>
+    </div>
+
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div class="card-item">  <p class="card-data">name</p>  <span>{{ project.name }}</span>  <p class="card-data">Callback URL</p>  <span>{{ project.callBackUrl }}</span>  <div class="d-flex justify-content-start">    <p class="card-data">client ID </p>    <span class="copy-span"> <i class="fa-solid fa-copy" (click)="copyClientID()"></i></span>  </div>  <span>{{ project.clientID }}</span>  <div class="d-flex justify-content-start">    <p class="card-data">Client Secret</p>    <span class="copy-span" (click)="copyClientSecret()"> <i class="fa-solid fa-copy" ></i> </span>    <span class="copy-span" (click)="toggleShowClientSecret()"><i class="fa-solid" [class.fa-eye-slash]="this.showClientSecret" [class.fa-eye]="!this.showClientSecret"></i></span>  </div>  @if(this.showClientSecret){    <span>{{ project.clientSECRET }}</span>  }      <div class="controls">    <div class="control-item">      <i        class="fa-solid fa-trash-can text-danger"        (click)="showDeleteDialog()"      ></i>    </div>    @if(user.role == \'tenant\'){      <div class="control-item">        <i          class="fa-solid fa-pen-to-square text-success"          (click)="showupdateDialog()"        ></i>      </div>    }   </div></div><div class="flex justify-content-center">  <p-dialog    header="Confirm Delete"    [(visible)]="DeleteDialogvisible"    [modal]="true"    [breakpoints]="{ \'1199px\': \'75vw\', \'575px\': \'90vw\' }"    [style]="{ width: \'400px\' }"    [draggable]="false"    [resizable]="false"  >    <div class="buttons w-100 d-flex justify-content-around">      are you sure you want to delete this project ?      <button        class="btn btn-info w-25 me-1"        (click)="this.DeleteDialogvisible = false"      >        No      </button>      <button class="btn btn-danger w-25" (click)="deleteProject(project._id)">        Yes      </button>    </div>  </p-dialog></div><div class="flex justify-content-center">  <p-dialog    header="Confirm Update"    [(visible)]="UpdateDialogVisible"    [modal]="true"    [breakpoints]="{ \'1199px\': \'75vw\', \'575px\': \'90vw\' }"    [style]="{ width: \'400px\' }"    [draggable]="false"    [resizable]="false"  >      <div class="buttons w-100 d-flex flex-column justify-content-around">      <form        [formGroup]="updateProjectForm"        (ngSubmit)="updateProject(project._id, updateProjectForm)"      >        <label for="clientID"> Client ID </label>        <input          type="text"          id="clientID"          formControlName="name"          placeholder="Project Name"          class="fw-bold border my-1 form-control"        />        @if(updateProjectForm.get(\'name\')?.errors &&        updateProjectForm.get(\'name\')?.touched){        <div class="text-danger">          @if(updateProjectForm.get(\'name\')?.getError(\'required\')){          <span class="fw-bold alert-msg"            ><i class="fa-solid fa-circle-exclamation"></i> project name is            required</span          >          }        </div>        }        <label for="callBackUrl"> Callback URL</label>        <input          type="text"          id="callBackUrl"          formControlName="callBackUrl"          placeholder="callBack Url"          class="fw-bold border my-1 form-control"        />        @if(updateProjectForm.get(\'callBackUrl\')?.errors &&        updateProjectForm.get(\'callBackUrl\')?.touched){        <div class="text-danger">          @if(updateProjectForm.get(\'callBackUrl\')?.getError(\'required\')){          <span class="fw-bold alert-msg"            ><i class="fa-solid fa-circle-exclamation"></i> callBack Url is            required</span          >          }        </div>        }      </form>      <button        class="btn btn-info w-100 my-2"        (click)="this.UpdateDialogVisible = false"      >        No      </button>      <button        class="btn btn-success w-100 my-2"        (click)="updateProject(project._id, updateProjectForm)"      >        Yes      </button>    </div>  </p-dialog></div></div>'
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AuthorizeComponent', 'selector': 'app-authorize'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'DeveloperComponent', 'selector': 'app-developer'},{'name': 'ErrorComponent', 'selector': 'app-error'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'GithubCallbackComponent', 'selector': 'app-github-callback'},{'name': 'GoogleCallbackComponent', 'selector': 'app-google-callback'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'LoaderComponent', 'selector': 'app-loader'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'NotFoundComponent', 'selector': 'app-not-found'},{'name': 'PricingComponent', 'selector': 'app-pricing'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'ProjectItemComponent', 'selector': 'app-project-item'},{'name': 'ProjectsComponent', 'selector': 'app-projects'},{'name': 'ResetPasswordComponent', 'selector': 'app-reset-password'},{'name': 'TenantsComponent', 'selector': 'app-tenants'},{'name': 'UserItemComponent', 'selector': 'app-user-item'},{'name': 'UsersComponent', 'selector': 'app-users'},{'name': 'UserSignupComponent', 'selector': 'app-user-signup'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'ProjectItemComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'ProjectItemComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

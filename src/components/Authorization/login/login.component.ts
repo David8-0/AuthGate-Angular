@@ -74,7 +74,7 @@ export class LoginComponent {
 
   resetPassword(formGroup: FormGroup){
     if(formGroup.valid){
-      this._authService.resetPassword(formGroup.value).subscribe({
+      this._authService.resetPasswordRequest(formGroup.value).subscribe({
         next:(res)=>{
           this._messageService.add({ severity: 'success', summary: 'Success', detail: 'an email has been sent to you ' });
           this.showResetPasswordDialog=false;

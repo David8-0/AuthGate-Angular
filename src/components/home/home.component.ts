@@ -1,24 +1,24 @@
-import { Component } from '@angular/core';
-import { trigger, state, style, animate, transition, keyframes } from '@angular/animations';
-import { PricingComponent } from '../pricing/pricing.component';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [PricingComponent],
+  imports: [],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
-  animations: [
-    trigger('upDownAnimation', [
-      transition('* => *', [
-        animate('2s infinite', keyframes([
-          style({ transform: 'translateY(0)', offset: 0 }),
-          style({ transform: 'translateY(-50px)', offset: 0.5 }),
-          style({ transform: 'translateY(0)', offset: 1 })
-        ]))
-      ])
-    ])
-  ]
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit{
+
+constructor(private _activatedRouter:ActivatedRoute){}
+ngOnInit(): void {
+    this._activatedRouter.fragment.subscribe((value)=>{
+      this.jumpTo(value)
+    })
+}
+
+jumpTo(section:string|null){
+  if(section)
+    document.getElementById(section)?.scrollIntoView({behavior:'smooth',block:'center'})
+}
 
 }

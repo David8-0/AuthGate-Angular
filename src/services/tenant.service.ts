@@ -17,6 +17,8 @@ export class TenantService {
     return this._http.post(this.baseUrl+`image/${teantID}`,photo)
   }
   updateTenant(user:User):Observable<any>{
+    console.log(user);
+    
     return this._http.patch(this.baseUrl,user)
   }
 
@@ -34,6 +36,10 @@ export class TenantService {
 
   updatePassword(updateForm:UpdatePassword):Observable<any>{
     return this._http.patch(this.baseUrl+"updateWithPassword",updateForm);
+  }
+
+  unDelete(userID:string):Observable<any>{
+    return this._http.patch(this.baseUrl+userID+"/undelete",{});
   }
 
 }

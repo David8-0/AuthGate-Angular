@@ -15,6 +15,7 @@ import { MessageService } from 'primeng/api';
   providers:[]
 })
 export class LoginComponent {
+  isProjectID:boolean = false;
   isShowPassword:boolean = false;
   showErrors:boolean = false;
   showResetPasswordDialog: boolean = false;
@@ -24,7 +25,10 @@ export class LoginComponent {
     private _authService: AuthenticationService,
     public _projectService:ProjectService,
     private _router: Router
-  ){}
+  ){
+    if(localStorage.getItem('projectID'))
+      this.isProjectID=true;
+  }
 
  
 
@@ -44,8 +48,8 @@ export class LoginComponent {
       this._authService.logIn(formGroup.value).subscribe({
         next:(response) => {
           this._authService.setUser(response.data.user,response.data.access_token);
-          if(this._projectService.projectID){
-            this._router.navigateByUrl(`/authorize/${this._projectService.projectID}`);
+          if(localStorage.getItem('projectID')){
+            this._router.navigateByUrl(`/authorize/${localStorage.getItem('projectID')}`);
           }else{
             this._router.navigateByUrl('/home');
           }

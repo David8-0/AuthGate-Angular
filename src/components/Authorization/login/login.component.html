@@ -9,7 +9,7 @@
             </div>
             <div class="col-md-7">
                 <h1 class="text-center">Sign in</h1>
-                @if(this._projectService.projectID){
+                @if(isProjectID){
                     <h4 class="">you need to log in first to continue...</h4> 
                 }
                 <form [formGroup]="loginForm" (ngSubmit)="register(loginForm)" class=" d-flex flex-column justify-content-center px-5 py-3 w-75 w-100">

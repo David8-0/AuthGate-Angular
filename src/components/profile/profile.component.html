@@ -127,13 +127,15 @@
               >
                 Save
               </button>
-              <button
+              @if(!user.githubId && !user.googleId){
+                <button
                 class="custom-btn me-3"
                 *ngIf="isEditMode"
                 (click)="this.showChangePasswordDialog = true"
               >
                 Change Password
               </button>
+              }
             </div>
           </div>
         </div>

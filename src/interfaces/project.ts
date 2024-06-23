@@ -6,4 +6,5 @@ export interface Project {
     callBackUrl: string;
     createdAt?:Date;
     updatedAt?:Date;
+    deleted?:boolean;
 }

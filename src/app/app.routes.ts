@@ -15,6 +15,7 @@ import { GithubCallbackComponent } from '../components/Authorization/github-call
 import { DeveloperComponent } from '../components/Information/developer/developer.component';
 import { isAdminGuard } from '../guards/is-admin.guard';
 import { ResetPasswordComponent } from '../components/Authorization/reset-password/reset-password.component';
+import { PaypalComponent } from '../components/paypal/paypal.component';
 
 export const routes: Routes = [
     {path:'',redirectTo:'home',pathMatch:'full'},
@@ -31,6 +32,7 @@ export const routes: Routes = [
     {path:'developer',component:DeveloperComponent},
     {path:'reset-password/:token',component:ResetPasswordComponent},
     {path:'services',component:HomeComponent},
+    {path:'paypal/:status',component:PaypalComponent},
     {path:'**',component:NotFoundComponent}
 
 ];

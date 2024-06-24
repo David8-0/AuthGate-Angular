@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
+import { CodeComponent } from '../code/code.component';
 
 @Component({
   selector: 'app-developer',
   standalone: true,
-  imports: [],
+  imports: [CodeComponent],
   templateUrl: './developer.component.html',
   styleUrl: './developer.component.css'
 })
@@ -52,11 +53,10 @@ export class DeveloperComponent {
         }`
 
 
+  code2:string = `let x = new CustomerRentCar()`
 
 
-        copyCode(){
-          navigator.clipboard.writeText(this.code);
-        }
+        
 }
 
 

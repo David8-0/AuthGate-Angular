@@ -1,0 +1,83 @@
+.controls{
+    padding: 5px 10px;
+    display: flex;
+    justify-content: center;
+}
+.control-item{
+    /* border: 1px solid #444; */
+    background-color: rgba(255, 255, 255, 0.1);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all ease-in-out 0.3s;
+    font-size: 20px;
+}
+
+.control-item:hover{
+    transform: translateY(-5px);
+}
+
+.card-item{
+    background-color:#fff;
+    border:1px solid  #2c4964;
+    text-align: left;
+    padding: 30px 20px 30px 20px;
+    transition: all ease-in-out 0.3s;
+    border-radius: 10px;
+}
+
+.card-item:hover{
+    box-shadow: 0px 0 25px 0 rgba(0, 0, 0, 0.1);
+}
+.card-item .card-data{
+    color: #2c4964;
+    font-size: 22px;
+    font-weight: 600;
+    line-height: 26.4px;
+    margin-bottom: 100;
+}
+
+.card-item p {
+    margin-bottom: 5px;
+}
+
+.copy-span{
+    display: flex;
+    border: 1px solid #2c4964;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    justify-content: center;
+    align-items: center;
+    margin-left: 5px;
+    color: #2c4964;
+    transition: 0.3s all;
+}
+
+.copy-span:hover{
+    cursor: pointer;
+    background-color: #2c4964;
+}
+
+.copy-span i {
+    transition: 0.3s all;
+}
+
+.copy-span:hover > i{
+    color: #fff;
+}
+
+#deleted{
+    border-radius: 10px;
+    background-color: red;
+    color: #fff;
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 20px;
+    padding: 5px 10px;
+}

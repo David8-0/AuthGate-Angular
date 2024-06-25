@@ -1,0 +1,31 @@
+<div class="container wrapper">
+  <h1 class="header-h1">Authorize</h1>
+  <div class="row">
+    @if (user.role != 'tenant') {
+      <div class="col-md-6">
+        <div class="card p-4 h-100 d-flex flex-column justify-content-center">
+          <h2>Confirm that you want to sign in to</h2>
+          <h2 class="text-center">
+            <span class="projName">{{ project.name }}</span> as {{ user.name }}
+          </h2>
+          <p class="text-center fw-bold">{{ user.email }}</p>
+          <p>By continuing, you agree that AuthGate will share your name, email address, and profile picture with {{project.name}}</p>
+          <button class="custom-btn my-3" (click)="confirm()">Confirm</button>
+          <button class="custom-btn my-3" (click)="cancel()">Cancel</button>
+        </div>
+      </div>
+    }
+    @if(user.role == 'tenant'){
+      <div class="col-md-6">
+        <div class="card p-4  d-flex flex-column justify-content-center">
+          <h2>We are Sorry this service is only available to users not tenants.</h2>
+        </div>
+      </div>
+    }
+    <div class="col-md-6">
+      <div class="img-container">
+        <img src="assets/access.png" class="w-100" alt="" />
+      </div>
+    </div>
+  </div>
+</div>

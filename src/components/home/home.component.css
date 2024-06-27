@@ -42,3 +42,12 @@ h1{
   #services p {
     font-size: 20px;
   }
+  #arrow-up{
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    color: #fff;
+    padding: 5px 15px !important;
+    font-size: 18px;
+    transition: all 0.3s;
+  }

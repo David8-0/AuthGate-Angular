@@ -33,6 +33,7 @@ h1{
 /* * Services * */
   #services{
     background-color: #F9F8FF;
+    margin-bottom: 30px;
   }
 
   #services h2 {
@@ -50,4 +51,22 @@ h1{
     padding: 5px 15px !important;
     font-size: 18px;
     transition: all 0.3s;
+    opacity: 0;
+  }
+
+  .show-arrow-up{
+    opacity: 1 !important;
+  }
+
+
+  /*********************************/
+  .scroll-item {
+    opacity: 0;
+    transform: translateX(100%);
+    transition: opacity 1s, transform 1s;
+  }
+  
+  .scroll-item.visible {
+    opacity: 1;
+    transform: translateX(0);
   }

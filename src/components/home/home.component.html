@@ -20,7 +20,7 @@
     </div>
 </div>
 <div class="container">
-    <div id="services" class="p-5 rounded">
+    <div id="services" class="p-5 rounded" data-aos="fade-in">
     
         <h2 class="text-center mb-5">Services</h2>
         <div class="row mt-5">
@@ -38,7 +38,7 @@
             </div>
         </div>
 
-        <div class="row mt-5">
+        <div class="row mt-5 scroll-item" id="animatedDiv" #animatedDiv>
             <div class="col-md-6">
                 <div class="img-wrapper">
                     <img src="assets/systems.jpg" class="w-100" alt="about us">
@@ -55,10 +55,10 @@
    
 </div>
 </div>
-@if(currentScrollPosition>200){
-    <div id="arrow-up" class="custom-btn">
-        <i class="fa-solid fa-arrow-up text-white" (click)="scrollUp()"></i>
+
+    <div id="arrow-up" class="custom-btn" [class.show-arrow-up]="showArrowUp" (click)="jumpTo('home')">
+        <i class="fa-solid fa-arrow-up text-white" ></i>
     </div>
-}
+
 
 

@@ -145,9 +145,7 @@ export class ProfileComponent implements OnInit,OnDestroy{
           }
         });
       }
-      
-    }else{
-      console.log(form.value);
+      this.toggleEditMode();
     }
   }
 

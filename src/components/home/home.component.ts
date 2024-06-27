@@ -1,4 +1,4 @@
-import { Component, OnInit,HostListener, AfterViewInit, ElementRef, ViewChild  } from '@angular/core';
+import { Component, OnInit,HostListener, AfterViewInit, ElementRef, ViewChild, ViewChildren, QueryList  } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 
@@ -10,7 +10,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrl: './home.component.css',
 })
 export class HomeComponent implements OnInit, AfterViewInit {
-  @ViewChild('animatedDiv') animatedDiv!: ElementRef;
+  @ViewChildren('animatedDiv') animatedDiv!: QueryList<ElementRef>;
   showArrowUp: boolean = false;
   currentScrollPosition: number = 0;
 
@@ -32,13 +32,16 @@ ngAfterViewInit():void{
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add('visible');
+        observer.unobserve(entry.target)
       } else {
         entry.target.classList.remove('visible');
       }
     });
   });
 
-  observer.observe(this.animatedDiv.nativeElement);
+    this.animatedDiv.forEach(el=>{
+      observer.observe(el.nativeElement);
+    });
 }
 
 jumpTo(section:string|null){

@@ -16,7 +16,7 @@ h1{
     text-decoration: none solid rgba(255, 255, 255, 0.8);
 }
 #vec-img{
-    width: 400px;
+    width: 100%;
 }
 
 #img-cont{
@@ -62,11 +62,17 @@ h1{
   /*********************************/
   .scroll-item {
     opacity: 0;
-    transform: translateX(100%);
-    transition: opacity 1s, transform 1s;
+    transition: opacity 2s, transform 2s;
   }
   
   .scroll-item.visible {
     opacity: 1;
     transform: translateX(0);
+  }
+
+  .scroll-right{
+    transform: translateX(50%);
+  }
+  .scroll-left{
+    transform: translateX(-50%);
   }

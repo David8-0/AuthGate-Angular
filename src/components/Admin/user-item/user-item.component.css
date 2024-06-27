@@ -32,3 +32,9 @@
     padding: 5px 10px;
     border-radius: 10px;
 }
+
+@media (max-width: 991.98px) { 
+    .user-info{
+        font-size: 14px;
+    }
+}

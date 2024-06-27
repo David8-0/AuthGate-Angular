@@ -136,14 +136,21 @@
                 Change Password
               </button>
               }
+              <button
+                class="custom-btn me-3"
+                (click)="this.showProjectsDialog=true;"
+              >
+                View Logins
+              </button>
             </div>
           </div>
+  
         </div>
       </div>
     </div>
     
 
-    <div class="flex justify-content-center">
+    <div class="d-flex justify-content-center">
       <p-dialog
         header="Change Password"
         [(visible)]="showChangePasswordDialog"
@@ -254,6 +261,32 @@
         </div>
       </p-dialog>
     </div>
+
+    <div class="d-flex justify-content-center">
+      <p-dialog
+        header="Logins"
+        [(visible)]="showProjectsDialog"
+        [modal]="true"
+        [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }"
+        [style]="{ width: '400px' }"
+        [draggable]="false"
+        [resizable]="false"
+      >
+        <div class="buttons w-100 d-flex flex-column justify-content-around">
+          <ol>
+            <li>first</li>
+            <li>second</li>
+            <li>third</li>
+            <li>forth</li>
+            <li>fifth</li>
+            <li>sixth</li>
+          </ol>
+          
+        </div>
+      </p-dialog>
+    </div>
     
   </div>
 </div>
+
+

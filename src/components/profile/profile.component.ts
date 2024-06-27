@@ -26,6 +26,7 @@ export class ProfileComponent implements OnInit,OnDestroy{
   showChangePasswordDialog: boolean = false;
   subscriptions:Subscription[]=[];
   showChangePasswordErrors:boolean = false;
+  showProjectsDialog:boolean = false;
   constructor(
     private _messageService: MessageService,
     private _authService:AuthenticationService,
@@ -34,9 +35,6 @@ export class ProfileComponent implements OnInit,OnDestroy{
     private _validationService:ValidationService
   ){
     this.user = this._authService.user.value;
-    //console.log(this.user);
-    // console.log(this._authService.user.value._id);
-
   }
 
   ngOnInit(): void {
@@ -182,6 +180,8 @@ export class ProfileComponent implements OnInit,OnDestroy{
     }
     this.updatePasswordForm.reset();
   }
+
+  
 
   ngOnDestroy(): void {
       this.subscriptions.forEach(sub=>sub.unsubscribe());

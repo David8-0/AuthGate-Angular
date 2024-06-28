@@ -44,8 +44,6 @@ export class ProfileComponent implements OnInit,OnDestroy{
       if(this.user?.image?.length){
         this.photoUrl = this.user.image;
       }
-      
-      
     this.updateInfoForm.get('name')?.setValue(this.user.name??"")
     this.updateInfoForm.get('email')?.setValue(this.user.email??"")
     this.updateInfoForm.get('phone')?.setValue(this.user.phone??"")

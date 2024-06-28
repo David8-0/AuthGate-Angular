@@ -1,6 +1,6 @@
 <div class="container wrapper">
     
-    <div class="card-body p-5  rounded bg-white">
+    <div class="card-body p-2 p-md-3 p-lg-5  rounded bg-white">
         <div class="row">
             <div class="col-md-5">
                 <div class="">
@@ -12,7 +12,7 @@
                 @if(isProjectID){
                     <h4 class="">you need to log in first to continue...</h4> 
                 }
-                <form [formGroup]="loginForm" (ngSubmit)="register(loginForm)" class=" d-flex flex-column justify-content-center px-5 py-3 w-75 w-100">
+                <form [formGroup]="loginForm" (ngSubmit)="register(loginForm)" class=" d-flex flex-column justify-content-center px-2  px-md-5 py-3 w-75 w-100">
                     
                     <input id="email" type="text" formControlName="email" placeholder="Email" class="fw-bold  form-control my-1">
                     @if(loginForm.get('email')?.errors && (loginForm.get('email')?.touched)|| showErrors){

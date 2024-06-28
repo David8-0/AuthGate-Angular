@@ -1,6 +1,6 @@
 
 <div class="container wrapper">
-  <div class="card-body p-5 shadow-5 rounded bg-white">
+  <div class="card-body p-2 p-md-3 p-lg-5 shadow-5 rounded bg-white">
     <div class="row">
       <div class="col-md-5">
         <div class="">
@@ -16,7 +16,7 @@
         <form
           [formGroup]="registerUserForm"
           (ngSubmit)="registerUser(registerUserForm)"
-          class="d-flex flex-column justify-content-center px-5 py-3 w-75 w-100"
+          class="d-flex flex-column justify-content-center px-1 px-md-5 py-3 w-75 w-100"
         >
           <input
             id="name"
@@ -175,7 +175,7 @@
         <form
           [formGroup]="registerTenantForm"
           (ngSubmit)="registerTenant(registerTenantForm)"
-          class="d-flex flex-column justify-content-center px-5 py-3 w-75 w-100"
+          class="d-flex flex-column justify-content-center px-1 px-md-5 py-3 w-75 w-100"
         >
           <input
             id="name"

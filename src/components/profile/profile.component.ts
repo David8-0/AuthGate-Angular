@@ -26,6 +26,7 @@ export class ProfileComponent implements OnInit,OnDestroy{
   showChangePasswordDialog: boolean = false;
   subscriptions:Subscription[]=[];
   showChangePasswordErrors:boolean = false;
+  showProjectsDialog:boolean = false;
   constructor(
     private _messageService: MessageService,
     private _authService:AuthenticationService,
@@ -34,9 +35,6 @@ export class ProfileComponent implements OnInit,OnDestroy{
     private _validationService:ValidationService
   ){
     this.user = this._authService.user.value;
-    //console.log(this.user);
-    // console.log(this._authService.user.value._id);
-
   }
 
   ngOnInit(): void {
@@ -46,8 +44,6 @@ export class ProfileComponent implements OnInit,OnDestroy{
       if(this.user?.image?.length){
         this.photoUrl = this.user.image;
       }
-      
-      
     this.updateInfoForm.get('name')?.setValue(this.user.name??"")
     this.updateInfoForm.get('email')?.setValue(this.user.email??"")
     this.updateInfoForm.get('phone')?.setValue(this.user.phone??"")
@@ -145,9 +141,7 @@ export class ProfileComponent implements OnInit,OnDestroy{
           }
         });
       }
-      
-    }else{
-      console.log(form.value);
+      this.toggleEditMode();
     }
   }
 
@@ -184,6 +178,8 @@ export class ProfileComponent implements OnInit,OnDestroy{
     }
     this.updatePasswordForm.reset();
   }
+
+  
 
   ngOnDestroy(): void {
       this.subscriptions.forEach(sub=>sub.unsubscribe());

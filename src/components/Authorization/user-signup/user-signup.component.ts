@@ -104,4 +104,9 @@ export class UserSignupComponent {
   signInWithGitHub(){
     window.location.href="http://localhost:3000/auth/github";
   }
+
+  signInWithFacebook(){
+    window.location.href="http://localhost:3000/auth/facebook";
+  }
+  
 }

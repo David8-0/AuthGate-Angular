@@ -1,4 +1,4 @@
-<div class="container wrapper">
+<div class="container wrapper d-flex justify-content-center align-items-center">
     
     <div class="card-body p-2 p-md-3 p-lg-5  rounded bg-white">
         <div class="row">
@@ -53,7 +53,7 @@
                     <div class="divider"></div>
                 </div>
                 <div class="providers mt-2 d-flex  justify-content-center">
-                    <div class="icon-wrapper">
+                    <div class="icon-wrapper" (click)="signInWithFacebook()">
                         <i class="fa-brands fa-facebook"></i>
                     </div>
                     <div class="icon-wrapper" (click)="signInWithGoogle()">

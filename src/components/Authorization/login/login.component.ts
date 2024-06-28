@@ -76,6 +76,10 @@ export class LoginComponent {
     window.location.href="http://localhost:3000/auth/github";
   }
 
+  signInWithFacebook(){
+    window.location.href="http://localhost:3000/auth/facebook";
+  }
+
   resetPassword(formGroup: FormGroup){
     if(formGroup.valid){
       this._authService.resetPasswordRequest(formGroup.value).subscribe({

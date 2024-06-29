@@ -7,7 +7,7 @@
 }
 h1{
     color:#fff;
-    font-size: 52px;
+    font-size: 55px;
     font-weight: 700;
 }
 .header-text{
@@ -75,4 +75,9 @@ h1{
   }
   .scroll-left{
     transform: translateX(-50%);
+  }
+
+  .home-logo{
+    margin-top: 100px;
+    max-width: 400px;
   }

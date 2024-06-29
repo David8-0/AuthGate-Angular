@@ -16,7 +16,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
 constructor(
   private _activatedRouter:ActivatedRoute,
-  private _router: Router
+  private _router: Router,
+  
 ){}
 ngOnInit(): void {
     this._activatedRouter.fragment.subscribe((value)=>{
@@ -25,6 +26,8 @@ ngOnInit(): void {
       urlTree.fragment=null;
       this._router.navigateByUrl(urlTree);
     })
+
+    
 }
 
 ngAfterViewInit():void{

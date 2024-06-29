@@ -13,6 +13,7 @@ export class UserService {
   domain:string="";
   endPoint:string="users/";
   baseUrl:string = ``;
+  // user:BehaviorSubject<User> = new BehaviorSubject<User>({});
   
   constructor(private _http: HttpClient) {
     this.domain=environment.domain;
@@ -27,15 +28,19 @@ export class UserService {
     return this._http.patch(this.baseUrl,user)
   }
 
-  addUserToProject(projectId:string):Observable<any>{
+  addUserToProject(projectId:string,codeChallenge:string):Observable<any>{
     return this._http.post(this.baseUrl,{
-      projectId
+      projectId,
+      codeChallenge
     });
   }
 
   getByID(userID:string):Observable<any>{
     return this._http.get(this.baseUrl+userID);
   }
+  // getuserAndProjects(userID:string):Observable<any>{
+  //   return this._http.get(this.baseUrl+"projects/"+userID);
+  // }
 
   getAll():Observable<any>{
     return this._http.get(this.baseUrl);
@@ -51,6 +56,6 @@ export class UserService {
   }
 
   unDelete(userID:string):Observable<any>{
-    return this._http.patch(this.baseUrl+userID+"/undelete",{});
+    return this._http.patch(this.baseUrl+"undelete/"+userID,{});
   }
 }

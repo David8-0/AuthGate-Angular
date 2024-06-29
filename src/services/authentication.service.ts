@@ -52,7 +52,7 @@ export class AuthenticationService {
         }
       }
       this.domain=environment.domain;
-      this.baseUrl = this.domain + this.endPoint;
+      this.baseUrl = this.domain + this.endPoint;      
    }
 
   userSingup(user:UserSignup):Observable<any>{

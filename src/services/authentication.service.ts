@@ -9,12 +9,15 @@ import { UserService } from './user.service';
 import { TenantService } from './tenant.service';
 import { Router } from '@angular/router';
 import { UpdatePassword } from '../interfaces/update-password';
+import { environment } from '../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
-  baseUrl:string = `http://localhost:3000/auth/`;
+  domain:string="";
+  endPoint:string="auth/";
+  baseUrl:string = ``;
   user:BehaviorSubject<User> = new BehaviorSubject<User>({} as User);
   
   constructor(
@@ -47,12 +50,9 @@ export class AuthenticationService {
             }
           });
         }
-      }else{
-        // this.logOut();
-        // _router.navigateByUrl('/error');
       }
-      
-      
+      this.domain=environment.domain;
+      this.baseUrl = this.domain + this.endPoint;      
    }
 
   userSingup(user:UserSignup):Observable<any>{

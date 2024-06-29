@@ -16,6 +16,7 @@ import { Subscription } from 'rxjs';
 })
 export class AuthorizeComponent implements OnInit,OnDestroy{
   projectID:string|null=null;
+  codeChallenge:string|null=null;
   project:Project = {} as Project;
   user:User = {} as User;
   subscriptions:Subscription[]=[];
@@ -32,13 +33,16 @@ export class AuthorizeComponent implements OnInit,OnDestroy{
   ngOnInit(): void {
     const sub =this._activatedRoute.paramMap.subscribe(params => { 
       this.projectID = params.get('projID');
+      this.codeChallenge = params.get('codeChallenge');
     });
     this.subscriptions.push(sub);
     
     if(!localStorage.getItem('token')){
       localStorage.setItem('projectID',`${this.projectID}`)
+      localStorage.setItem('codeChallenge',`${this.codeChallenge}`)
       this._router.navigateByUrl('/login');
     }else{
+      localStorage.removeItem('token');
       localStorage.removeItem('projectID');
       if(this.projectID){
         this._projectService.getByID(this.projectID).subscribe({
@@ -61,8 +65,8 @@ export class AuthorizeComponent implements OnInit,OnDestroy{
   }
 
   confirm(){
-    if(this.projectID){
-      this._userService.addUserToProject(this.projectID).subscribe({
+    if(this.projectID && this.codeChallenge){
+      this._userService.addUserToProject(this.projectID,this.codeChallenge).subscribe({
         next:(res)=>{
           console.log(res);
           window.location.href=`${this.project.callBackUrl}/${res.data.result.authorizationCode}`

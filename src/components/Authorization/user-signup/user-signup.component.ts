@@ -60,8 +60,8 @@ export class UserSignupComponent {
       this._authService.userSingup(formGroup.value).subscribe({
         next:(response) => {
           this._authService.setUser(response.data.user,response.data.access_token);
-          if(localStorage.getItem('projectID')){
-            this._router.navigateByUrl(`/authorize/${localStorage.getItem('projectID')}`);
+          if(localStorage.getItem('projectID') && localStorage.getItem('codeChallenge')){
+            this._router.navigateByUrl(`/authorize/${localStorage.getItem('projectID')}/${localStorage.getItem('codeChallenge')}`);
           }else{
             this._router.navigateByUrl('/home');
           }

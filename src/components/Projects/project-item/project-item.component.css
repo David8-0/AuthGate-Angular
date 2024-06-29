@@ -81,3 +81,8 @@
     font-size: 20px;
     padding: 5px 10px;
 }
+
+.client-id,.client-secret{
+    font-size: 14px;
+    word-wrap: break-word;
+}

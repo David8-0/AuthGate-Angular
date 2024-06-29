@@ -46,7 +46,7 @@ export class TenantService {
   }
 
   unDelete(userID:string):Observable<any>{
-    return this._http.patch(this.baseUrl+userID+"/undelete",{});
+    return this._http.patch(this.baseUrl+"undelete/"+userID,{});
   }
 
 }

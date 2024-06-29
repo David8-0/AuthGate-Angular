@@ -22,7 +22,7 @@ export class ProjectService {
 
 
   getAllPerTenant():Observable<any>{
-    return this._http.get(this.baseUrl+"targetTenant");
+    return this._http.get(this.baseUrl+"tenantProjects");
   }
 
   addProject(project:Project):Observable<any>{
@@ -38,6 +38,6 @@ export class ProjectService {
   }
 
   undeleteProject(projectID:string):Observable<any>{
-    return this._http.patch(this.baseUrl+projectID+"/undelete",{});
+    return this._http.patch(this.baseUrl+"undelete/"+projectID,{});
   }
 }

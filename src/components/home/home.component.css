@@ -7,7 +7,7 @@
 }
 h1{
     color:#fff;
-    font-size: 70px;
+    font-size: 55px;
     font-weight: 700;
 }
 .header-text{
@@ -79,4 +79,5 @@ h1{
 
   .home-logo{
     margin-top: 100px;
+    max-width: 400px;
   }

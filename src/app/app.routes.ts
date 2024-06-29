@@ -26,7 +26,7 @@ export const routes: Routes = [
     {path:'user-signup', component:UserSignupComponent},
     {path:'login',component:LoginComponent},
     {path:'home',component:HomeComponent},
-    {path:'authorize/:projID',component:AuthorizeComponent},
+    {path:'authorize/:projID/:codeChallenge',component:AuthorizeComponent},
     {path:'error',component:ErrorComponent},
     {path:'dashboard',canActivate:[isAdminGuard], loadChildren: ()=>import('../components/Admin/dashboard/admin.routes').then(m=>m.routes)},
     {path:'auth/google/callback',component:GoogleCallbackComponent},

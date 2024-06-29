@@ -127,7 +127,7 @@
               >
                 Save
               </button>
-              @if(!user.githubId && !user.googleId){
+              @if(!user.githubId && !user.googleId && !user.facebookId){
                 <button
                 class="custom-btn me-3"
                 *ngIf="isEditMode"

@@ -3,15 +3,22 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { User } from '../interfaces/user';
 import { UpdatePassword } from '../interfaces/update-password';
+import { environment } from '../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TenantService {
-  baseUrl:string = `http://localhost:3000/tenants/`;
+  domain:string="";
+  endPoint:string="tenants/";
+  baseUrl:string = ``;
+  
   tenantsList:BehaviorSubject<User[]> = new BehaviorSubject<User[]>([]);
 
-  constructor(private _http: HttpClient) { }
+  constructor(private _http: HttpClient) { 
+    this.domain=environment.domain;
+    this.baseUrl = this.domain + this.endPoint;
+  }
 
   updateTenantImage(teantID:string,photo:any):Observable<any>{
     return this._http.post(this.baseUrl+`image/${teantID}`,photo)
@@ -39,7 +46,7 @@ export class TenantService {
   }
 
   unDelete(userID:string):Observable<any>{
-    return this._http.patch(this.baseUrl+userID+"/undelete",{});
+    return this._http.patch(this.baseUrl+"undelete/"+userID,{});
   }
 
 }

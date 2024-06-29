@@ -8,10 +8,11 @@ import { User } from '../../../interfaces/user';
 import { Subscription } from 'rxjs';
 import { AuthenticationService } from '../../../services/authentication.service';
 import { ProjectService } from '../../../services/project.service';
+import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-project-item',
   standalone: true,
-  imports: [ReactiveFormsModule,DialogModule,ButtonModule],
+  imports: [ReactiveFormsModule,DialogModule,ButtonModule,CommonModule],
   templateUrl: './project-item.component.html',
   styleUrl: './project-item.component.css',
   providers:[]

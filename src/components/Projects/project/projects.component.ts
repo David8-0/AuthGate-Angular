@@ -46,7 +46,7 @@ ngOnInit(): void {
 
   addProjectForm = new FormGroup({
     name: new FormControl('',[Validators.required]),
-    callBackUrl: new FormControl('',[Validators.required,Validators.pattern(/^www\.[a-zA-Z0-9-]+(\.[a-zA-Z]+)+$/)]),
+    callBackUrl: new FormControl('',[Validators.required,/*Validators.pattern(/^www\.[a-zA-Z0-9-]+(\.[a-zA-Z]+)+$/)*/]),
   });
 
 

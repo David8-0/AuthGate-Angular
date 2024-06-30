@@ -42,7 +42,7 @@ export class AuthorizeComponent implements OnInit,OnDestroy{
       localStorage.setItem('codeChallenge',`${this.codeChallenge}`)
       this._router.navigateByUrl('/login');
     }else{
-      localStorage.removeItem('token');
+      localStorage.removeItem('codeChallenge');
       localStorage.removeItem('projectID');
       if(this.projectID){
         this._projectService.getByID(this.projectID).subscribe({
@@ -66,6 +66,7 @@ export class AuthorizeComponent implements OnInit,OnDestroy{
 
   confirm(){
     if(this.projectID && this.codeChallenge){
+      console.log(this.codeChallenge);
       this._userService.addUserToProject(this.projectID,this.codeChallenge).subscribe({
         next:(res)=>{
           console.log(res);

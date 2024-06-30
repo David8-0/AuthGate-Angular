@@ -1,23 +1,120 @@
+<!-- <div class="container">
+      <h1 class="header-h1">Developers</h1>
+      <div class="wrapper card-body p-5 rounded cards">
+            <div class="steps">
+                  <h3>1. Sign In With Authgate Button</h3>
+                  <p>Make a "Sign In With Authgate" button in your Angular frontend Application, by clicking it an HTTP
+                        request should be made to 'Authgate_Backend_Url/tenants/authorize-client' sending the Client_ID
+                        and Client_Secret to verify the tenant.</p>
+
+                  <h3>2. Redirect To Authgate Login Page</h3>
+                  <p>You would then receive the Authgate login page URL, with the projectID concatenated to it, you
+                        would then be required to concatenate a Code Challenge to it in order to implement PKCE flow and
+                        then redirect to it.</p>
+                  <div class="row">
+                        <div class="col-md-6">
+                              <h4 class="text-center">Request <span class="request-method">(POST)</span></h4>
+                              <app-code [code]="code1"></app-code>
+                        </div>
+                        <div class="col-md-6">
+                              <h4 class="text-center">Response</h4>
+                              <app-code [code]="code2"></app-code>
+                        </div>
+                  </div>
+
+                  <h3>3. Adjust app.routes.ts File</h3>
+                  <p>Adjust your app.routes.ts file, by adding an extra route that have the same URI of the callback URL
+                        but with '/:authCode' added to it.</p>
+
+                  <h3>4. Adjust Component Used In Callback URL</h3>
+                  <p>Adjust the Component that you are redirecting to in the app.routes.ts file to extract the
+                        Authentication Code and send it to your backend server along with the Code Verifier.</p>
+                  <div class="row">
+                        <div class="col-md-6">
+                              <h4 class="text-center">Request <span class="request-method">(POST)</span></h4>
+                              <app-code [code]="code3"></app-code>
+                        </div>
+                        <div class="col-md-6">
+                              <h4 class="text-center">Response</h4>
+                              <app-code [code]="code5"></app-code>
+                        </div>
+                  </div>
+
+                  <h3>5. Exchange Authorization Code and Code Verifier For Authentication Token</h3>
+                  <p>Your backend server should then send a request to Authgate and receive an Authorization Token in
+                        return. Then, you should extract the user information from the token and save it in your
+                        database. After that, you should issue a JWT to be sent to your Angular frontend application.
+                  </p>
+                  <div class="row">
+                        <div class="col-md-6">
+                              <h4 class="text-center">Request <span class="request-method">(POST)</span></h4>
+                              <app-code [code]="code6"></app-code>
+                        </div>
+                        <div class="col-md-6">
+                              <h4 class="text-center">Response</h4>
+                              <app-code [code]="code4"></app-code>
+                        </div>
+                  </div>
+                  <h3>6. Maintain State of User</h3>
+                  <p>Save the token in your Angular frontend application and maintain user state.
+                  </p>
+            </div>
+      </div>
+</div> -->
+
+
 <div class="container">
-  <h1 class="header-h1">Developers</h1>
-  <div class="wrapper card-body p-5 rounded cards">
-    <div class="steps">
-      <h3>1. First step is asdasdasdasd</h3>
-      <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Beatae odit quo aliquam nisi velit magni natus asperiores eaque, debitis recusandae tempora inventore ducimus saepe hic dignissimos ipsum perferendis, ut, similique eos? Atque minus nisi voluptatibus, velit aperiam delectus eos et commodi dolor ipsam placeat sequi! Consectetur odio ullam ea quibusdam explicabo neque porro aliquam. Explicabo suscipit cumque distinctio natus minima.</p>
-      <h3>2. Second step is asdasdasdasd</h3>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Beatae odit quo aliquam nisi velit magni natus asperiores eaque, debitis recusandae tempora inventore ducimus saepe hic dignissimos ipsum perferendis, ut, similique eos? Atque minus nisi voluptatibus, velit aperiam delectus eos et commodi dolor ipsam placeat sequi! Consectetur odio ullam ea quibusdam explicabo neque porro aliquam. Explicabo suscipit cumque distinctio natus minima.</p>
-      <h3>3. Third step is asdasdasdasd</h3>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Beatae odit quo aliquam nisi velit magni natus asperiores eaque, debitis recusandae tempora inventore ducimus saepe hic dignissimos ipsum perferendis, ut, similique eos? Atque minus nisi voluptatibus, velit aperiam delectus eos et commodi dolor ipsam placeat sequi! Consectetur odio ullam ea quibusdam explicabo neque porro aliquam. Explicabo suscipit cumque distinctio natus minima.</p>
-      <app-code [code]="code2"></app-code>
-      <h3>4. Forth step is asdasdasdasd</h3>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Beatae odit quo aliquam nisi velit magni natus asperiores eaque, debitis recusandae tempora inventore ducimus saepe hic dignissimos ipsum perferendis, ut, similique eos? Atque minus nisi voluptatibus, velit aperiam delectus eos et commodi dolor ipsam placeat sequi! Consectetur odio ullam ea quibusdam explicabo neque porro aliquam. Explicabo suscipit cumque distinctio natus minima.</p>
-      <h3>5. Fifth step is asdasdasdasd</h3>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Beatae odit quo aliquam nisi velit magni natus asperiores eaque, debitis recusandae tempora inventore ducimus saepe hic dignissimos ipsum perferendis, ut, similique eos? Atque minus nisi voluptatibus, velit aperiam delectus eos et commodi dolor ipsam placeat sequi! Consectetur odio ullam ea quibusdam explicabo neque porro aliquam. Explicabo suscipit cumque distinctio natus minima.</p>
+      <h1 class="header-h1">Developers</h1>
+      <div class="wrapper card-body p-5 rounded cards">
+        <div class="steps">
+          <h3>1. Sign In with Authgate Button</h3>
+          <p>Create a "Sign In with Authgate" button in your Angular frontend application. Clicking it should send an HTTP request to 'Authgate_Backend_Url/tenants/authorize-client' with the Client_ID and Client_Secret to verify the tenant.</p>
+    
+          <h3>2. Redirect to Authgate Login Page</h3>
+          <p>You will receive the Authgate login page URL with the projectID appended to it. Then, you need to append a Code Challenge to implement the PKCE flow and redirect to it.</p>
+          <div class="row">
+            <div class="col-md-6">
+              <h4 class="text-center">Request <span class="request-method">(POST)</span></h4>
+              <app-code [code]="code1"></app-code>
+            </div>
+            <div class="col-md-6">
+              <h4 class="text-center">Response</h4>
+              <app-code [code]="code2"></app-code>
+            </div>
+          </div>
+    
+          <h3>3. Adjust app.routes.ts File</h3>
+          <p>Modify your app.routes.ts file by adding an extra route that matches the callback URL with '/:authCode' appended to it.</p>
+    
+          <h3>4. Adjust Component Used in Callback URL</h3>
+          <p>Modify the component that you are redirecting to in the app.routes.ts file to extract the authentication code and send it to your backend server along with the code verifier.</p>
+          <div class="row">
+            <div class="col-md-6">
+              <h4 class="text-center">Request <span class="request-method">(POST)</span></h4>
+              <app-code [code]="code3"></app-code>
+            </div>
+            <div class="col-md-6">
+              <h4 class="text-center">Response</h4>
+              <app-code [code]="code5"></app-code>
+            </div>
+          </div>
+    
+          <h3>5. Exchange Authorization Code and Code Verifier for Authentication Token</h3>
+          <p>Your backend server should send a request to Authgate and receive an authorization token in return. Extract the user information from the token, save it in your database, and issue a JWT to be sent to your Angular frontend application.</p>
+          <div class="row">
+            <div class="col-md-6">
+              <h4 class="text-center">Request <span class="request-method">(POST)</span></h4>
+              <app-code [code]="code6"></app-code>
+            </div>
+            <div class="col-md-6">
+              <h4 class="text-center">Response</h4>
+              <app-code [code]="code4"></app-code>
+            </div>
+          </div>
+    
+          <h3>6. Maintain User State</h3>
+          <p>Save the token in your Angular frontend application and maintain user state.</p>
+        </div>
+      </div>
     </div>
     
-    <app-code [code]="code"></app-code>
-
-  </div>
-</div>
-
-

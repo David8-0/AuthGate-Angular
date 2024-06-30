@@ -6,6 +6,7 @@ import { ProjectService } from '../../../services/project.service';
 import { DialogModule } from 'primeng/dialog';
 
 import { MessageService } from 'primeng/api';
+import { environment } from '../../../environments/environment';
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -47,6 +48,8 @@ export class LoginComponent {
     if (formGroup.valid) {
       this._authService.logIn(formGroup.value).subscribe({
         next:(response) => {
+          // conssole.log(response);
+          
           this._authService.setUser(response.data.user,response.data.access_token);
           if(localStorage.getItem('projectID') && localStorage.getItem('codeChallenge')){
             this._router.navigateByUrl(`/authorize/${localStorage.getItem('projectID')}/${localStorage.getItem('codeChallenge')}`);

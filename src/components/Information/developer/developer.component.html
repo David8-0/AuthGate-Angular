@@ -1,5 +1,5 @@
 <div class="container">
-<h1 class="header-h1">Developers</h1>
+      <h1 class="header-h1">Developers</h1>
       <div class="wrapper card-body p-5 rounded cards">
             <div class="steps">
                   <h3>1. Sign In with Authgate Button</h3>
@@ -57,19 +57,19 @@
                   <h3>6. Maintain User State</h3>
                   <p>Save the token in your Angular frontend application and maintain user state.</p>
             </div>
-
+            <h2>Code Samples</h2>
             <div class="accordion" id="accordionExample">
                   <div class="accordion-item">
                         <h2 class="accordion-header">
                               <button class="accordion-button" type="button" data-bs-toggle="collapse"
                                     data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                    C# Backend Client
+                                    Angular Client-Side
                               </button>
                         </h2>
                         <div id="collapseOne" class="accordion-collapse collapse show"
                               data-bs-parent="#accordionExample">
                               <div class="accordion-body">
-                                    <app-tabs [headers]="headers" [contents]="contents"></app-tabs>
+                                    <app-tabs [headers]="angularHeaders" [contents]="angularContents"></app-tabs>
                               </div>
                         </div>
                   </div>
@@ -77,21 +77,16 @@
                         <h2 class="accordion-header">
                               <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                     data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                    Accordion Item #2
+                                    C# Server-Side
                               </button>
                         </h2>
                         <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
                               <div class="accordion-body">
-                                    <strong>This is the second item's accordion body.</strong> It is hidden by default,
-                                    until the collapse plugin adds the appropriate classes that we use to style each
-                                    element. These classes control the overall appearance, as well as the showing and
-                                    hiding via CSS transitions. You can modify any of this with custom CSS or overriding
-                                    our default variables. It's also worth noting that just about any HTML can go within
-                                    the <code>.accordion-body</code>, though the transition does limit overflow.
+                                    <app-tabs [headers]="cSharpHeaders" [contents]="cSharpContents"></app-tabs>
                               </div>
                         </div>
                   </div>
-                  <div class="accordion-item">
+                  <!-- <div class="accordion-item">
                         <h2 class="accordion-header">
                               <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                     data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
@@ -108,11 +103,8 @@
                                     the <code>.accordion-body</code>, though the transition does limit overflow.
                               </div>
                         </div>
-                  </div>
+                  </div> -->
             </div>
 
       </div>
 </div>
-
-
->>>>>>> 0a79a56bcebbe9aed25a9f67b5418ac7e68dfde7

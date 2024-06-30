@@ -215,16 +215,15 @@
     [resizable]="false"
   >
     <div class="buttons w-100 d-flex flex-column justify-content-around">
-      <ul>
-        <div class="my-3">
-          <li class="">first</li>
-        </div>
-        <div class="my-3">
-          <li class="">first</li>
-        </div>
-        <div class="my-3">
-          <li class="">first</li>
-        </div>
+      <ul id="subscriptions">
+        @for(project of user.projects;track user.projects){
+          @if(!project.deleted){
+            <div class="my-3 d-flex justify-content-between">
+              <li>{{project.name}}</li>
+              <button class="custom-btn" (click)="unsubscribe(project.projectID)">unsbscribe</button>
+            </div>
+          }
+        }       
       </ul>
       
     </div>

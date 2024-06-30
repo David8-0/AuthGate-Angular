@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from '../../../services/authentication.service';
 import { Subscription } from 'rxjs';
 import { ProjectService } from '../../../services/project.service';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-github-callback',
@@ -16,6 +17,7 @@ export class GithubCallbackComponent implements OnInit,OnDestroy{
   user:any = {};
   sub:Subscription={} as Subscription;
   constructor(
+    private _messageService: MessageService,
     public _projectService:ProjectService,
     private _activatedRoute:ActivatedRoute,
     private _autehnticationService:AuthenticationService,
@@ -29,9 +31,8 @@ export class GithubCallbackComponent implements OnInit,OnDestroy{
       this.token = params['token'];
       this.user = params['user'];
       this.user = JSON.parse(decodeURIComponent(this.user));
-      console.log(this.user);
-      
       this._autehnticationService.setUser(this.user,this.token??"");
+      this._messageService.add({ severity: 'info', summary: 'Info', detail: 'unfortunately github does not provide email so we have generated random email for you and you can change it any time you want!' });
       if(localStorage.getItem('projectID')){
         this._router.navigateByUrl(`/authorize/${localStorage.getItem('projectID')}`);
       }else{

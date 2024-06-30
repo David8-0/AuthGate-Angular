@@ -11,6 +11,7 @@ import { DialogModule } from 'primeng/dialog';
 import { Subscription } from 'rxjs';
 import { ValidationService } from '../../services/validation.service';
 import { Router } from '@angular/router';
+import { ProjectService } from '../../services/project.service';
 
 @Component({
   selector: 'app-profile',
@@ -27,13 +28,14 @@ export class ProfileComponent implements OnInit,OnDestroy{
   showChangePasswordDialog: boolean = false;
   subscriptions:Subscription[]=[];
   showChangePasswordErrors:boolean = false;
-  showProjectsDialog:boolean = false;
+  showProjectsDialog:boolean = true;
   DeleteDialogvisible: boolean = false;
 
 
 
 
   constructor(
+    private _projectService:ProjectService,
     private _messageService: MessageService,
     private _authService:AuthenticationService,
     private _tenantService:TenantService,
@@ -229,6 +231,18 @@ export class ProfileComponent implements OnInit,OnDestroy{
         }
       })
     }
+  }
+
+  unsubscribe(projectID:string){
+    this._userService.deleteProject(projectID).subscribe({
+      next:(res)=>{
+        this._messageService.add({ severity: 'info', summary: 'Info', detail: 'successfully unsubscribed' });
+        this._authService.user.next(res.data);
+      },
+      error:(err)=>{
+        this._messageService.add({ severity: 'error', summary: 'Error', detail: 'there was an error unsubscribing ' });
+      }
+    });
   }
 
   ngOnDestroy(): void {

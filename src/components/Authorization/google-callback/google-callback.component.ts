@@ -31,8 +31,8 @@ export class GoogleCallbackComponent implements OnInit,OnDestroy{
       this.user = JSON.parse(decodeURIComponent(this.user))
       this._autehnticationService.setUser(this.user,this.token??"");
 
-      if(this._projectService.projectID){
-        this._router.navigateByUrl(`/authorize/${this._projectService.projectID}`);
+      if(localStorage.getItem('projectID')){
+        this._router.navigateByUrl(`/authorize/${localStorage.getItem('projectID')}`);
       }else{
         this._router.navigateByUrl('/home');
       }

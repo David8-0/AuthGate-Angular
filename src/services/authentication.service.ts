@@ -8,12 +8,16 @@ import { SignIn } from '../interfaces/sign-in';
 import { UserService } from './user.service';
 import { TenantService } from './tenant.service';
 import { Router } from '@angular/router';
+import { UpdatePassword } from '../interfaces/update-password';
+import { environment } from '../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
-  baseUrl:string = `http://localhost:3000/auth/`;
+  domain:string="";
+  endPoint:string="auth/";
+  baseUrl:string = ``;
   user:BehaviorSubject<User> = new BehaviorSubject<User>({} as User);
   
   constructor(
@@ -46,19 +50,14 @@ export class AuthenticationService {
             }
           });
         }
-      }else{
-        // this.logOut();
-        // _router.navigateByUrl('/error');
       }
-      
-      
+      this.domain=environment.domain;
+      this.baseUrl = this.domain + this.endPoint;      
    }
 
   userSingup(user:UserSignup):Observable<any>{
     return this._http.post(this.baseUrl+"registeruser",user);
   }
-
-  
 
   tenantSingup(tenant:TenantSignup):Observable<any>{
     return this._http.post(this.baseUrl+"registertenant",tenant);
@@ -84,9 +83,14 @@ export class AuthenticationService {
     this.user.next({} as User);
   }
   
-  // SignInWithGoogle():Observable<any>{
-  //   return this._http.get(this.baseUrl+"google")
-  // }
+  resetPasswordRequest(email:string):Observable<any>{
+    return this._http.post(this.baseUrl+"reset-password/request",email)
+  }
+
+  resetPassword(form:UpdatePassword):Observable<any>{
+    return this._http.post(this.baseUrl+"reset-password",form)
+  }
+  
 }
 
 

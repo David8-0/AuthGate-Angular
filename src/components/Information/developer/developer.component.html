@@ -1,26 +1,110 @@
 <div class="container">
-  <h1 class="header-h1">Developers</h1>
-  <div class="wrapper card-body p-5 rounded cards">
-    <div class="steps">
-      <h3>1. First step is asdasdasdasd</h3>
-      <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Beatae odit quo aliquam nisi velit magni natus asperiores eaque, debitis recusandae tempora inventore ducimus saepe hic dignissimos ipsum perferendis, ut, similique eos? Atque minus nisi voluptatibus, velit aperiam delectus eos et commodi dolor ipsam placeat sequi! Consectetur odio ullam ea quibusdam explicabo neque porro aliquam. Explicabo suscipit cumque distinctio natus minima.</p>
-      <h3>2. Second step is asdasdasdasd</h3>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Beatae odit quo aliquam nisi velit magni natus asperiores eaque, debitis recusandae tempora inventore ducimus saepe hic dignissimos ipsum perferendis, ut, similique eos? Atque minus nisi voluptatibus, velit aperiam delectus eos et commodi dolor ipsam placeat sequi! Consectetur odio ullam ea quibusdam explicabo neque porro aliquam. Explicabo suscipit cumque distinctio natus minima.</p>
-      <h3>3. Third step is asdasdasdasd</h3>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Beatae odit quo aliquam nisi velit magni natus asperiores eaque, debitis recusandae tempora inventore ducimus saepe hic dignissimos ipsum perferendis, ut, similique eos? Atque minus nisi voluptatibus, velit aperiam delectus eos et commodi dolor ipsam placeat sequi! Consectetur odio ullam ea quibusdam explicabo neque porro aliquam. Explicabo suscipit cumque distinctio natus minima.</p>
-      <h3>4. Forth step is asdasdasdasd</h3>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Beatae odit quo aliquam nisi velit magni natus asperiores eaque, debitis recusandae tempora inventore ducimus saepe hic dignissimos ipsum perferendis, ut, similique eos? Atque minus nisi voluptatibus, velit aperiam delectus eos et commodi dolor ipsam placeat sequi! Consectetur odio ullam ea quibusdam explicabo neque porro aliquam. Explicabo suscipit cumque distinctio natus minima.</p>
-      <h3>5. Fifth step is asdasdasdasd</h3>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Beatae odit quo aliquam nisi velit magni natus asperiores eaque, debitis recusandae tempora inventore ducimus saepe hic dignissimos ipsum perferendis, ut, similique eos? Atque minus nisi voluptatibus, velit aperiam delectus eos et commodi dolor ipsam placeat sequi! Consectetur odio ullam ea quibusdam explicabo neque porro aliquam. Explicabo suscipit cumque distinctio natus minima.</p>
-    </div>
-    
-    <div class="code-block position-relative" >
-        
-        <code><pre>{{code}}</pre></code>
-        <i class="fa-regular fa-clone" (click)="copyCode()"></i>
-    </div>
+      <h1 class="header-h1">Developers</h1>
+      <div class="wrapper card-body p-5 rounded cards">
+            <div class="steps">
+                  <h3>1. Sign In with Authgate Button</h3>
+                  <p>Create a "Sign In with Authgate" button in your Angular frontend application. Clicking it should
+                        send an HTTP request to 'Authgate_Backend_Url/tenants/authorize-client' with the Client_ID and
+                        Client_Secret to verify the tenant.</p>
 
-  </div>
+                  <h3>2. Redirect to Authgate Login Page</h3>
+                  <p>You will receive the Authgate login page URL with the projectID appended to it. Then, you need to
+                        append a Code Challenge to implement the PKCE flow and redirect to it.</p>
+                  <div class="row">
+                        <div class="col-md-6">
+                              <h4 class="text-center">Request <span class="request-method">(POST)</span></h4>
+                              <app-code [code]="code1"></app-code>
+                        </div>
+                        <div class="col-md-6">
+                              <h4 class="text-center">Response</h4>
+                              <app-code [code]="code2"></app-code>
+                        </div>
+                  </div>
+
+                  <h3>3. Adjust app.routes.ts File</h3>
+                  <p>Modify your app.routes.ts file by adding an extra route that matches the callback URL with
+                        '/:authCode' appended to it.</p>
+
+                  <h3>4. Adjust Component Used in Callback URL</h3>
+                  <p>Modify the component that you are redirecting to in the app.routes.ts file to extract the
+                        authentication code and send it to your backend server along with the code verifier.</p>
+                  <div class="row">
+                        <div class="col-md-6">
+                              <h4 class="text-center">Request <span class="request-method">(POST)</span></h4>
+                              <app-code [code]="code3"></app-code>
+                        </div>
+                        <div class="col-md-6">
+                              <h4 class="text-center">Response</h4>
+                              <app-code [code]="code5"></app-code>
+                        </div>
+                  </div>
+
+                  <h3>5. Exchange Authorization Code and Code Verifier for Authentication Token</h3>
+                  <p>Your backend server should send a request to Authgate and receive an authorization token in return.
+                        Extract the user information from the token, save it in your database, and issue a JWT to be
+                        sent to your Angular frontend application.</p>
+                  <div class="row">
+                        <div class="col-md-6">
+                              <h4 class="text-center">Request <span class="request-method">(POST)</span></h4>
+                              <app-code [code]="code6"></app-code>
+                        </div>
+                        <div class="col-md-6">
+                              <h4 class="text-center">Response</h4>
+                              <app-code [code]="code4"></app-code>
+                        </div>
+                  </div>
+
+                  <h3>6. Maintain User State</h3>
+                  <p>Save the token in your Angular frontend application and maintain user state.</p>
+            </div>
+            <h2>Code Samples</h2>
+            <div class="accordion" id="accordionExample">
+                  <div class="accordion-item">
+                        <h2 class="accordion-header">
+                              <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    Angular Client-Side
+                              </button>
+                        </h2>
+                        <div id="collapseOne" class="accordion-collapse collapse show"
+                              data-bs-parent="#accordionExample">
+                              <div class="accordion-body">
+                                    <app-tabs [headers]="angularHeaders" [contents]="angularContents"></app-tabs>
+                              </div>
+                        </div>
+                  </div>
+                  <div class="accordion-item">
+                        <h2 class="accordion-header">
+                              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    C# Server-Side
+                              </button>
+                        </h2>
+                        <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                              <div class="accordion-body">
+                                    <app-tabs [headers]="cSharpHeaders" [contents]="cSharpContents"></app-tabs>
+                              </div>
+                        </div>
+                  </div>
+                  <!-- <div class="accordion-item">
+                        <h2 class="accordion-header">
+                              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                    Accordion Item #3
+                              </button>
+                        </h2>
+                        <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                              <div class="accordion-body">
+                                    <strong>This is the third item's accordion body.</strong> It is hidden by default,
+                                    until the collapse plugin adds the appropriate classes that we use to style each
+                                    element. These classes control the overall appearance, as well as the showing and
+                                    hiding via CSS transitions. You can modify any of this with custom CSS or overriding
+                                    our default variables. It's also worth noting that just about any HTML can go within
+                                    the <code>.accordion-body</code>, though the transition does limit overflow.
+                              </div>
+                        </div>
+                  </div> -->
+            </div>
+
+      </div>
 </div>
-
-

@@ -1,6 +1,6 @@
-<div class="container wrapper">
+<div class="container wrapper d-flex justify-content-center align-items-center">
     
-    <div class="card-body p-5  rounded bg-white">
+    <div class="card-body p-2 p-md-3 p-lg-5  rounded bg-white">
         <div class="row">
             <div class="col-md-5">
                 <div class="">
@@ -9,10 +9,10 @@
             </div>
             <div class="col-md-7">
                 <h1 class="text-center">Sign in</h1>
-                @if(this._projectService.projectID){
+                @if(isProjectID){
                     <h4 class="">you need to log in first to continue...</h4> 
                 }
-                <form [formGroup]="loginForm" (ngSubmit)="register(loginForm)" class="d-flex flex-column justify-content-center px-5 py-3 w-75 w-100">
+                <form [formGroup]="loginForm" (ngSubmit)="register(loginForm)" class=" d-flex flex-column justify-content-center px-2  px-md-5 py-3 w-75 w-100">
                     
                     <input id="email" type="text" formControlName="email" placeholder="Email" class="fw-bold  form-control my-1">
                     @if(loginForm.get('email')?.errors && (loginForm.get('email')?.touched)|| showErrors){
@@ -40,6 +40,7 @@
                             
                         </div>
                     }
+                    <a class="text-decoration-none cursor-pointer" (click)="this.showResetPasswordDialog=true;">Forgot Password ?</a>
                     <input type="submit"  class="custom-btn w-50 m-auto mt-4" value="Login" />
 
                     
@@ -52,7 +53,7 @@
                     <div class="divider"></div>
                 </div>
                 <div class="providers mt-2 d-flex  justify-content-center">
-                    <div class="icon-wrapper">
+                    <div class="icon-wrapper" (click)="signInWithFacebook()">
                         <i class="fa-brands fa-facebook"></i>
                     </div>
                     <div class="icon-wrapper" (click)="signInWithGoogle()">
@@ -62,11 +63,54 @@
                         <i class="fa-brands fa-github"></i>
                     </div>
                 </div>
-                <a class="text-decoration-none" routerLink="/user-signup">Don't have an account ? Sign Up</a>
+                <a class="text-decoration-none d-block text-center mt-2" routerLink="/user-signup">Don't have an account ? Sign Up</a>
             </div>
         </div>
     </div>
 
+    <div class="flex justify-content-center">
+        <p-dialog
+          header="Reset Password"
+          [(visible)]="showResetPasswordDialog"
+          [modal]="true"
+          [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }"
+          [style]="{ width: '400px' }"
+          [draggable]="false"
+          [resizable]="false"
+        >
+        <form [formGroup]="resetPasswordForm">
+            <input id="email" type="text" formControlName="email" placeholder="Email" class="fw-bold  form-control my-1">
+                    @if(resetPasswordForm.get('email')?.errors && (resetPasswordForm.get('email')?.touched)|| showResetPasswordErrors){
+                        <div>
+                            @if(resetPasswordForm.get('email')?.getError('required')){
+                                <i class="fa-solid fa-circle-exclamation alert-icon"></i>
+                                <span class="alert-text text-danger">Email is required</span>
+                            }
+                            @if(resetPasswordForm.get('email')?.getError('email')){
+                                <i class="fa-solid fa-circle-exclamation alert-icon"></i>
+                                <span class="alert-text text-danger">Email pattern is invalid</span>
+                            }
+                        </div>
+                    }
+          <div class="buttons w-100 d-flex flex-column justify-content-around">
+          
+            <button
+              class="btn btn-info w-100 my-2"
+              (click)="this.showResetPasswordDialog = false"
+            >
+              cancel
+            </button>
+            <button
+              class="custom-btn w-100 my-2"
+              (click)="resetPassword(resetPasswordForm)"
+            >
+              Send Email
+            </button>
+          </div>
+        </form>
+       
+          
+        </p-dialog>
+      </div>
 
-<p-toast />
 </div>

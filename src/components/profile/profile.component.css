@@ -13,12 +13,12 @@
   .profile-details {
     width: 100%;
     max-width: 750px;
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: #fff;
     border-radius: 10px;
     padding: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     box-sizing: border-box;
-    box-shadow: 10px 10px 10px -1px rgb(10, 99, 169,0.16), 3px 3px 10px -1px rgb(255, 255, 255, 0.5);
+    /* box-shadow: 10px 10px 10px -1px rgb(10, 99, 169,0.16), 3px 3px 10px -1px rgb(255, 255, 255, 0.5); */
   }
   
   .profile-details .form-group {
@@ -42,7 +42,9 @@
     box-sizing: border-box;
   }
   
-
+  .delete-btn{
+    padding: 10px 24px;
+  }
 
   .custom-file-upload{
     cursor: pointer;
@@ -73,3 +75,4 @@
   color: red;
   margin-right: 5px;
 }
+

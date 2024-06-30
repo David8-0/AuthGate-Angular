@@ -5,8 +5,8 @@
         <h2 class="text-center my-5">you currently have no projects want to add one ?</h2>
       }
         <div class="row g-3">
-          @for(item of projectsArr; track item){
-            <div class="col-md-4">
+          @for(item of projectsArr ; track item){
+              <div class="col-md-4">
                 <app-project-item [project]="item"></app-project-item>  
             </div>
           } 
@@ -31,7 +31,7 @@
             @if(addProjectForm.get('name')?.errors && addProjectForm.get('name')?.touched){
                 <div class="text-danger">
                     @if(addProjectForm.get('name')?.getError('required')){
-                        <span class="fw-bold alert-msg"><i class="fa-solid fa-circle-exclamation"></i> project name is required</span>
+                        <span class="fw-bold alert-text"><i class="fa-solid fa-circle-exclamation text-danger"></i> project name is required</span>
                     }
                 </div>
             }
@@ -39,7 +39,10 @@
             @if(addProjectForm.get('callBackUrl')?.errors && addProjectForm.get('callBackUrl')?.touched){
                 <div class="text-danger">
                     @if(addProjectForm.get('callBackUrl')?.getError('required')){
-                        <span class="fw-bold alert-msg"><i class="fa-solid fa-circle-exclamation"></i> callBack Url is required</span>
+                        <span class="fw-bold alert-text"><i class="fa-solid fa-circle-exclamation text-danger"></i> callBack Url is required</span>
+                    }@if(addProjectForm.get('callBackUrl')?.getError('pattern')){
+                      <i class="fa-solid fa-circle-exclamation text-danger me-1"></i>
+                    <span class="alert-text">Invalid URL</span>
                     }
                 </div>
             }
@@ -53,5 +56,5 @@
     </div>
   </div>
 
-  <p-toast />
+ 
  

@@ -23,9 +23,11 @@
 
 .card-item{
     background-color:#fff;
+    border:1px solid  #2c4964;
     text-align: left;
     padding: 30px 20px 30px 20px;
     transition: all ease-in-out 0.3s;
+    border-radius: 10px;
 }
 
 .card-item:hover{
@@ -67,4 +69,20 @@
 
 .copy-span:hover > i{
     color: #fff;
+}
+
+#deleted{
+    border-radius: 10px;
+    background-color: red;
+    color: #fff;
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 20px;
+    padding: 5px 10px;
+}
+
+.client-id,.client-secret{
+    font-size: 14px;
+    word-wrap: break-word;
 }

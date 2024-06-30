@@ -4,16 +4,16 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { AuthenticationService } from '../../../services/authentication.service';
 import { ProjectService } from '../../../services/project.service';
-import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-user-signup',
   standalone: true,
-  imports: [ReactiveFormsModule,RouterLink,RouterLinkActive,ToastModule],
+  imports: [ReactiveFormsModule,RouterLink,RouterLinkActive],
   templateUrl: './user-signup.component.html',
   styleUrl: './user-signup.component.css',
-  providers:[MessageService]
+  providers:[]
 })
 export class UserSignupComponent {
   isUser: boolean = true;
@@ -21,6 +21,7 @@ export class UserSignupComponent {
   isShowConfirmPassword:boolean = false;
   showUserErrors:boolean = false;
   showTenantErrors:boolean = false;
+  isProjectID:boolean = false;
 
   constructor(
     private _messageService: MessageService,
@@ -28,7 +29,10 @@ export class UserSignupComponent {
     private _authService: AuthenticationService,
     private _router: Router,
     private _validationService:ValidationService
-  ){}
+  ){
+    if(localStorage.getItem('projectID'))
+      this.isProjectID=true;
+  }
 
   registerUserForm = new FormGroup({
     name: new FormControl('',Validators.required),
@@ -57,8 +61,8 @@ export class UserSignupComponent {
       this._authService.userSingup(formGroup.value).subscribe({
         next:(response) => {
           this._authService.setUser(response.data.user,response.data.access_token);
-          if(this._projectService.projectID){
-            this._router.navigateByUrl(`/authorize/${this._projectService.projectID}`);
+          if(localStorage.getItem('projectID') && localStorage.getItem('codeChallenge')){
+            this._router.navigateByUrl(`/authorize/${localStorage.getItem('projectID')}/${localStorage.getItem('codeChallenge')}`);
           }else{
             this._router.navigateByUrl('/home');
           }
@@ -101,4 +105,9 @@ export class UserSignupComponent {
   signInWithGitHub(){
     window.location.href="http://localhost:3000/auth/github";
   }
+
+  signInWithFacebook(){
+    window.location.href="http://localhost:3000/auth/facebook";
+  }
+  
 }

@@ -3,16 +3,16 @@ import { Component, ElementRef, Input, OnChanges, OnDestroy, OnInit, SimpleChang
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
-import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { User } from '../../../interfaces/user';
 import { Subscription } from 'rxjs';
 import { AuthenticationService } from '../../../services/authentication.service';
 import { ProjectService } from '../../../services/project.service';
+import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-project-item',
   standalone: true,
-  imports: [ReactiveFormsModule,DialogModule,ButtonModule,ToastModule],
+  imports: [ReactiveFormsModule,DialogModule,ButtonModule,CommonModule],
   templateUrl: './project-item.component.html',
   styleUrl: './project-item.component.css',
   providers:[]
@@ -84,6 +84,7 @@ user:User = {};
         next:(res)=>{
           this._messageService.add({ severity: 'info', summary: 'Info', detail: 'successfully deleted your project' });
           this._projectService.projectsArr.next(res.data);
+          this.project=res.data.find( (p:any) => p._id === projectID);
         },
         error:(err)=>{
           this._messageService.add({ severity: 'error', summary: 'Error', detail: 'there was an error deleting your project' });
@@ -107,6 +108,22 @@ user:User = {};
 
   toggleShowClientSecret(){
     this.showClientSecret = !this.showClientSecret;
+  }
+
+
+  undeleteProject(projectID:string | undefined){
+    if(projectID){
+      this._projectService.undeleteProject(projectID).subscribe({
+        next:(res)=>{
+          this._messageService.add({ severity: 'info', summary: 'Info', detail: 'project is undeleted successfully   ' });  
+          this.project= res.data;
+        },
+        error:(err)=>{
+          this._messageService.add({ severity: 'error', summary: 'Error', detail: 'there was an error undeleting the project' });
+        },
+        complete:()=>{}
+      });
+    }
   }
 }
 

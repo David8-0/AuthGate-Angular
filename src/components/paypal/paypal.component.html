@@ -1,0 +1,40 @@
+<div class="container wrapper">
+    <h1 class="head-h1 text-white text-center">
+        Your payment was @if(this.validTransactions){successful}@else {unsuccessful }
+    </h1>
+    @if(this.validTransactions){
+        <div class="row">
+            <div class="col-md-6">
+                <div class="h-100 d-flex align-items-center text-center">
+                    <h3 class="text-white">
+                        Thank you for your generous donation! Your support is vital to our mission and helps us continue to provide
+                     valuable content and services to our community. We are incredibly grateful for your contribution and commitment
+                      to our cause. Thank you for being an essential part of our journey!
+                    </h3>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="img-wrapper">
+                    <img src="assets/thanks.png" class="w-100" alt="">
+                </div>
+            </div>
+        </div>
+    }@else {
+        <div class="row">
+            <div class="col-md-6">
+                <div class="h-100 d-flex align-items-center text-center">
+                    <h3 class="text-white">
+                        Thank you for your intention to donate! Although the payment was unsuccessful,
+                         we greatly appreciate your support and willingness to contribute to our service.
+                           Thank you for being a valued member of our community!
+                    </h3>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="img-wrapper">
+                    <img src="assets/notfound.png" class="w-100" alt="">
+                </div>
+            </div>
+        </div>
+    }
+</div>

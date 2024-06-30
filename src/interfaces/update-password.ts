@@ -1,5 +1,6 @@
 export interface UpdatePassword {
-    oldPassword:string;
+    oldPassword?:string;
     newPassword:string;
     confirmNewPassword:string;
+    token?:string;
 }

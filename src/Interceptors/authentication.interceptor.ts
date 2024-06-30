@@ -10,6 +10,8 @@ export const authenticationInterceptor: HttpInterceptorFn = (req, next) => {
   let modifiedRequest = req.clone({
     headers: req.headers.set("authorization", `Bearer ${token}`)
   }) 
+  console.log(req);
+  
   return next(modifiedRequest).pipe(
     finalize(()=>{
       _loader.setLoader(false);

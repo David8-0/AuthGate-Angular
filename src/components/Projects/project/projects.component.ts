@@ -11,10 +11,10 @@ import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-projects',
   standalone: true,
-  imports: [ReactiveFormsModule, ProjectItemComponent,DialogModule,ButtonModule,ToastModule],
+  imports: [ReactiveFormsModule, ProjectItemComponent,DialogModule,ButtonModule],
   templateUrl: './projects.component.html',
   styleUrl: './projects.component.css',
-  providers:[MessageService]
+  providers:[]
 })
 export class ProjectsComponent implements OnInit,OnDestroy{
   projectsArr:Project[] = [];
@@ -29,7 +29,7 @@ export class ProjectsComponent implements OnInit,OnDestroy{
 ngOnInit(): void {
     this._projectService.getAllPerTenant().subscribe({
       next:(res)=>{
-        this.projectsArr=res.data;
+        this.projectsArr=res.data.filter((p:Project)=>p.deleted==false);
         console.log(res);
       },
       error:(err)=>{
@@ -37,7 +37,7 @@ ngOnInit(): void {
       }
     })
     const sub =this._projectService.projectsArr.subscribe(newArr=>{
-      this.projectsArr=newArr;
+      this.projectsArr=newArr.filter((p:Project)=>p.deleted==false);;
     });
     this.subscriptions.push(sub); 
 }
@@ -46,7 +46,7 @@ ngOnInit(): void {
 
   addProjectForm = new FormGroup({
     name: new FormControl('',[Validators.required]),
-    callBackUrl: new FormControl('',[Validators.required]),
+    callBackUrl: new FormControl('',[Validators.required,/*Validators.pattern(/^www\.[a-zA-Z0-9-]+(\.[a-zA-Z]+)+$/)*/]),
   });
 
 

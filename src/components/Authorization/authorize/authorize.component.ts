@@ -16,9 +16,11 @@ import { Subscription } from 'rxjs';
 })
 export class AuthorizeComponent implements OnInit,OnDestroy{
   projectID:string|null=null;
+  codeChallenge:string|null=null;
   project:Project = {} as Project;
   user:User = {} as User;
   subscriptions:Subscription[]=[];
+  
   constructor(
     private _userService:UserService,
     private _authenticationService:AuthenticationService,
@@ -26,22 +28,22 @@ export class AuthorizeComponent implements OnInit,OnDestroy{
     private _activatedRoute:ActivatedRoute,
     private _router:Router
   ){
-    //console.log(this._authenticationService.user.value);
-
   }
 
   ngOnInit(): void {
     const sub =this._activatedRoute.paramMap.subscribe(params => { 
       this.projectID = params.get('projID');
+      this.codeChallenge = params.get('codeChallenge');
     });
     this.subscriptions.push(sub);
-    //console.log(this._authenticationService.user.value);
     
     if(!localStorage.getItem('token')){
-      this._projectService.projectID = this.projectID;
+      localStorage.setItem('projectID',`${this.projectID}`)
+      localStorage.setItem('codeChallenge',`${this.codeChallenge}`)
       this._router.navigateByUrl('/login');
     }else{
-      this._projectService.projectID=null;
+      localStorage.removeItem('codeChallenge');
+      localStorage.removeItem('projectID');
       if(this.projectID){
         this._projectService.getByID(this.projectID).subscribe({
           next:(res)=>{
@@ -49,8 +51,6 @@ export class AuthorizeComponent implements OnInit,OnDestroy{
           },
           error:(err)=>{
             console.log(err);
-            
-            //this._router.navigateByUrl('/error');
           }
         })
       }
@@ -65,11 +65,12 @@ export class AuthorizeComponent implements OnInit,OnDestroy{
   }
 
   confirm(){
-    if(this.projectID){
-      this._userService.addUserToProject(this.projectID).subscribe({
+    if(this.projectID && this.codeChallenge){
+      console.log(this.codeChallenge);
+      this._userService.addUserToProject(this.projectID,this.codeChallenge).subscribe({
         next:(res)=>{
           console.log(res);
-          window.location.href=`https://${this.project.callBackUrl}/${res.data.result.authorizationCode}`
+          window.location.href=`${this.project.callBackUrl}/${res.data.result.authorizationCode}`
         },
         error:(err)=>{
           console.log(err);

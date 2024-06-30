@@ -7,7 +7,7 @@
 }
 h1{
     color:#fff;
-    font-size: 52px;
+    font-size: 55px;
     font-weight: 700;
 }
 .header-text{
@@ -16,7 +16,7 @@ h1{
     text-decoration: none solid rgba(255, 255, 255, 0.8);
 }
 #vec-img{
-    width: 400px;
+    width: 100%;
 }
 
 #img-cont{
@@ -29,4 +29,55 @@ h1{
     50% {
       transform: translatey(-30px);
     }
+  }
+/* * Services * */
+  #services{
+    background-color: #F9F8FF;
+    margin-bottom: 30px;
+  }
+
+  #services h2 {
+    font-size: 40px;
+  }
+
+  #services p {
+    font-size: 20px;
+  }
+  #arrow-up{
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    color: #fff;
+    padding: 5px 15px !important;
+    font-size: 18px;
+    transition: all 0.3s;
+    opacity: 0;
+  }
+
+  .show-arrow-up{
+    opacity: 1 !important;
+  }
+
+
+  /*********************************/
+  .scroll-item {
+    opacity: 0;
+    transition: opacity 1.5s, transform 1.5s;
+  }
+  
+  .scroll-item.visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .scroll-right{
+    transform: translateX(50%);
+  }
+  .scroll-left{
+    transform: translateX(-50%);
+  }
+
+  .home-logo{
+    margin-top: 100px;
+    max-width: 400px;
   }

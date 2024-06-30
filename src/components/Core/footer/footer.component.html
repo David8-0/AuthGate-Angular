@@ -14,17 +14,26 @@
                 <div class="col-md-6 col-lg-2">
                     <div class="footer-section">
                         <h4>Useful Links</h4>
-                        <p><a><i class="fa-solid fa-chevron-right"></i> Home</a></p>
+                        <p><a routerLink="/home"><i class="fa-solid fa-chevron-right"></i> Home</a></p>
                         <p><a><i class="fa-solid fa-chevron-right"></i> About us</a></p>
-                        <p><a><i class="fa-solid fa-chevron-right"></i> Services</a></p>
+                        <p><a routerLink="/home" fragment="services"><i class="fa-solid fa-chevron-right"></i> Services</a></p>
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-2">
                     <div class="footer-section">
                         <h4>Our Services</h4>
-                        <p><a> <i class="fa-solid fa-chevron-right"></i> Web Development</a></p>
-                        <p><a> <i class="fa-solid fa-chevron-right"></i> App Development</a></p>
-                        <p><a> <i class="fa-solid fa-chevron-right"></i> SEO Services</a></p>
+                        @if(user._id){
+                            <p><a routerLink="/profile"> <i class="fa-solid fa-chevron-right"></i> Profile</a></p>
+                        }
+                        <p><a routerLink="/developer"> <i class="fa-solid fa-chevron-right"></i> Developers</a></p>
+                        @if(user.role=='admin'){
+                            <p><a routerLink="/dashboard"> <i class="fa-solid fa-chevron-right"></i> Dashboard</a></p>
+
+                        }
+                        @if(user.role == 'tenant'){
+                            <p><a routerLink="/projects"> <i class="fa-solid fa-chevron-right"></i> Projects</a></p>
+
+                        }
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-5">

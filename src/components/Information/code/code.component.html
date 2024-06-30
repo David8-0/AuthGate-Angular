@@ -1,5 +1,18 @@
-<div class="code-block position-relative" >
-        
-    <code><pre>{{code}}</pre></code>
-    <i class="fa-regular fa-clone" pTooltip="copy code" tooltipPosition="top" (click)="copyCode()"></i>
+<div class="code-block position-relative">
+  <code>
+    <pre>{{ code }}</pre>
+  </code>
+  @if(!isCopied){
+    <div id="copy-code" (click)="copyCode()">
+        <i class="fa-regular fa-clone me-1"></i>
+        <span>copy code</span>
+      </div>
+  }@else {
+    <div id="copied">
+        <i class="fa-solid fa-check text-white me-1"></i>
+        <span class="text-white">copied</span>
+      </div>
+  }
+
+  
 </div>

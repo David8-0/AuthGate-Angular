@@ -1,0 +1,22 @@
+.tab-header-item {
+    font-weight: 600;
+    padding: 5px 12px;
+    transition: all 0.3s;
+    border-bottom: 0;
+}
+#tabs-headers{
+    border: 1px solid #1E293B;
+    width: fit-content;
+}
+
+.active-tab-header{
+    color: #fff;
+    background-color: #1E293B;
+}
+#tabs-headers{
+    margin-left: 15px;
+}
+
+#tabs-container{
+    margin-block: 20px;
+}

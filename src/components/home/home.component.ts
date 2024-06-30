@@ -1,11 +1,13 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit,HostListener, AfterViewInit, ElementRef, ViewChild, ViewChildren, QueryList  } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
 
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [],
+  imports: [CarouselModule,CommonModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
 })
@@ -13,6 +15,36 @@ export class HomeComponent implements OnInit, AfterViewInit {
   @ViewChildren('animatedDiv') animatedDiv!: QueryList<ElementRef>;
   showArrowUp: boolean = false;
   currentScrollPosition: number = 0;
+  customOptions: OwlOptions = {
+    autoplaySpeed:1000,
+    autoHeight:false,
+    loop: true,
+    autoplay: true,
+    autoplayTimeout:1300,
+    autoplayHoverPause: true,
+    mouseDrag: true,
+    touchDrag: false,
+    pullDrag: false,
+    dots: false,
+    navSpeed: 700,
+    navText: ['', ''],
+    responsive: {
+      0: {
+        items: 1
+      },
+      400: {
+        items: 2
+      },
+      740: {
+        items: 3
+      },
+      940: {
+        items: 4
+      }
+    },
+    nav: true
+  }
+  slidesStore:string[]=["assets/systems2.jpg","assets/lock2.jpg","assets/thanks.png","assets/login.png"]
 
 constructor(
   private _activatedRouter:ActivatedRoute,

@@ -22,6 +22,23 @@
     </div>
 </div>
 
+
+  <div id="our-customers" class="my-5">
+    <h3 class="header-h1">our customers</h3>
+<owl-carousel-o [options]="customOptions">
+
+    <ng-container *ngFor="let slide of slidesStore">
+      <ng-template carouselSlide [id]="slide">
+        <div class=" carousel-image">
+            <img [src]="slide" [alt]="slide" [title]="slide" class="w-100">
+        </div>
+      </ng-template>
+    </ng-container>
+
+  </owl-carousel-o>
+  </div>
+
+
 <div class="container">
     <div id="services" class="p-5 rounded overflow-hidden" data-aos="fade-in">
     

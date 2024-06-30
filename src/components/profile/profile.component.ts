@@ -28,7 +28,7 @@ export class ProfileComponent implements OnInit,OnDestroy{
   showChangePasswordDialog: boolean = false;
   subscriptions:Subscription[]=[];
   showChangePasswordErrors:boolean = false;
-  showProjectsDialog:boolean = true;
+  showProjectsDialog:boolean = false;
   DeleteDialogvisible: boolean = false;
 
 

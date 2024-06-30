@@ -81,3 +81,14 @@ h1{
     margin-top: 100px;
     max-width: 400px;
   }
+  .carousel-image{
+    width: 300px;
+    border: 1px solid black;
+    border-radius: 5px;
+    overflow: hidden;
+  }
+
+  #our-customers h3 {
+    margin-bottom: 50px;
+  }
+

@@ -25,12 +25,14 @@ export class ProfileComponent implements OnInit,OnDestroy{
   user:User = {} as User;
   isEditMode: boolean = false;
   photoUrl:string="assets/default.png";
-  showChangePasswordDialog: boolean = false;
+
   subscriptions:Subscription[]=[];
+
   showChangePasswordErrors:boolean = false;
   showProjectsDialog:boolean = false;
   DeleteDialogvisible: boolean = false;
-
+  showChangePasswordDialog: boolean = false;
+  showErrors:boolean = false;
 
 
 
@@ -143,7 +145,7 @@ export class ProfileComponent implements OnInit,OnDestroy{
           error:(err)=>{
             console.log(err);
             
-            this._messageService.add({ severity: 'error', summary: 'Error', detail: 'there was a problem updating your data' });
+            this._messageService.add({ severity: 'error', summary: 'Error', detail: `${err.error.message}` });
           }
         });
       }else if (this.user.role == 'tenant'){
@@ -158,6 +160,8 @@ export class ProfileComponent implements OnInit,OnDestroy{
         });
       }
       this.toggleEditMode();
+    }else{
+      this.showErrors= true;
     }
   }
 
@@ -234,15 +238,18 @@ export class ProfileComponent implements OnInit,OnDestroy{
   }
 
   unsubscribe(projectID:string){
-    this._userService.deleteProject(projectID).subscribe({
-      next:(res)=>{
-        this._messageService.add({ severity: 'info', summary: 'Info', detail: 'successfully unsubscribed' });
-        this._authService.user.next(res.data);
-      },
-      error:(err)=>{
-        this._messageService.add({ severity: 'error', summary: 'Error', detail: 'there was an error unsubscribing ' });
-      }
-    });
+    if(this.user._id){
+      this._userService.deleteProject(this.user._id,projectID).subscribe({
+        next:(res)=>{
+          this._messageService.add({ severity: 'info', summary: 'Info', detail: 'successfully unsubscribed' });
+          this._authService.user.next(res.data);
+        },
+        error:(err)=>{
+          this._messageService.add({ severity: 'error', summary: 'Error', detail: 'there was an error unsubscribing ' });
+        }
+      });
+    }
+
   }
 
   ngOnDestroy(): void {

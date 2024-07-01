@@ -1,6 +1,6 @@
 #home {
     width: 100%;
-    min-height: 100vh;
+    min-height: 90vh;
     /* background: linear-gradient(45deg, rgba(86, 58, 250, 0.9) 0%, rgba(116, 15, 214, 0.9) 100%),
      url('../../assets/hero-bg.jpg') center center no-repeat; */
     background-size: cover;
@@ -79,7 +79,7 @@ h1{
 
   .home-logo{
     margin-top: 100px;
-    max-width: 400px;
+    max-width: 500px;
   }
   .carousel-image{
     width: 300px;
@@ -92,3 +92,6 @@ h1{
     margin-bottom: 50px;
   }
 
+  #our-customers {
+    margin-bottom: 100px;
+  }

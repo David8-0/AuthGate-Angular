@@ -2,6 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit,HostListener, AfterViewInit, ElementRef, ViewChild, ViewChildren, QueryList  } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
+import { TenantService } from '../../services/tenant.service';
+import { User } from '../../interfaces/user';
 
 
 @Component({
@@ -27,7 +29,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
     pullDrag: false,
     dots: false,
     navSpeed: 700,
-    navText: ['', ''],
+    navText: [],
     responsive: {
       0: {
         items: 1
@@ -42,12 +44,13 @@ export class HomeComponent implements OnInit, AfterViewInit {
         items: 4
       }
     },
-    nav: true
+    nav: false
   }
-  slidesStore:string[]=["assets/systems2.jpg","assets/lock2.jpg","assets/thanks.png","assets/login.png"]
+  slidesStore:string[]=[];
 
 constructor(
   private _activatedRouter:ActivatedRoute,
+  private _tenantService:TenantService,
   private _router: Router,
   
 ){}
@@ -59,7 +62,20 @@ ngOnInit(): void {
       this._router.navigateByUrl(urlTree);
     })
 
-    
+    if(this._tenantService.tenantsImages.length ==0){
+      this._tenantService.getAll().subscribe({
+        next:(res)=>{
+          const images = res.data.map((tenant:User)=>tenant.image).filter((image:string)=>image!=null);
+          this._tenantService.tenantsImages=images;
+          this.slidesStore=images;
+          console.log(images);
+          
+        },
+        error:(err)=>{console.log(err)}
+      })
+    }else{
+      this.slidesStore = this._tenantService.tenantsImages;
+    }
 }
 
 ngAfterViewInit():void{

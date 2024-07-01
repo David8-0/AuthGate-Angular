@@ -96,13 +96,13 @@ user:User = {};
 
   copyClientSecret(){
     if(this.project.clientSECRET){
-      navigator.clipboard.writeText(this.project.clientSECRET).then(()=>{console.log("copied")}).catch(err=>{console.log(err)});
+      navigator.clipboard.writeText(this.project.clientSECRET);
     }
   }
 
   copyClientID(){
     if(this.project.clientID){
-      navigator.clipboard.writeText(this.project.clientID).then(()=>{console.log("copied")}).catch(err=>{console.log(err)});
+      navigator.clipboard.writeText(this.project.clientID);
     }
   }
 

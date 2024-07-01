@@ -16,5 +16,6 @@ export interface User {
     githubId?: string;
     googleId?: string;
     facebookId?: string;
+    isFirstTime?:boolean;
 }
 

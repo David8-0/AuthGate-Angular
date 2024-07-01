@@ -5,7 +5,6 @@ import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { AuthenticationService } from '../../../services/authentication.service';
 import { ProjectService } from '../../../services/project.service';
 import { MessageService } from 'primeng/api';
-import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-user-signup',
@@ -78,6 +77,7 @@ export class UserSignupComponent {
 
   registerTenant(formGroup: FormGroup) {
     if (formGroup.valid) {
+      console.log(formGroup.value);
       this._authService.tenantSingup (formGroup.value).subscribe({
         next:(response) => {
           this._authService.setUser(response.data.user,response.data.access_token);
@@ -85,6 +85,8 @@ export class UserSignupComponent {
           },
         error: (err) => {
           this._messageService.add({ severity: 'error', summary: 'Error', detail: 'something went wrong signing you up' });
+          console.log(err);
+          
         }
       })
     }else{

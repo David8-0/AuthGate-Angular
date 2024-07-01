@@ -88,11 +88,11 @@ export class LoginComponent {
         next:(res)=>{
           this._messageService.add({ severity: 'success', summary: 'Success', detail: 'an email has been sent to you ' });
           this.showResetPasswordDialog=false;
-          console.log(res);
+          
         },
         error:(err)=>{
-          this._messageService.add({ severity: 'error', summary: 'Error', detail: 'there is a problem with your email' });
-          console.log(err);
+          this._messageService.add({ severity: 'error', summary: 'Error', detail: `${err.error.message}` });
+          
         }
       });
     }else{

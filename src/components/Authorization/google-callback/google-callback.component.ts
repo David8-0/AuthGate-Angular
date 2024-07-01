@@ -29,6 +29,7 @@ export class GoogleCallbackComponent implements OnInit,OnDestroy{
     this.sub =this._activatedRoute.queryParams.subscribe(params => { 
       this.token = params['token'];
       this.user = params['user'];
+      
       this.user = JSON.parse(decodeURIComponent(this.user))
       this._autehnticationService.setUser(this.user,this.token??"");
 

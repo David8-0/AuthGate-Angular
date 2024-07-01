@@ -10,7 +10,7 @@
         @if(isUser){
         <h2 class="fw-bold text-center">Register as a User</h2>
         @if(isProjectID){
-        <h4 class="text-white">you need to sing up first to continue...</h4>
+        <h4 class="">you need to sing up first to continue...</h4>
         }
         <form
           [formGroup]="registerUserForm"
@@ -353,7 +353,7 @@
           </div>
           <div class="providers">
             <div class="d-flex justify-content-center align-items-center">
-              <span class="mx-2 fw-bold">OR use</span>
+              <span class="mx-2 fw-bold">for users</span>
             </div>
             <div class="providers mt-2 d-flex justify-content-center">
               <div class="icon-wrapper" (click)="signInWithFacebook()">

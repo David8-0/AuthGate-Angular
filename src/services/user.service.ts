@@ -51,6 +51,14 @@ export class UserService {
     return this._http.delete(this.baseUrl+userID);
   }
 
+  deleteProject(userId:string,projectID:string):Observable<any>{
+    return this._http.delete(this.baseUrl+"project/"+userId +"/"+projectID);
+  }
+
+  unDeleteProject(userId:string,projectID:string):Observable<any>{
+    return this._http.patch(this.baseUrl+"undelete-project/"+userId +"/"+projectID,{});
+  }
+
   updatePassword(updateForm:UpdatePassword):Observable<any>{
     return this._http.patch(this.baseUrl+"updateWithPassword",updateForm);
   }
@@ -58,4 +66,5 @@ export class UserService {
   unDelete(userID:string):Observable<any>{
     return this._http.patch(this.baseUrl+"undelete/"+userID,{});
   }
+
 }

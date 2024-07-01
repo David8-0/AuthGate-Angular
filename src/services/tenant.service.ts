@@ -14,6 +14,7 @@ export class TenantService {
   baseUrl:string = ``;
   
   tenantsList:BehaviorSubject<User[]> = new BehaviorSubject<User[]>([]);
+  tenantsImages:string[] = [];
 
   constructor(private _http: HttpClient) { 
     this.domain=environment.domain;

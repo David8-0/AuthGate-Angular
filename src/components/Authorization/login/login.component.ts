@@ -16,6 +16,7 @@ import { environment } from '../../../environments/environment';
   providers:[]
 })
 export class LoginComponent {
+
   isProjectID:boolean = false;
   isShowPassword:boolean = false;
   showErrors:boolean = false;
@@ -24,7 +25,7 @@ export class LoginComponent {
   constructor(
     private _messageService: MessageService,
     private _authService: AuthenticationService,
-    public _projectService:ProjectService,
+    
     private _router: Router
   ){
     if(localStorage.getItem('projectID'))
@@ -48,8 +49,6 @@ export class LoginComponent {
     if (formGroup.valid) {
       this._authService.logIn(formGroup.value).subscribe({
         next:(response) => {
-          // conssole.log(response);
-          
           this._authService.setUser(response.data.user,response.data.access_token);
           if(localStorage.getItem('projectID') && localStorage.getItem('codeChallenge')){
             this._router.navigateByUrl(`/authorize/${localStorage.getItem('projectID')}/${localStorage.getItem('codeChallenge')}`);
@@ -58,7 +57,7 @@ export class LoginComponent {
           }
           },
         error: (err) => {
-          this._messageService.add({ severity: 'error', summary: 'Error', detail: 'your email or password is invalid' });
+          this._messageService.add({ severity: 'error', summary: 'Error', detail: `${err.error.message}` });
         }
       })
     }else{

@@ -86,4 +86,36 @@ export class UserItemComponent implements OnChanges{
     showDialog() {
         this.visible = true;
     }
+
+    deleteProject(userID:string|undefined,projectID:string){
+      if(userID){
+        this._userService.deleteProject(userID,projectID).subscribe({
+          next:(res)=>{
+            this._messageService.add({ severity: 'info', summary: 'Info', detail: 'successfully deleted' });
+            this.user = res.data;
+          },
+          error:(err)=>{
+            this._messageService.add({ severity: 'error', summary: 'Error', detail: 'there was an error deleting project ' });
+            console.log(err);
+          }
+        });
+      }
+    }
+
+    unDeleteProject(userID:string|undefined,projectID:string){
+
+      if(userID){
+        this._userService.unDeleteProject(userID,projectID).subscribe({
+          next:(res)=>{
+            this._messageService.add({ severity: 'info', summary: 'Info', detail: 'successfully un deleted' });
+            this.user = res.data;
+          },
+          error:(err)=>{
+            this._messageService.add({ severity: 'error', summary: 'Error', detail: 'there was an error un deleting project ' });
+            console.log(err);
+          }
+        });
+      }
+    }
+
 }

@@ -1,11 +1,15 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit,HostListener, AfterViewInit, ElementRef, ViewChild, ViewChildren, QueryList  } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
+import { TenantService } from '../../services/tenant.service';
+import { User } from '../../interfaces/user';
 
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [],
+  imports: [CarouselModule,CommonModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
 })
@@ -13,9 +17,40 @@ export class HomeComponent implements OnInit, AfterViewInit {
   @ViewChildren('animatedDiv') animatedDiv!: QueryList<ElementRef>;
   showArrowUp: boolean = false;
   currentScrollPosition: number = 0;
+  customOptions: OwlOptions = {
+    autoplaySpeed:1000,
+    autoHeight:false,
+    loop: true,
+    autoplay: true,
+    autoplayTimeout:1300,
+    autoplayHoverPause: true,
+    mouseDrag: true,
+    touchDrag: false,
+    pullDrag: false,
+    dots: false,
+    navSpeed: 700,
+    navText: [],
+    responsive: {
+      0: {
+        items: 1
+      },
+      400: {
+        items: 2
+      },
+      740: {
+        items: 3
+      },
+      940: {
+        items: 4
+      }
+    },
+    nav: false
+  }
+  slidesStore:string[]=[];
 
 constructor(
   private _activatedRouter:ActivatedRoute,
+  private _tenantService:TenantService,
   private _router: Router,
   
 ){}
@@ -27,7 +62,20 @@ ngOnInit(): void {
       this._router.navigateByUrl(urlTree);
     })
 
-    
+    if(this._tenantService.tenantsImages.length ==0){
+      this._tenantService.getAll().subscribe({
+        next:(res)=>{
+          const images = res.data.map((tenant:User)=>tenant.image).filter((image:string)=>image!=null);
+          this._tenantService.tenantsImages=images;
+          this.slidesStore=images;
+          console.log(images);
+          
+        },
+        error:(err)=>{console.log(err)}
+      })
+    }else{
+      this.slidesStore = this._tenantService.tenantsImages;
+    }
 }
 
 ngAfterViewInit():void{

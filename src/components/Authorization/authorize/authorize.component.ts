@@ -70,7 +70,7 @@ export class AuthorizeComponent implements OnInit,OnDestroy{
       this._userService.addUserToProject(this.projectID,this.codeChallenge).subscribe({
         next:(res)=>{
           console.log(res);
-          window.location.href=`${this.project.callBackUrl}/${res.data.result.authorizationCode}`
+          window.location.href=`http://${this.project.callBackUrl}/${res.data.result.authorizationCode}`
         },
         error:(err)=>{
           console.log(err);

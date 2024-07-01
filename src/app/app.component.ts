@@ -6,6 +6,7 @@ import { UserSignupComponent } from '../components/Authorization/user-signup/use
 import { LoaderComponent } from '../components/Core/loader/loader.component';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
+import { LoaderService } from '../services/loader.service';
 
 @Component({
   selector: 'app-root',
@@ -17,4 +18,5 @@ import { MessageService } from 'primeng/api';
 })
 export class AppComponent {
   title = 'AuthGate';
+  constructor(private _loaderService:LoaderService){}
 }

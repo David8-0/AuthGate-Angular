@@ -10,6 +10,8 @@ import { MessageService } from 'primeng/api';
 import { DialogModule } from 'primeng/dialog';
 import { Subscription } from 'rxjs';
 import { ValidationService } from '../../services/validation.service';
+import { Router } from '@angular/router';
+import { ProjectService } from '../../services/project.service';
 
 @Component({
   selector: 'app-profile',
@@ -23,20 +25,27 @@ export class ProfileComponent implements OnInit,OnDestroy{
   user:User = {} as User;
   isEditMode: boolean = false;
   photoUrl:string="assets/default.png";
-  showChangePasswordDialog: boolean = false;
+
   subscriptions:Subscription[]=[];
+
   showChangePasswordErrors:boolean = false;
+  showProjectsDialog:boolean = false;
+  DeleteDialogvisible: boolean = false;
+  showChangePasswordDialog: boolean = false;
+  showErrors:boolean = false;
+
+
+
   constructor(
+    private _projectService:ProjectService,
     private _messageService: MessageService,
     private _authService:AuthenticationService,
     private _tenantService:TenantService,
     private _userService:UserService,
-    private _validationService:ValidationService
+    private _validationService:ValidationService,
+    private _router:Router
   ){
     this.user = this._authService.user.value;
-    //console.log(this.user);
-    // console.log(this._authService.user.value._id);
-
   }
 
   ngOnInit(): void {
@@ -46,8 +55,6 @@ export class ProfileComponent implements OnInit,OnDestroy{
       if(this.user?.image?.length){
         this.photoUrl = this.user.image;
       }
-      
-      
     this.updateInfoForm.get('name')?.setValue(this.user.name??"")
     this.updateInfoForm.get('email')?.setValue(this.user.email??"")
     this.updateInfoForm.get('phone')?.setValue(this.user.phone??"")
@@ -60,6 +67,13 @@ export class ProfileComponent implements OnInit,OnDestroy{
     this.updateInfoForm.disable();
     });
     this.subscriptions.push(sub);
+
+    // if(!this._userService.user.value._id){
+
+    // }else {
+
+    // }
+
     
   }
 
@@ -131,7 +145,7 @@ export class ProfileComponent implements OnInit,OnDestroy{
           error:(err)=>{
             console.log(err);
             
-            this._messageService.add({ severity: 'error', summary: 'Error', detail: 'there was a problem updating your data' });
+            this._messageService.add({ severity: 'error', summary: 'Error', detail: `${err.error.message}` });
           }
         });
       }else if (this.user.role == 'tenant'){
@@ -145,9 +159,9 @@ export class ProfileComponent implements OnInit,OnDestroy{
           }
         });
       }
-      
+      this.toggleEditMode();
     }else{
-      console.log(form.value);
+      this.showErrors= true;
     }
   }
 
@@ -183,6 +197,59 @@ export class ProfileComponent implements OnInit,OnDestroy{
       this.showChangePasswordErrors=true;
     }
     this.updatePasswordForm.reset();
+  }
+
+  showDeleteDialog() {
+    this.DeleteDialogvisible = true;
+    
+  }
+
+  deleteUser(userId:string | undefined){
+    if(userId && this.user.role == 'user'){
+      this._userService.delete(userId).subscribe({
+        next:(res)=>{
+          console.log(res);
+          // this._userService.usersList.next(res.data);
+          this._messageService.add({ severity: 'info', summary: 'Deleted', detail: 'your account is deleted successfully' });
+          this.DeleteDialogvisible = false;
+          this._authService.logOut();
+          this._router.navigateByUrl('/home');
+        },
+        error:(err)=>{
+          console.log(err);
+          this._messageService.add({ severity: 'error', summary: 'Error', detail: 'there was a problem deleting your account' });
+        }
+      })
+    }else if(userId && this.user.role == 'tenant'){
+      this._tenantService.delete(userId).subscribe({
+        next:(res)=>{
+          // this._tenantService.tenantsList.next(res.data);
+          this._messageService.add({ severity: 'info', summary: 'Deleted', detail: 'your account is deleted successfully' });
+          this.DeleteDialogvisible = false;
+          this._authService.logOut();
+          this._router.navigateByUrl('/home');
+        },
+        error:(err)=>{
+          console.log(err);
+          this._messageService.add({ severity: 'error', summary: 'Error', detail: 'there was a problem deleting your account' });
+        }
+      })
+    }
+  }
+
+  unsubscribe(projectID:string){
+    if(this.user._id){
+      this._userService.deleteProject(this.user._id,projectID).subscribe({
+        next:(res)=>{
+          this._messageService.add({ severity: 'info', summary: 'Info', detail: 'successfully unsubscribed' });
+          this._authService.user.next(res.data);
+        },
+        error:(err)=>{
+          this._messageService.add({ severity: 'error', summary: 'Error', detail: 'there was an error unsubscribing ' });
+        }
+      });
+    }
+
   }
 
   ngOnDestroy(): void {

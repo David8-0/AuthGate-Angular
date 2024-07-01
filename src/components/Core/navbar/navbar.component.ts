@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { AuthenticationService } from '../../../services/authentication.service';
 import { User } from '../../../interfaces/user';
@@ -13,12 +13,24 @@ import { Subscription } from 'rxjs';
 })
 export class NavbarComponent implements OnInit,OnDestroy{
   isLoggedIn:boolean = false;
+  isFixedNavbar:boolean = false;
   user:User={} as User;
   subscriptions:Subscription[]=[];
+
+
   constructor(
     private _authService:AuthenticationService,
     private _router:Router
   ){}
+
+  @HostListener('document:scroll', ['$event'])
+  scrollEvent(){
+    if(document.documentElement.scrollTop>0){
+      this.isFixedNavbar=true;
+    }else{
+      this.isFixedNavbar=false;
+    }
+  }
 
   ngOnInit(): void {
     const sub =this._authService.user.subscribe(res=>{

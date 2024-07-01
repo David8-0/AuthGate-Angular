@@ -1,18 +1,17 @@
-
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AuthenticationService } from '../../../services/authentication.service';
 import { Subscription } from 'rxjs';
+import { AuthenticationService } from '../../../services/authentication.service';
 import { ProjectService } from '../../../services/project.service';
 
 @Component({
-  selector: 'app-google-callback',
+  selector: 'app-facebook-callback',
   standalone: true,
   imports: [],
-  templateUrl: './google-callback.component.html',
-  styleUrl: './google-callback.component.css'
+  templateUrl: './facebook-callback.component.html',
+  styleUrl: './facebook-callback.component.css'
 })
-export class GoogleCallbackComponent implements OnInit,OnDestroy{
+export class FacebookCallbackComponent {
   token:string|null=null;
   user:any = {};
   sub:Subscription={} as Subscription;
@@ -21,17 +20,18 @@ export class GoogleCallbackComponent implements OnInit,OnDestroy{
     private _activatedRoute:ActivatedRoute,
     private _autehnticationService:AuthenticationService,
     private _router:Router
-  ){
-
-  }
+  ){}
 
   ngOnInit(): void {
     this.sub =this._activatedRoute.queryParams.subscribe(params => { 
       this.token = params['token'];
       this.user = params['user'];
-      this.user = JSON.parse(decodeURIComponent(this.user))
+      this.user = JSON.parse(decodeURIComponent(this.user));
+      console.log(this.user);
+      console.log(this.token);
+      
+      
       this._autehnticationService.setUser(this.user,this.token??"");
-
       if(localStorage.getItem('projectID')&& localStorage.getItem('codeChallenge')){
         this._router.navigateByUrl(`/authorize/${localStorage.getItem('projectID')}/${localStorage.getItem('codeChallenge')}`);
       }else{
@@ -40,9 +40,8 @@ export class GoogleCallbackComponent implements OnInit,OnDestroy{
     }); 
   }
 
+
   ngOnDestroy(): void {
     this.sub.unsubscribe();
   }
-
-  
 }

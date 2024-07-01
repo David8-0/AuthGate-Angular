@@ -42,7 +42,9 @@
     box-sizing: border-box;
   }
   
-
+  .delete-btn{
+    padding: 10px 24px;
+  }
 
   .custom-file-upload{
     cursor: pointer;
@@ -72,4 +74,13 @@
  i {
   color: red;
   margin-right: 5px;
+}
+
+#subscriptions li{
+  font-size: 20px;
+  font-weight: 500;
+}
+
+#subscriptions button{
+  padding: 5px 10px;
 }

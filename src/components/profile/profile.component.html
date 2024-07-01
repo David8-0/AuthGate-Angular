@@ -2,7 +2,7 @@
   <div class="profile wrapper">
     <h1 class="header-h1">Profile</h1>
 
-    <div class="wrapper card-body p-5 rounded cards">
+    <div class="wrapper card-body px-0 py-3 p-md-3 p-lg-5 rounded cards">
       <div class="row">
         <div class="col-md-6">
           <div class="profile-details m-auto">
@@ -13,68 +13,69 @@
               <div class="form-group">
                 <label for="name">Name:</label>
                 <input id="name" type="text" formControlName="name" />
-  
-                @if(updateInfoForm.get('name')?.errors &&
-                updateInfoForm.get('name')?.touched){
+
+                @if((updateInfoForm.get('name')?.errors &&
+                updateInfoForm.get('name')?.touched)|| showErrors){
                 <div class="text-danger">
                   @if(updateInfoForm.get('name')?.getError('required')){
-                    <i class="fa-solid fa-circle-exclamation"></i>
+                  <i class="fa-solid fa-circle-exclamation"></i>
                   <span class="alert-text">name is required</span>
                   }
                 </div>
                 }
               </div>
-  
+
               <div class="form-group">
                 <label for="email">Email:</label>
                 <input id="email" type="text" formControlName="email" />
-                @if(updateInfoForm.get('email')?.errors &&
-                updateInfoForm.get('email')?.touched ){
+                @if((updateInfoForm.get('email')?.errors &&
+                updateInfoForm.get('email')?.touched) || showErrors ){
                 <div class="text-danger">
                   @if(updateInfoForm.get('email')?.getError('required')){
-                    <i class="fa-solid fa-circle-exclamation"></i>
+                  <i class="fa-solid fa-circle-exclamation"></i>
                   <span class="alert-text">email is required</span>
                   } @if(updateInfoForm.get('email')?.getError('email')){
-                    <i class="fa-solid fa-circle-exclamation"></i>
+                  <i class="fa-solid fa-circle-exclamation"></i>
                   <span class="alert-text">email pattern is invalid</span>
                   }
                 </div>
                 }
               </div>
-  
+
               <div class="form-group">
                 <label for="role">Role:</label>
                 <input id="role" type="text" formControlName="role" />
               </div>
-  
+
               <div class="form-group">
                 <label for="phone">Phone:</label>
                 <input id="phone" type="text" formControlName="phone" />
-  
-                @if(updateInfoForm.get('phone')?.errors &&
-                (updateInfoForm.get('phone')?.touched )){
+
+                @if((updateInfoForm.get('phone')?.errors &&
+                updateInfoForm.get('phone')?.touched) || showErrors){
                 <div class="text-danger">
                   @if(updateInfoForm.get('phone')?.getError('pattern')){
-                    <i class="fa-solid fa-circle-exclamation"></i>
+                  <i class="fa-solid fa-circle-exclamation"></i>
                   <span class="alert-text">Invalid Phone number</span>
                   }
                 </div>
                 }
               </div>
-  
+
               @if (user.role !='tenant') {
               <div class="form-group">
                 <label for="age">Age:</label>
                 <input id="age" type="number" formControlName="age" />
-                @if(updateInfoForm.get('age')?.errors &&
-            (updateInfoForm.get('age')?.touched)){
-            <div class="text-danger">
-              @if(updateInfoForm.get('age')?.getError('min') || updateInfoForm.get('age')?.getError('max')){
-                <i class="fa-solid fa-circle-exclamation"></i>
-              <span class="alert-text">Age must be between 13 ad 100 </span>
-              } 
-            </div>
-            }
+                @if((updateInfoForm.get('age')?.errors &&
+                updateInfoForm.get('age')?.touched)|| showErrors){
+                <div class="text-danger">
+                  @if(updateInfoForm.get('age')?.getError('min') ||
+                  updateInfoForm.get('age')?.getError('max')){
+                  <i class="fa-solid fa-circle-exclamation"></i>
+                  <span class="alert-text">Age must be between 13 ad 100 </span>
+                  }
+                </div>
+                }
               </div>
               } @if(user.role =='tenant') {
               <div class="form-group">
@@ -84,11 +85,11 @@
               <div class="form-group">
                 <label for="website">website:</label>
                 <input id="website" type="text" formControlName="website" />
-                @if(updateInfoForm.get('website')?.errors &&
-                (updateInfoForm.get('website')?.touched )){
+                @if((updateInfoForm.get('website')?.errors &&
+                updateInfoForm.get('website')?.touched ) || showErrors){
                 <div class="text-danger">
                   @if(updateInfoForm.get('website')?.getError('pattern')){
-                    <i class="fa-solid fa-circle-exclamation"></i>
+                  <i class="fa-solid fa-circle-exclamation"></i>
                   <span class="alert-text">Invalid URL</span>
                   }
                 </div>
@@ -96,6 +97,13 @@
               </div>
               }
             </form>
+            <button
+              class="custom-btn w-100 my-1"
+              *ngIf="isEditMode"
+              (click)="updateInfo(updateInfoForm)"
+            >
+              Save
+            </button>
           </div>
         </div>
         <div class="col-md-6 mt-3 mt-md-0">
@@ -116,144 +124,217 @@
                 type="file"
               />
             </div>
-            <div class="controls d-flex justify-content-center">
-              <button (click)="toggleEditMode()" class="me-3 custom-btn">
-                Edit
-              </button>
+            <div class="controls d-flex flex-column justify-content-center p-2">
+              @if(user.role =='user'){
               <button
-                class="custom-btn me-3"
-                *ngIf="isEditMode"
-                (click)="updateInfo(updateInfoForm)"
+                class="custom-btn my-2 w-75 m-auto"
+                (click)="this.showProjectsDialog = true"
               >
-                Save
-              </button>
-              @if(!user.githubId && !user.googleId){
-                <button
-                class="custom-btn me-3"
-                *ngIf="isEditMode"
-                (click)="this.showChangePasswordDialog = true"
-              >
-                Change Password
+                View Subscriptions
               </button>
               }
+              <button
+                (click)="toggleEditMode()"
+                class="custom-btn my-2 w-75 m-auto"
+              >
+                Edit
+              </button>
+
+              <div class="edit-controls text-center">
+                <div class="row">
+                  <div class="col-md-12">
+                    @if(!user.githubId && !user.googleId && !user.facebookId){
+                    <button
+                      class="custom-btn w-75 my-1"
+                      *ngIf="isEditMode"
+                      (click)="this.showChangePasswordDialog = true"
+                    >
+                      Change Password
+                    </button>
+                    }
+                  </div>
+                  <div class="col-md-12">
+                    <button
+                      class="btn text-white delete-btn bg-danger w-75 my-1"
+                      *ngIf="isEditMode"
+                      (click)="showDeleteDialog()"
+                    >
+                      Delete Account
+                    </button>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-    
+  </div>
+</div>
 
-    <div class="flex justify-content-center">
-      <p-dialog
-        header="Change Password"
-        [(visible)]="showChangePasswordDialog"
-        [modal]="true"
-        [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }"
-        [style]="{ width: '400px' }"
-        [draggable]="false"
-        [resizable]="false"
+<div class="flex justify-content-center">
+  <p-dialog
+    header="Confirm Delete"
+    [(visible)]="DeleteDialogvisible"
+    [modal]="true"
+    [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }"
+    [style]="{ width: '400px' }"
+    [draggable]="false"
+    [resizable]="false"
+  >
+    <div class="buttons w-100 d-flex flex-column justify-content-around">
+      <span class="fw-bold">
+        are you sure you want to delete your account ?
+      </span>
+      please note that if u need to restore the account later you will have to
+      contact admin
+      <button
+        class="btn btn-info w-100 my-2"
+        (click)="this.DeleteDialogvisible = false"
       >
-        <div class="buttons w-100 d-flex flex-column justify-content-around">
-          <form
-            [formGroup]="updatePasswordForm"
-            (ngSubmit)="updatePassword(updatePasswordForm)"
-            id="passwordChangeForm"
-          >
-            <input
-              type="password"
-              id="oldPassword"
-              formControlName="oldPassword"
-              placeholder="old password"
-              class="fw-bold border my-1 form-control"
-              autocomplete=""
-            />
-            @if(updatePasswordForm.get('oldPassword')?.errors &&(
-            updatePasswordForm.get('oldPassword')?.touched ||
-            showChangePasswordErrors)){
-            <div class="text-danger">
-              @if(updatePasswordForm.get('oldPassword')?.getError('required')){
-              <span class="fw-bold alert-text"
-                ><i class="fa-solid fa-circle-exclamation"></i> old password is
-                required
-              </span>
-              }
-            </div>
-            }
+        No
+      </button>
+      <button class="btn btn-danger w-100 my-2" (click)="deleteUser(user._id)">
+        Yes
+      </button>
+    </div>
+  </p-dialog>
+</div>
 
-            <input
-              autocomplete=""
-              type="password"
-              id="newPassword"
-              formControlName="newPassword"
-              placeholder="new password"
-              class="fw-bold border my-1 form-control"
-            />
-            @if(updatePasswordForm.get('newPassword')?.errors &&(
-            updatePasswordForm.get('newPassword')?.touched ||
-            showChangePasswordErrors)){
-            <div class="">
-              @if(updatePasswordForm.get('newPassword')?.getError('required')){
-              <span class="fw-bold alert-text"
-                ><i class="fa-solid fa-circle-exclamation"></i> new password
-                required</span
-              >
-              } @if(updatePasswordForm.get('newPassword')?.getError('pattern')){
-              <span class="fw-bold alert-text"
-                >confirm Password pattern is invalid and must contain at least
-              </span>
-              <ul>
-                <li>one uppercase letter.</li>
-                <li>one digit.</li>
-                <li>special character.</li>
-                <li>minimum length is 8.</li>
-              </ul>
-              }
-            </div>
-            }
-
-            <input
-              autocomplete=""
-              type="password"
-              id="confirmNewPassword"
-              formControlName="confirmNewPassword"
-              placeholder="confirm new password"
-              class="fw-bold border my-1 form-control"
-            />
-            @if(updatePasswordForm.get('confirmNewPassword')?.errors
-            &&(updatePasswordForm.get('confirmNewPassword')?.touched ||
-            showChangePasswordErrors)){
-            <div class="text-danger">
-              @if(updatePasswordForm.get('confirmNewPassword')?.getError('required')){
-              <span class="fw-bold alert-text"
-                ><i class="fa-solid fa-circle-exclamation"></i> confirm new
-                password required</span
-              >
-              }
-              @if(updatePasswordForm.get('confirmNewPassword')?.getError('passwordMismatch')){
-              <span class="fw-bold alert-text"
-                ><i class="fa-solid fa-circle-exclamation"></i> confirm password
-                doesn't match password</span
-              >
-              }
-            </div>
-            }
-          </form>
-
-          <button
-            class="btn btn-info w-100 my-2"
-            (click)="this.showChangePasswordDialog = false"
-          >
-            cancel
-          </button>
-          <button
-            class="custom-btn w-100 my-2"
-            (click)="updatePassword(updatePasswordForm)"
-          >
-            save
+<div class="d-flex justify-content-center">
+  <p-dialog
+    header="Subscriptions"
+    [(visible)]="showProjectsDialog"
+    [modal]="true"
+    [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }"
+    [style]="{ width: '400px' }"
+    [draggable]="false"
+    [resizable]="false"
+  >
+    <div class="buttons w-100 d-flex flex-column justify-content-around">
+      <ul id="subscriptions">
+        @for(project of user.projects;track user.projects){
+        @if(!project.deleted){
+        <div class="my-3 d-flex justify-content-between">
+          <li>{{ project.name }}</li>
+          <button class="custom-btn" (click)="unsubscribe(project.projectID)">
+            unsbscribe
           </button>
         </div>
-      </p-dialog>
+        } }
+      </ul>
     </div>
-    
-  </div>
+  </p-dialog>
+</div>
+
+<div class="d-flex justify-content-center">
+  <p-dialog
+    header="Change Password"
+    [(visible)]="showChangePasswordDialog"
+    [modal]="true"
+    [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }"
+    [style]="{ width: '400px' }"
+    [draggable]="false"
+    [resizable]="false"
+  >
+    <div class="buttons w-100 d-flex flex-column justify-content-around">
+      <form
+        [formGroup]="updatePasswordForm"
+        (ngSubmit)="updatePassword(updatePasswordForm)"
+        id="passwordChangeForm"
+      >
+        <input
+          type="password"
+          id="oldPassword"
+          formControlName="oldPassword"
+          placeholder="old password"
+          class="fw-bold border my-1 form-control"
+          autocomplete=""
+        />
+        @if(updatePasswordForm.get('oldPassword')?.errors &&(
+        updatePasswordForm.get('oldPassword')?.touched ||
+        showChangePasswordErrors)){
+        <div class="text-danger">
+          @if(updatePasswordForm.get('oldPassword')?.getError('required')){
+          <span class="fw-bold alert-text"
+            ><i class="fa-solid fa-circle-exclamation"></i> old password is
+            required
+          </span>
+          }
+        </div>
+        }
+
+        <input
+          autocomplete=""
+          type="password"
+          id="newPassword"
+          formControlName="newPassword"
+          placeholder="new password"
+          class="fw-bold border my-1 form-control"
+        />
+        @if(updatePasswordForm.get('newPassword')?.errors &&(
+        updatePasswordForm.get('newPassword')?.touched ||
+        showChangePasswordErrors)){
+        <div class="">
+          @if(updatePasswordForm.get('newPassword')?.getError('required')){
+          <span class="fw-bold alert-text"
+            ><i class="fa-solid fa-circle-exclamation"></i> new password
+            required</span
+          >
+          } @if(updatePasswordForm.get('newPassword')?.getError('pattern')){
+          <span class="fw-bold alert-text"
+            >confirm Password pattern is invalid and must contain at least
+          </span>
+          <ul>
+            <li>one uppercase letter.</li>
+            <li>one digit.</li>
+            <li>special character.</li>
+            <li>minimum length is 8.</li>
+          </ul>
+          }
+        </div>
+        }
+
+        <input
+          autocomplete=""
+          type="password"
+          id="confirmNewPassword"
+          formControlName="confirmNewPassword"
+          placeholder="confirm new password"
+          class="fw-bold border my-1 form-control"
+        />
+        @if(updatePasswordForm.get('confirmNewPassword')?.errors
+        &&(updatePasswordForm.get('confirmNewPassword')?.touched ||
+        showChangePasswordErrors)){
+        <div class="text-danger">
+          @if(updatePasswordForm.get('confirmNewPassword')?.getError('required')){
+          <span class="fw-bold alert-text"
+            ><i class="fa-solid fa-circle-exclamation"></i> confirm new password
+            required</span
+          >
+          }
+          @if(updatePasswordForm.get('confirmNewPassword')?.getError('passwordMismatch')){
+          <span class="fw-bold alert-text"
+            ><i class="fa-solid fa-circle-exclamation"></i> confirm password
+            doesn't match password</span
+          >
+          }
+        </div>
+        }
+      </form>
+
+      <button
+        class="btn btn-info w-100 my-2"
+        (click)="this.showChangePasswordDialog = false"
+      >
+        cancel
+      </button>
+      <button
+        class="custom-btn w-100 my-2"
+        (click)="updatePassword(updatePasswordForm)"
+      >
+        save
+      </button>
+    </div>
+  </p-dialog>
 </div>

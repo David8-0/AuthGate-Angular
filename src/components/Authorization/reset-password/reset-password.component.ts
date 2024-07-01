@@ -17,7 +17,7 @@ export class ResetPasswordComponent implements OnInit{
   isShowConfirmPassword:boolean = false;
   showErrors:boolean = false;
   token:string | null=null;
-  reseted:boolean = true;
+  reseted:boolean = false;
   constructor(
     private _validationService:ValidationService,
     private _activateRoute: ActivatedRoute,
@@ -29,7 +29,6 @@ export class ResetPasswordComponent implements OnInit{
  ngOnInit(): void {
      this._activateRoute.paramMap.subscribe(params => {
       this.token = params.get('token');
-      console.log(this.token);
      })
  }
 

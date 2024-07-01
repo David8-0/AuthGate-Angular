@@ -76,3 +76,11 @@
   margin-right: 5px;
 }
 
+#subscriptions li{
+  font-size: 20px;
+  font-weight: 500;
+}
+
+#subscriptions button{
+  padding: 5px 10px;
+}

@@ -13,68 +13,69 @@
               <div class="form-group">
                 <label for="name">Name:</label>
                 <input id="name" type="text" formControlName="name" />
-  
-                @if(updateInfoForm.get('name')?.errors &&
-                updateInfoForm.get('name')?.touched){
+
+                @if((updateInfoForm.get('name')?.errors &&
+                updateInfoForm.get('name')?.touched)|| showErrors){
                 <div class="text-danger">
                   @if(updateInfoForm.get('name')?.getError('required')){
-                    <i class="fa-solid fa-circle-exclamation"></i>
+                  <i class="fa-solid fa-circle-exclamation"></i>
                   <span class="alert-text">name is required</span>
                   }
                 </div>
                 }
               </div>
-  
+
               <div class="form-group">
                 <label for="email">Email:</label>
                 <input id="email" type="text" formControlName="email" />
-                @if(updateInfoForm.get('email')?.errors &&
-                updateInfoForm.get('email')?.touched ){
+                @if((updateInfoForm.get('email')?.errors &&
+                updateInfoForm.get('email')?.touched) || showErrors ){
                 <div class="text-danger">
                   @if(updateInfoForm.get('email')?.getError('required')){
-                    <i class="fa-solid fa-circle-exclamation"></i>
+                  <i class="fa-solid fa-circle-exclamation"></i>
                   <span class="alert-text">email is required</span>
                   } @if(updateInfoForm.get('email')?.getError('email')){
-                    <i class="fa-solid fa-circle-exclamation"></i>
+                  <i class="fa-solid fa-circle-exclamation"></i>
                   <span class="alert-text">email pattern is invalid</span>
                   }
                 </div>
                 }
               </div>
-  
+
               <div class="form-group">
                 <label for="role">Role:</label>
                 <input id="role" type="text" formControlName="role" />
               </div>
-  
+
               <div class="form-group">
                 <label for="phone">Phone:</label>
                 <input id="phone" type="text" formControlName="phone" />
-  
-                @if(updateInfoForm.get('phone')?.errors &&
-                (updateInfoForm.get('phone')?.touched )){
+
+                @if((updateInfoForm.get('phone')?.errors &&
+                updateInfoForm.get('phone')?.touched) || showErrors){
                 <div class="text-danger">
                   @if(updateInfoForm.get('phone')?.getError('pattern')){
-                    <i class="fa-solid fa-circle-exclamation"></i>
+                  <i class="fa-solid fa-circle-exclamation"></i>
                   <span class="alert-text">Invalid Phone number</span>
                   }
                 </div>
                 }
               </div>
-  
+
               @if (user.role !='tenant') {
               <div class="form-group">
                 <label for="age">Age:</label>
                 <input id="age" type="number" formControlName="age" />
-                @if(updateInfoForm.get('age')?.errors &&
-            (updateInfoForm.get('age')?.touched)){
-            <div class="text-danger">
-              @if(updateInfoForm.get('age')?.getError('min') || updateInfoForm.get('age')?.getError('max')){
-                <i class="fa-solid fa-circle-exclamation"></i>
-              <span class="alert-text">Age must be between 13 ad 100 </span>
-              } 
-            </div>
-            }
+                @if((updateInfoForm.get('age')?.errors &&
+                updateInfoForm.get('age')?.touched)|| showErrors){
+                <div class="text-danger">
+                  @if(updateInfoForm.get('age')?.getError('min') ||
+                  updateInfoForm.get('age')?.getError('max')){
+                  <i class="fa-solid fa-circle-exclamation"></i>
+                  <span class="alert-text">Age must be between 13 ad 100 </span>
+                  }
+                </div>
+                }
               </div>
               } @if(user.role =='tenant') {
               <div class="form-group">
@@ -84,11 +85,11 @@
               <div class="form-group">
                 <label for="website">website:</label>
                 <input id="website" type="text" formControlName="website" />
-                @if(updateInfoForm.get('website')?.errors &&
-                (updateInfoForm.get('website')?.touched )){
+                @if((updateInfoForm.get('website')?.errors &&
+                updateInfoForm.get('website')?.touched ) || showErrors){
                 <div class="text-danger">
                   @if(updateInfoForm.get('website')?.getError('pattern')){
-                    <i class="fa-solid fa-circle-exclamation"></i>
+                  <i class="fa-solid fa-circle-exclamation"></i>
                   <span class="alert-text">Invalid URL</span>
                   }
                 </div>
@@ -97,12 +98,12 @@
               }
             </form>
             <button
-            class="custom-btn w-100 my-1"
-            *ngIf="isEditMode"
-            (click)="updateInfo(updateInfoForm)"
-          >
-            Save
-          </button>
+              class="custom-btn w-100 my-1"
+              *ngIf="isEditMode"
+              (click)="updateInfo(updateInfoForm)"
+            >
+              Save
+            </button>
           </div>
         </div>
         <div class="col-md-6 mt-3 mt-md-0">
@@ -125,22 +126,25 @@
             </div>
             <div class="controls d-flex flex-column justify-content-center p-2">
               @if(user.role =='user'){
-                <button
-                class="custom-btn  my-2 w-75 m-auto"
-                (click)="this.showProjectsDialog=true;"
-                >
+              <button
+                class="custom-btn my-2 w-75 m-auto"
+                (click)="this.showProjectsDialog = true"
+              >
                 View Subscriptions
-                </button>
+              </button>
               }
-              <button (click)="toggleEditMode()" class=" custom-btn my-2 w-75 m-auto">
+              <button
+                (click)="toggleEditMode()"
+                class="custom-btn my-2 w-75 m-auto"
+              >
                 Edit
               </button>
-              
-              <div class="edit-controls text-center ">
+
+              <div class="edit-controls text-center">
                 <div class="row">
                   <div class="col-md-12">
                     @if(!user.githubId && !user.googleId && !user.facebookId){
-                      <button
+                    <button
                       class="custom-btn w-75 my-1"
                       *ngIf="isEditMode"
                       (click)="this.showChangePasswordDialog = true"
@@ -150,33 +154,23 @@
                     }
                   </div>
                   <div class="col-md-12">
-                    <button 
-                    class="btn text-white delete-btn bg-danger w-75 my-1"
-                    *ngIf="isEditMode"
-                    (click)="showDeleteDialog()"
+                    <button
+                      class="btn text-white delete-btn bg-danger w-75 my-1"
+                      *ngIf="isEditMode"
+                      (click)="showDeleteDialog()"
                     >
-                    Delete Account
-                  </button>
+                      Delete Account
+                    </button>
                   </div>
                 </div>
-
-              
-
               </div>
-
-
             </div>
           </div>
-  
         </div>
       </div>
     </div>
-
   </div>
 </div>
-
-
-
 
 <div class="flex justify-content-center">
   <p-dialog
@@ -189,8 +183,11 @@
     [resizable]="false"
   >
     <div class="buttons w-100 d-flex flex-column justify-content-around">
-      <span class="fw-bold"> are you sure you want to delete your account ? </span>
-      please note that if u need to restore the account later you will have to contact admin
+      <span class="fw-bold">
+        are you sure you want to delete your account ?
+      </span>
+      please note that if u need to restore the account later you will have to
+      contact admin
       <button
         class="btn btn-info w-100 my-2"
         (click)="this.DeleteDialogvisible = false"
@@ -215,18 +212,17 @@
     [resizable]="false"
   >
     <div class="buttons w-100 d-flex flex-column justify-content-around">
-      <ul>
-        <div class="my-3">
-          <li class="">first</li>
+      <ul id="subscriptions">
+        @for(project of user.projects;track user.projects){
+        @if(!project.deleted){
+        <div class="my-3 d-flex justify-content-between">
+          <li>{{ project.name }}</li>
+          <button class="custom-btn" (click)="unsubscribe(project.projectID)">
+            unsbscribe
+          </button>
         </div>
-        <div class="my-3">
-          <li class="">first</li>
-        </div>
-        <div class="my-3">
-          <li class="">first</li>
-        </div>
+        } }
       </ul>
-      
     </div>
   </p-dialog>
 </div>
@@ -313,8 +309,8 @@
         <div class="text-danger">
           @if(updatePasswordForm.get('confirmNewPassword')?.getError('required')){
           <span class="fw-bold alert-text"
-            ><i class="fa-solid fa-circle-exclamation"></i> confirm new
-            password required</span
+            ><i class="fa-solid fa-circle-exclamation"></i> confirm new password
+            required</span
           >
           }
           @if(updatePasswordForm.get('confirmNewPassword')?.getError('passwordMismatch')){

@@ -10,6 +10,7 @@ import { TenantService } from './tenant.service';
 import { Router } from '@angular/router';
 import { UpdatePassword } from '../interfaces/update-password';
 import { environment } from '../environments/environment';
+import { ProjectService } from './project.service';
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +25,8 @@ export class AuthenticationService {
     private _http: HttpClient,
     private _userService: UserService,
     private _tenantService:TenantService,
-    private _router:Router) 
+    private _router:Router,
+    private _projectService:ProjectService) 
     {
       if(localStorage.getItem('userID') && localStorage.getItem('role') ){
         let id = localStorage.getItem('userID');
@@ -80,6 +82,7 @@ export class AuthenticationService {
     localStorage.removeItem('token');
     localStorage.removeItem('userID');
     localStorage.removeItem('role');
+    this._projectService.projectsArr.next([]);
     this.user.next({} as User);
   }
   

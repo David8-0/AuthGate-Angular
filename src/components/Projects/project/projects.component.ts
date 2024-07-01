@@ -30,14 +30,12 @@ ngOnInit(): void {
     this._projectService.getAllPerTenant().subscribe({
       next:(res)=>{
         this.projectsArr=res.data.filter((p:Project)=>p.deleted==false);
-        console.log(res);
       },
       error:(err)=>{
-        console.log(err);
       }
     })
     const sub =this._projectService.projectsArr.subscribe(newArr=>{
-      this.projectsArr=newArr.filter((p:Project)=>p.deleted==false);;
+      this.projectsArr=newArr.filter((p:Project)=>p.deleted==false);
     });
     this.subscriptions.push(sub); 
 }

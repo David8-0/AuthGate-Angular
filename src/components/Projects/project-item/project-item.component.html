@@ -120,7 +120,7 @@
         [formGroup]="updateProjectForm"
         (ngSubmit)="updateProject(project._id, updateProjectForm)"
       >
-        <label for="clientID"> Client ID </label>
+        <label for="clientID"> Name </label>
         <input
           type="text"
           id="clientID"
@@ -132,8 +132,8 @@
         updateProjectForm.get('name')?.touched){
         <div class="text-danger">
           @if(updateProjectForm.get('name')?.getError('required')){
-          <span class="fw-bold alert-msg"
-            ><i class="fa-solid fa-circle-exclamation"></i> project name is
+          <span class="fw-bold alert-msg text-danger"
+            ><i class="fa-solid fa-circle-exclamation text-danger"></i> project name is
             required</span
           >
           }
@@ -151,8 +151,8 @@
         updateProjectForm.get('callBackUrl')?.touched){
         <div class="text-danger">
           @if(updateProjectForm.get('callBackUrl')?.getError('required')){
-          <span class="fw-bold alert-msg"
-            ><i class="fa-solid fa-circle-exclamation"></i> callBack Url is
+          <span class="fw-bold alert-msg text-danger"
+            ><i class="fa-solid fa-circle-exclamation text-danger"></i> callBack Url is
             required</span
           >
           }

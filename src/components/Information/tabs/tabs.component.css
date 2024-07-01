@@ -6,16 +6,14 @@
 }
 #tabs-headers{
     border: 1px solid #1E293B;
-    width: fit-content;
+    width: 100%;
 }
 
 .active-tab-header{
     color: #fff;
     background-color: #1E293B;
 }
-#tabs-headers{
-    margin-left: 15px;
-}
+
 
 #tabs-container{
     margin-block: 20px;

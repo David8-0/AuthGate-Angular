@@ -4,58 +4,71 @@
             <div class="steps">
                   <h3>1. Sign In with Authgate Button</h3>
                   <p>Create a "Sign In with Authgate" button in your Angular frontend application. Clicking it should
-                        send an HTTP request to 'Authgate_Backend_Url/tenants/authorize-client' with the Client_ID and
-                        Client_Secret to verify the tenant.</p>
+                        send an HTTP request to <span class="code-highlight">'Authgate_Backend_Url/tenants/authorize-client'</span> with the <span class="code-highlight">Client_ID</span> and
+                        <span class="code-highlight">Client_Secret</span> to verify the tenant.</p>
 
                   <h3>2. Redirect to Authgate Login Page</h3>
-                  <p>You will receive the Authgate login page URL with the projectID appended to it. Then, you need to
-                        append a Code Challenge to implement the PKCE flow and redirect to it.</p>
+                  <p>You will receive the Authgate login page URL with the <span class="code-highlight">projectID</span> appended to it. Then, you need to
+                        append a <span class="code-highlight">Code Challenge</span> to implement the PKCE flow and redirect to it.</p>
                   <div class="row">
                         <div class="col-md-6">
                               <h4 class="text-center">Request <span class="request-method">(POST)</span></h4>
-                              <app-code [code]="code1"></app-code>
+                              <div class="code">
+                                    <app-code [code]="code1"></app-code>
+
+                              </div>
                         </div>
                         <div class="col-md-6">
                               <h4 class="text-center">Response</h4>
-                              <app-code [code]="code2"></app-code>
+                              <div class="code">
+                                    <app-code [code]="code2"></app-code>
+                              </div>
                         </div>
                   </div>
 
                   <h3>3. Adjust app.routes.ts File</h3>
-                  <p>Modify your app.routes.ts file by adding an extra route that matches the callback URL with
-                        '/:authCode' appended to it.</p>
+                  <p>Modify your <span class="code-highlight">app.routes.ts</span> file by adding an extra route that matches the callback URL with
+                        <span class="code-highlight">'/:authCode'</span> appended to it.</p>
 
                   <h3>4. Adjust Component Used in Callback URL</h3>
-                  <p>Modify the component that you are redirecting to in the app.routes.ts file to extract the
+                  <p>Modify the component that you are redirecting to in the <span class="code-highlight">app.routes.ts</span>  file to extract the
                         authentication code and send it to your backend server along with the code verifier.</p>
                   <div class="row">
                         <div class="col-md-6">
                               <h4 class="text-center">Request <span class="request-method">(POST)</span></h4>
-                              <app-code [code]="code3"></app-code>
+                              <div class="code">
+                                    <app-code [code]="code3"></app-code>
+                              </div>
                         </div>
                         <div class="col-md-6">
                               <h4 class="text-center">Response</h4>
-                              <app-code [code]="code5"></app-code>
+                              <div class="code">
+                                    <app-code [code]="code5"></app-code>
+                              </div>
                         </div>
                   </div>
 
                   <h3>5. Exchange Authorization Code and Code Verifier for Authentication Token</h3>
-                  <p>Your backend server should send a request to Authgate and receive an authorization token in return.
+                  <p>Your backend server should send a request to <span class="code-highlight">Authgate</span>  and receive an <span class="code-highlight">authorization token</span>  in return.
                         Extract the user information from the token, save it in your database, and issue a JWT to be
                         sent to your Angular frontend application.</p>
                   <div class="row">
                         <div class="col-md-6">
                               <h4 class="text-center">Request <span class="request-method">(POST)</span></h4>
-                              <app-code [code]="code6"></app-code>
+                              <div class="code">
+                                    <app-code [code]="code6"></app-code>
+                              </div>
                         </div>
                         <div class="col-md-6">
                               <h4 class="text-center">Response</h4>
-                              <app-code [code]="code4"></app-code>
+                              <div class="code">
+                                    <app-code [code]="code4"></app-code>
+                              </div>
                         </div>
                   </div>
 
                   <h3>6. Maintain User State</h3>
-                  <p>Save the token in your Angular frontend application and maintain user state.</p>
+                  <p>Save the <span class="code-highlight">token</span> in your Angular frontend application and maintain user state.</p>
             </div>
             <h2>Code Samples</h2>
             <div class="accordion" id="accordionExample">
@@ -86,24 +99,6 @@
                               </div>
                         </div>
                   </div>
-                  <!-- <div class="accordion-item">
-                        <h2 class="accordion-header">
-                              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                    Accordion Item #3
-                              </button>
-                        </h2>
-                        <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                              <div class="accordion-body">
-                                    <strong>This is the third item's accordion body.</strong> It is hidden by default,
-                                    until the collapse plugin adds the appropriate classes that we use to style each
-                                    element. These classes control the overall appearance, as well as the showing and
-                                    hiding via CSS transitions. You can modify any of this with custom CSS or overriding
-                                    our default variables. It's also worth noting that just about any HTML can go within
-                                    the <code>.accordion-body</code>, though the transition does limit overflow.
-                              </div>
-                        </div>
-                  </div> -->
             </div>
 
       </div>

@@ -10,6 +10,8 @@ import { MessageService } from 'primeng/api';
 import { DialogModule } from 'primeng/dialog';
 import { Subscription } from 'rxjs';
 import { ValidationService } from '../../services/validation.service';
+import { Router } from '@angular/router';
+import { ProjectService } from '../../services/project.service';
 
 @Component({
   selector: 'app-profile',
@@ -23,20 +25,27 @@ export class ProfileComponent implements OnInit,OnDestroy{
   user:User = {} as User;
   isEditMode: boolean = false;
   photoUrl:string="assets/default.png";
-  showChangePasswordDialog: boolean = false;
+
   subscriptions:Subscription[]=[];
+
   showChangePasswordErrors:boolean = false;
+  showProjectsDialog:boolean = false;
+  DeleteDialogvisible: boolean = false;
+  showChangePasswordDialog: boolean = false;
+  showErrors:boolean = false;
+
+
+
   constructor(
+    private _projectService:ProjectService,
     private _messageService: MessageService,
     private _authService:AuthenticationService,
     private _tenantService:TenantService,
     private _userService:UserService,
-    private _validationService:ValidationService
+    private _validationService:ValidationService,
+    private _router:Router
   ){
     this.user = this._authService.user.value;
-    //console.log(this.user);
-    // console.log(this._authService.user.value._id);
-
   }
 
   ngOnInit(): void {
@@ -46,8 +55,6 @@ export class ProfileComponent implements OnInit,OnDestroy{
       if(this.user?.image?.length){
         this.photoUrl = this.user.image;
       }
-      
-      
     this.updateInfoForm.get('name')?.setValue(this.user.name??"")
     this.updateInfoForm.get('email')?.setValue(this.user.email??"")
     this.updateInfoForm.get('phone')?.setValue(this.user.phone??"")
@@ -60,6 +67,13 @@ export class ProfileComponent implements OnInit,OnDestroy{
     this.updateInfoForm.disable();
     });
     this.subscriptions.push(sub);
+
+    // if(!this._userService.user.value._id){
+
+    // }else {
+
+    // }
+
     
   }
 
@@ -97,7 +111,7 @@ export class ProfileComponent implements OnInit,OnDestroy{
         formData.append('image',file);
         if(this.user.role == 'tenant' && this.user._id){
           this._tenantService.updateTenantImage(this.user._id,formData).subscribe({
-            next:(res)=>{console.log(res)
+            next:(res)=>{
               this._authService.setUser(res.data);
               this._messageService.add({ severity: 'success', summary: 'Success', detail: 'your photo is updated successfully' }); 
             },
@@ -107,7 +121,7 @@ export class ProfileComponent implements OnInit,OnDestroy{
           })
         }else if((this.user.role == 'user' ||this.user.role == 'admin') && this.user._id){
           this._userService.updateUserImage(this.user._id,formData).subscribe({
-            next:(res)=>{console.log(res)
+            next:(res)=>{
               this._authService.setUser(res.data);
               this._messageService.add({ severity: 'success', summary: 'Success', detail: 'your photo is updated successfully' }); 
             },
@@ -129,9 +143,9 @@ export class ProfileComponent implements OnInit,OnDestroy{
             this._authService.user.next(res.data)
           },
           error:(err)=>{
-            console.log(err);
             
-            this._messageService.add({ severity: 'error', summary: 'Error', detail: 'there was a problem updating your data' });
+            
+            this._messageService.add({ severity: 'error', summary: 'Error', detail: `${err.error.message}` });
           }
         });
       }else if (this.user.role == 'tenant'){
@@ -145,15 +159,15 @@ export class ProfileComponent implements OnInit,OnDestroy{
           }
         });
       }
-      
+      this.toggleEditMode();
     }else{
-      console.log(form.value);
+      this.showErrors= true;
     }
   }
 
   updatePassword(form:FormGroup){
     if(form.valid && this.user._id){
-      console.log(form.value);
+      
       
       if((this.user.role == 'user' || this.user.role == 'admin')  && this.user._id){
         this._userService.updatePassword(form.value).subscribe({
@@ -167,12 +181,12 @@ export class ProfileComponent implements OnInit,OnDestroy{
       }else if (this.user.role == 'tenant'){
         this._tenantService.updatePassword(form.value).subscribe({
           next:res=>{
-            console.log(res);
+            
             
             this._messageService.add({ severity: 'success', summary: 'Success', detail: 'your password is updated successfully' });
           },
           error:(err)=>{
-            console.log(err);
+            
             
             this._messageService.add({ severity: 'error', summary: 'Error', detail: 'there was a problem updating your password' });
           }
@@ -183,6 +197,57 @@ export class ProfileComponent implements OnInit,OnDestroy{
       this.showChangePasswordErrors=true;
     }
     this.updatePasswordForm.reset();
+  }
+
+  showDeleteDialog() {
+    this.DeleteDialogvisible = true;
+    
+  }
+
+  deleteUser(userId:string | undefined){
+    if(userId && this.user.role == 'user'){
+      this._userService.delete(userId).subscribe({
+        next:(res)=>{
+
+          this._messageService.add({ severity: 'info', summary: 'Deleted', detail: 'your account is deleted successfully' });
+          this.DeleteDialogvisible = false;
+          this._authService.logOut();
+          this._router.navigateByUrl('/home');
+        },
+        error:(err)=>{
+          
+          this._messageService.add({ severity: 'error', summary: 'Error', detail: 'there was a problem deleting your account' });
+        }
+      })
+    }else if(userId && this.user.role == 'tenant'){
+      this._tenantService.delete(userId).subscribe({
+        next:(res)=>{
+          this._messageService.add({ severity: 'info', summary: 'Deleted', detail: 'your account is deleted successfully' });
+          this.DeleteDialogvisible = false;
+          this._authService.logOut();
+          this._router.navigateByUrl('/home');
+        },
+        error:(err)=>{
+          
+          this._messageService.add({ severity: 'error', summary: 'Error', detail: 'there was a problem deleting your account' });
+        }
+      })
+    }
+  }
+
+  unsubscribe(projectID:string){
+    if(this.user._id){
+      this._userService.deleteProject(this.user._id,projectID).subscribe({
+        next:(res)=>{
+          this._messageService.add({ severity: 'info', summary: 'Info', detail: 'successfully unsubscribed' });
+          this._authService.user.next(res.data);
+        },
+        error:(err)=>{
+          this._messageService.add({ severity: 'error', summary: 'Error', detail: 'there was an error unsubscribing ' });
+        }
+      });
+    }
+
   }
 
   ngOnDestroy(): void {

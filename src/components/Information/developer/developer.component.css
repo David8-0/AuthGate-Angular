@@ -1,24 +1,14 @@
-.code-block {
-    background-color: #1E293B;
-    padding: 50px 30px;
-    border-radius: 15px;
+.request-method {
+    font-size: 17px;
+    font-weight: 400;
+    color: grey;
 }
 
-.code-block code pre {
-    color: #fff;
-    font-size: 16px;
+.code{
+    margin-bottom: 30px !important;
 }
 
-.code-block i {
-    color: rgba(255, 255, 255, 0.6);
-    transition: all 0.3s;
-    position: absolute;
-    top: 20px;
-    right: 20px;
-}
-
-
-.code-block i:hover{
-    color:#fff;
-    cursor: pointer;
+.code-highlight{
+    background-color: #d9dee085;
+    padding: 2px;
 }

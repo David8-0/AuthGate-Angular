@@ -60,14 +60,16 @@ export class UserSignupComponent {
       this._authService.userSingup(formGroup.value).subscribe({
         next:(response) => {
           this._authService.setUser(response.data.user,response.data.access_token);
-          if(localStorage.getItem('projectID')){
-            this._router.navigateByUrl(`/authorize/${localStorage.getItem('projectID')}`);
+          if(localStorage.getItem('projectID') && localStorage.getItem('codeChallenge')){
+            this._router.navigateByUrl(`/authorize/${localStorage.getItem('projectID')}/${localStorage.getItem('codeChallenge')}`);
           }else{
             this._router.navigateByUrl('/home');
           }
           },
         error: (err) => {
-          this._messageService.add({ severity: 'error', summary: 'Error', detail: 'something went wrong signing you up' });
+          
+          
+          this._messageService.add({ severity: 'error', summary: 'Error', detail: `${err.error.message}` });
         }
       })
     }else{
@@ -77,13 +79,16 @@ export class UserSignupComponent {
 
   registerTenant(formGroup: FormGroup) {
     if (formGroup.valid) {
+     
       this._authService.tenantSingup (formGroup.value).subscribe({
         next:(response) => {
           this._authService.setUser(response.data.user,response.data.access_token);
           this._router.navigateByUrl('/home');
           },
         error: (err) => {
-          this._messageService.add({ severity: 'error', summary: 'Error', detail: 'something went wrong signing you up' });
+          this._messageService.add({ severity: 'error', summary: 'Error', detail: `${err.error.message}` });
+          
+          
         }
       })
     }else{
@@ -104,4 +109,9 @@ export class UserSignupComponent {
   signInWithGitHub(){
     window.location.href="http://localhost:3000/auth/github";
   }
+
+  signInWithFacebook(){
+    window.location.href="http://localhost:3000/auth/facebook";
+  }
+  
 }

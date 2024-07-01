@@ -1,0 +1,18 @@
+<div id="tabs-container">
+    <div id="tabs-headers" class="rounded">
+       <div class="d-flex flex-wrap">
+        <div *ngFor="let item of headers; let i = index;" class="tab-header-item  rounded cursor-pointer" [class.active-tab-header]="i==currentIndex" (click)="setIhndex(i)">
+            {{item}}
+        </div>
+    
+       </div>
+           
+    </div>
+    <div id="tabs-contents" class="">
+        <div class="tab-content-item" *ngFor="let contentItem of contents;let j = index">
+            @if(j == currentIndex){
+                <app-code [code]="contentItem"></app-code>
+            }
+        </div>
+    </div>
+</div>

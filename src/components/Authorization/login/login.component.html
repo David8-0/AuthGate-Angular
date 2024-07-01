@@ -1,6 +1,6 @@
-<div class="container wrapper">
+<div class="container wrapper d-flex justify-content-center align-items-center">
     
-    <div class="card-body p-5  rounded bg-white">
+    <div class="card-body p-2 p-md-3 p-lg-5  rounded bg-white">
         <div class="row">
             <div class="col-md-5">
                 <div class="">
@@ -12,7 +12,7 @@
                 @if(isProjectID){
                     <h4 class="">you need to log in first to continue...</h4> 
                 }
-                <form [formGroup]="loginForm" (ngSubmit)="register(loginForm)" class=" d-flex flex-column justify-content-center px-5 py-3 w-75 w-100">
+                <form [formGroup]="loginForm" (ngSubmit)="register(loginForm)" class=" d-flex flex-column justify-content-center px-2  px-md-5 py-3 w-75 w-100">
                     
                     <input id="email" type="text" formControlName="email" placeholder="Email" class="fw-bold  form-control my-1">
                     @if(loginForm.get('email')?.errors && (loginForm.get('email')?.touched)|| showErrors){
@@ -49,11 +49,11 @@
                 </form>
                 <div class="d-flex  justify-content-center align-items-center">
                     <div class="divider"></div>
-                    <span class="mx-2 fw-bold">OR</span>
+                    <span class="mx-2 fw-bold">for users</span>
                     <div class="divider"></div>
                 </div>
                 <div class="providers mt-2 d-flex  justify-content-center">
-                    <div class="icon-wrapper">
+                    <div class="icon-wrapper" (click)="signInWithFacebook()">
                         <i class="fa-brands fa-facebook"></i>
                     </div>
                     <div class="icon-wrapper" (click)="signInWithGoogle()">

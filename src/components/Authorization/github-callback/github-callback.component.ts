@@ -3,6 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from '../../../services/authentication.service';
 import { Subscription } from 'rxjs';
 import { ProjectService } from '../../../services/project.service';
+import { MessageService } from 'primeng/api';
+import { User } from '../../../interfaces/user';
 
 @Component({
   selector: 'app-github-callback',
@@ -13,9 +15,10 @@ import { ProjectService } from '../../../services/project.service';
 })
 export class GithubCallbackComponent implements OnInit,OnDestroy{
   token:string|null=null;
-  user:any = {};
+  user:User = {};
   sub:Subscription={} as Subscription;
   constructor(
+    private _messageService: MessageService,
     public _projectService:ProjectService,
     private _activatedRoute:ActivatedRoute,
     private _autehnticationService:AuthenticationService,
@@ -27,13 +30,14 @@ export class GithubCallbackComponent implements OnInit,OnDestroy{
   ngOnInit(): void {
     this.sub =this._activatedRoute.queryParams.subscribe(params => { 
       this.token = params['token'];
-      this.user = params['user'];
-      this.user = JSON.parse(decodeURIComponent(this.user));
-      console.log(this.user);
-      
+      this.user = JSON.parse(decodeURIComponent(params['user']));
       this._autehnticationService.setUser(this.user,this.token??"");
-      if(localStorage.getItem('projectID')){
-        this._router.navigateByUrl(`/authorize/${localStorage.getItem('projectID')}`);
+      
+      if(this.user.isFirstTime){
+        this._messageService.add({ severity: 'info', summary: 'Info', detail: 'unfortunately github does not provide email so we have generated random email for you and you can change it any time you want!' });
+      }
+      if(localStorage.getItem('projectID') && localStorage.getItem('codeChallenge')){
+        this._router.navigateByUrl(`/authorize/${localStorage.getItem('projectID')}/${localStorage.getItem('codeChallenge')}`);
       }else{
         this._router.navigateByUrl('/home');
       }

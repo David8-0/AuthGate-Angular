@@ -34,12 +34,10 @@ export class UserItemComponent implements OnChanges{
     if(userId && this.user.role == 'user'){
       this._userService.delete(userId).subscribe({
         next:(res)=>{
-          console.log(res);
           this._userService.usersList.next(res.data);
           this._messageService.add({ severity: 'info', summary: 'Deleted', detail: 'user deleted successfully' });
         },
         error:(err)=>{
-          console.log(err);
           this._messageService.add({ severity: 'error', summary: 'Error', detail: 'there was a problem deleting the user' });
         }
       })
@@ -50,7 +48,6 @@ export class UserItemComponent implements OnChanges{
           this._messageService.add({ severity: 'info', summary: 'Deleted', detail: 'user deleted successfully' });
         },
         error:(err)=>{
-          console.log(err);
           this._messageService.add({ severity: 'error', summary: 'Error', detail: 'there was a problem deleting the user' });
         }
       })
@@ -66,7 +63,6 @@ export class UserItemComponent implements OnChanges{
           },
           error:(err)=>{
             this._messageService.add({ severity: 'error', summary: 'Error', detail: 'there was a problem undeleting the user' });
-            console.log(err);
           }
         });
       }else if(userId && this.user.role == 'user'){
@@ -77,7 +73,6 @@ export class UserItemComponent implements OnChanges{
           },
           error:(err)=>{
             this._messageService.add({ severity: 'error', summary: 'Error', detail: 'there was a problem undeleting the user' });
-            console.log(err);
           }
         });
       }
@@ -86,4 +81,34 @@ export class UserItemComponent implements OnChanges{
     showDialog() {
         this.visible = true;
     }
+
+    deleteProject(userID:string|undefined,projectID:string){
+      if(userID){
+        this._userService.deleteProject(userID,projectID).subscribe({
+          next:(res)=>{
+            this._messageService.add({ severity: 'info', summary: 'Info', detail: 'successfully deleted' });
+            this.user = res.data;
+          },
+          error:(err)=>{
+            this._messageService.add({ severity: 'error', summary: 'Error', detail: 'there was an error deleting project ' });
+          }
+        });
+      }
+    }
+
+    unDeleteProject(userID:string|undefined,projectID:string){
+
+      if(userID){
+        this._userService.unDeleteProject(userID,projectID).subscribe({
+          next:(res)=>{
+            this._messageService.add({ severity: 'info', summary: 'Info', detail: 'successfully un deleted' });
+            this.user = res.data;
+          },
+          error:(err)=>{
+            this._messageService.add({ severity: 'error', summary: 'Error', detail: 'there was an error un deleting project ' });
+          }
+        });
+      }
+    }
+
 }

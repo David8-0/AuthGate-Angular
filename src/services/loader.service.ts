@@ -21,7 +21,6 @@ export class LoaderService {
     } else if(this._globalLoaderCounter==0 && this.loading.value){
      this.loading.next(false);
     }
-    // console.log(this._globalLoaderCounter,this.loading.value);
 
   }
 }

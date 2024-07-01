@@ -8,10 +8,11 @@ import { User } from '../../../interfaces/user';
 import { Subscription } from 'rxjs';
 import { AuthenticationService } from '../../../services/authentication.service';
 import { ProjectService } from '../../../services/project.service';
+import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-project-item',
   standalone: true,
-  imports: [ReactiveFormsModule,DialogModule,ButtonModule],
+  imports: [ReactiveFormsModule,DialogModule,ButtonModule,CommonModule],
   templateUrl: './project-item.component.html',
   styleUrl: './project-item.component.css',
   providers:[]
@@ -95,13 +96,13 @@ user:User = {};
 
   copyClientSecret(){
     if(this.project.clientSECRET){
-      navigator.clipboard.writeText(this.project.clientSECRET).then(()=>{console.log("copied")}).catch(err=>{console.log(err)});
+      navigator.clipboard.writeText(this.project.clientSECRET);
     }
   }
 
   copyClientID(){
     if(this.project.clientID){
-      navigator.clipboard.writeText(this.project.clientID).then(()=>{console.log("copied")}).catch(err=>{console.log(err)});
+      navigator.clipboard.writeText(this.project.clientID);
     }
   }
 

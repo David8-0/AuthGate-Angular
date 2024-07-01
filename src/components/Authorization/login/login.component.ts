@@ -6,6 +6,7 @@ import { ProjectService } from '../../../services/project.service';
 import { DialogModule } from 'primeng/dialog';
 
 import { MessageService } from 'primeng/api';
+import { environment } from '../../../environments/environment';
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -15,6 +16,7 @@ import { MessageService } from 'primeng/api';
   providers:[]
 })
 export class LoginComponent {
+
   isProjectID:boolean = false;
   isShowPassword:boolean = false;
   showErrors:boolean = false;
@@ -23,7 +25,7 @@ export class LoginComponent {
   constructor(
     private _messageService: MessageService,
     private _authService: AuthenticationService,
-    public _projectService:ProjectService,
+    
     private _router: Router
   ){
     if(localStorage.getItem('projectID'))
@@ -48,14 +50,14 @@ export class LoginComponent {
       this._authService.logIn(formGroup.value).subscribe({
         next:(response) => {
           this._authService.setUser(response.data.user,response.data.access_token);
-          if(localStorage.getItem('projectID')){
-            this._router.navigateByUrl(`/authorize/${localStorage.getItem('projectID')}`);
+          if(localStorage.getItem('projectID') && localStorage.getItem('codeChallenge')){
+            this._router.navigateByUrl(`/authorize/${localStorage.getItem('projectID')}/${localStorage.getItem('codeChallenge')}`);
           }else{
             this._router.navigateByUrl('/home');
           }
           },
         error: (err) => {
-          this._messageService.add({ severity: 'error', summary: 'Error', detail: 'your email or password is invalid' });
+          this._messageService.add({ severity: 'error', summary: 'Error', detail: `${err.error.message}` });
         }
       })
     }else{
@@ -76,17 +78,21 @@ export class LoginComponent {
     window.location.href="http://localhost:3000/auth/github";
   }
 
+  signInWithFacebook(){
+    window.location.href="http://localhost:3000/auth/facebook";
+  }
+
   resetPassword(formGroup: FormGroup){
     if(formGroup.valid){
       this._authService.resetPasswordRequest(formGroup.value).subscribe({
         next:(res)=>{
           this._messageService.add({ severity: 'success', summary: 'Success', detail: 'an email has been sent to you ' });
           this.showResetPasswordDialog=false;
-          console.log(res);
+          
         },
         error:(err)=>{
-          this._messageService.add({ severity: 'error', summary: 'Error', detail: 'there is a problem with your email' });
-          console.log(err);
+          this._messageService.add({ severity: 'error', summary: 'Error', detail: `${err.error.message}` });
+          
         }
       });
     }else{

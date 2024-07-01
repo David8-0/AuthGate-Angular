@@ -1,7 +1,10 @@
-<div class="container">
-  <nav class="navbar navbar-expand-lg">
-    <div class="container-fluid">
-      <a class="navbar-brand" routerLink="home">AuthGate</a>
+  <div class="" [class.holder]="isFixedNavbar"></div>
+  <nav class="navbar navbar-expand-md" [class.fixed-navbar]="isFixedNavbar">
+    <div class="container">
+      <a class="navbar-brand" routerLink="home">
+        <img src="assets/icon.png" id="nav-icon" alt="">
+        AuthGate
+      </a>
       <button
         class="navbar-toggler"
         type="button"
@@ -33,16 +36,6 @@
               >Developers</a
             >
           </li>
-          <li class="nav-item">
-            <a
-              class="nav-link"
-              aria-current="page"
-              routerLink="/home"
-              fragment="services"
-              routerLinkActive="custom-active"
-              >Services</a
-            >
-          </li>
           @if(isLoggedIn){
           <li class="nav-item">
             <a
@@ -50,7 +43,7 @@
               routerLink="profile"
               routerLinkActive="custom-active"
             >
-              <i class="fa-solid fa-user me-2"></i>
+              <i class="fa-solid fa-user me-0 me-md-2"></i>
               profile</a
             >
           </li>
@@ -71,7 +64,7 @@
               routerLink="projects"
               routerLinkActive="custom-active"
             >
-              <i class="fa-solid fa-shield me-2"></i>
+              <i class="fa-solid fa-shield me-0 me-md-2"></i>
               Projects</a
             >
           </li>
@@ -101,4 +94,4 @@
       </div>
     </div>
   </nav>
-</div>
+

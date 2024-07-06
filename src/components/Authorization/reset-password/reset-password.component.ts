@@ -29,7 +29,6 @@ export class ResetPasswordComponent implements OnInit{
  ngOnInit(): void {
      this._activateRoute.paramMap.subscribe(params => {
       this.token = params.get('token');
-      console.log(this.token);
      })
  }
 

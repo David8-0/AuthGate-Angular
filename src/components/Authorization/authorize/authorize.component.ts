@@ -6,6 +6,7 @@ import { Project } from '../../../interfaces/project';
 import { User } from '../../../interfaces/user';
 import { UserService } from '../../../services/user.service';
 import { Subscription } from 'rxjs';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-authorize',
@@ -22,6 +23,7 @@ export class AuthorizeComponent implements OnInit,OnDestroy{
   subscriptions:Subscription[]=[];
   
   constructor(
+    private _messageService: MessageService,
     private _userService:UserService,
     private _authenticationService:AuthenticationService,
     private _projectService:ProjectService,
@@ -50,7 +52,8 @@ export class AuthorizeComponent implements OnInit,OnDestroy{
             this.project=res.data;
           },
           error:(err)=>{
-            console.log(err);
+            this._messageService.add({ severity: 'error', summary: 'Error', detail: `there was a problem subscriping to this project` });
+            this._router.navigateByUrl('/error');
           }
         })
       }
@@ -66,14 +69,13 @@ export class AuthorizeComponent implements OnInit,OnDestroy{
 
   confirm(){
     if(this.projectID && this.codeChallenge){
-      console.log(this.codeChallenge);
       this._userService.addUserToProject(this.projectID,this.codeChallenge).subscribe({
         next:(res)=>{
-          console.log(res);
+          
           window.location.href=`http://${this.project.callBackUrl}/${res.data.result.authorizationCode}`
         },
         error:(err)=>{
-          console.log(err);
+          
         }
       });
     }

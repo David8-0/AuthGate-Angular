@@ -61,17 +61,6 @@
                   "with": "src/environments/environment.development.ts"
                 }
               ]
-            },
-            "uat": {
-              "optimization": false,
-              "extractLicenses": false,
-              "sourceMap": true,
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.uat.ts"
-                }
-              ]
             }
           },
           "defaultConfiguration": "production"
@@ -84,9 +73,6 @@
             },
             "development": {
               "buildTarget": "AuthGate:build:development"
-            },
-            "uat": {
-              "buildTarget": "AuthGate:build:uat"
             }
           },
           "defaultConfiguration": "development"

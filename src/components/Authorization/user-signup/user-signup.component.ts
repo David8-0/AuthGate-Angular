@@ -67,7 +67,9 @@ export class UserSignupComponent {
           }
           },
         error: (err) => {
-          this._messageService.add({ severity: 'error', summary: 'Error', detail: 'something went wrong signing you up' });
+          
+          
+          this._messageService.add({ severity: 'error', summary: 'Error', detail: `${err.error.message}` });
         }
       })
     }else{
@@ -77,15 +79,15 @@ export class UserSignupComponent {
 
   registerTenant(formGroup: FormGroup) {
     if (formGroup.valid) {
-      console.log(formGroup.value);
+     
       this._authService.tenantSingup (formGroup.value).subscribe({
         next:(response) => {
           this._authService.setUser(response.data.user,response.data.access_token);
           this._router.navigateByUrl('/home');
           },
         error: (err) => {
-          this._messageService.add({ severity: 'error', summary: 'Error', detail: 'something went wrong signing you up' });
-          console.log(err);
+          this._messageService.add({ severity: 'error', summary: 'Error', detail: `${err.error.message}` });
+          
           
         }
       })

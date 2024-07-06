@@ -32,7 +32,6 @@ ngOnInit(): void {
         this.projectsArr=res.data.filter((p:Project)=>p.deleted==false);
       },
       error:(err)=>{
-        console.log(err);
       }
     })
     const sub =this._projectService.projectsArr.subscribe(newArr=>{

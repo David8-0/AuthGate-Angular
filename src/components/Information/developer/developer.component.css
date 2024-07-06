@@ -7,3 +7,8 @@
 .code{
     margin-bottom: 30px !important;
 }
+
+.code-highlight{
+    background-color: #d9dee085;
+    padding: 2px;
+}

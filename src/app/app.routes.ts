@@ -15,8 +15,6 @@ import { GithubCallbackComponent } from '../components/Authorization/github-call
 import { DeveloperComponent } from '../components/Information/developer/developer.component';
 import { isAdminGuard } from '../guards/is-admin.guard';
 import { ResetPasswordComponent } from '../components/Authorization/reset-password/reset-password.component';
-import { PaypalComponent } from '../components/paypal/paypal.component';
-import { PaymobComponent } from '../components/paymob/paymob.component';
 import { FacebookCallbackComponent } from '../components/Authorization/facebook-callback/facebook-callback.component';
 
 export const routes: Routes = [
@@ -34,8 +32,6 @@ export const routes: Routes = [
     {path:'auth/facebook/callback',component:FacebookCallbackComponent},
     {path:'developer',component:DeveloperComponent},
     {path:'reset-password/:token',component:ResetPasswordComponent},
-    {path:'paypal/:status',component:PaypalComponent},
-    {path:'paymob',component:PaymobComponent},
     {path:'**',component:NotFoundComponent}
 
 ];

@@ -27,8 +27,7 @@ export class FacebookCallbackComponent {
       this.token = params['token'];
       this.user = params['user'];
       this.user = JSON.parse(decodeURIComponent(this.user));
-      console.log(this.user);
-      console.log(this.token);
+ 
       
       
       this._autehnticationService.setUser(this.user,this.token??"");

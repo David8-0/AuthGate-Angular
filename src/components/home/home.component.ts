@@ -68,10 +68,8 @@ ngOnInit(): void {
           const images = res.data.map((tenant:User)=>tenant.image).filter((image:string)=>image!=null);
           this._tenantService.tenantsImages=images;
           this.slidesStore=images;
-          console.log(images);
-          
         },
-        error:(err)=>{console.log(err)}
+        
       })
     }else{
       this.slidesStore = this._tenantService.tenantsImages;
